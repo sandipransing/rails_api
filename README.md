@@ -11,4 +11,8 @@ Handy Rails API i.e exact clone of api.rubyonrails.org to work offline.
 Open index.html file inside ROOT directory in browser and you are ready to use
 rails api in offline
 
+## Mirror Latest API
+    wget -mk www.api.rubyonrails.org
+
+###
 any sugestions? *san2821 at gmail.com* or *sandip at joshsoftware.com* released under the MIT license
