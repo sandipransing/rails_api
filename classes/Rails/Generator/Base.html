@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Class: Rails::Generator::Base</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Class</span><br />Rails::Generator::Base</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../../files/vendor/rails/railties/lib/rails_generator/base_rb.html">vendor/rails/railties/lib/rails_generator/base.rb</a>
+        </td>
+      </tr>
+    <tr>
+      <td>Parent:</td>
+      <td>
+        <a href="../../Object.html">
+Object
+         </a>
+     </td>
+   </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+  <div class="description"><p>
+The base code generator is bare-bones. It sets up the source and
+destination paths and tells the logger whether to keep its trap shut.
+</p>
+<p>
+It&#8216;s useful for copying files such as stylesheets, images, or
+javascripts.
+</p>
+<p>
+For more comprehensive template-based passive code generation with
+arguments, you&#8216;ll want <a
+href="NamedBase.html">Rails::Generator::NamedBase</a>.
+</p>
+<p>
+Generators create a <a href="Base.html#M002485">manifest</a> of the actions
+they perform then hand the <a href="Base.html#M002485">manifest</a> to a
+command which replays the actions to do the heavy lifting (such as checking
+for existing files or creating directories if needed). Create, destroy, and
+list commands are included. Since a single <a
+href="Base.html#M002485">manifest</a> may be used by any command, creating
+<a href="Base.html#M002484">new</a> generators is as simple as writing some
+code templates and declaring what you&#8216;d like to do with them.
+</p>
+<p>
+The <a href="Base.html#M002485">manifest</a> method must be implemented by
+subclasses, returning a <a
+href="Manifest.html">Rails::Generator::Manifest</a>. The <tt><a
+href="Base.html#M002489">record</a></tt> method is provided as a
+convenience for <a href="Base.html#M002485">manifest</a> creation. Example:
+</p>
+<pre>
+  class StylesheetGenerator &lt; Rails::Generator::Base
+    def manifest
+      record do |m|
+        m.directory('public/stylesheets')
+        m.file('application.css', 'public/stylesheets/application.css')
+      end
+    end
+  end
+</pre>
+<p>
+See <a href="Commands/Create.html">Rails::Generator::Commands::Create</a>
+for a list of methods available to the <a
+href="Base.html#M002485">manifest</a>.
+</p>
+</div>
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M002488">after_generate</a></li>
+  <li><a href="#M002490">banner</a></li>
+  <li><a href="#M002487">destination_path</a></li>
+  <li><a href="#M002485">manifest</a></li>
+  <li><a href="#M002484">new</a></li>
+  <li><a href="#M002489">record</a></li>
+  <li><a href="#M002486">source_path</a></li>
+  <li><a href="#M002491">usage_message</a></li>
+  </ul>
+
+<div class="sectiontitle">Included Modules</div>
+<ul>
+  <li><a href="Options.html">Options</a></li>
+</ul>
+
+
+
+
+  <div class="sectiontitle">Attributes</div>
+  <table border='0' cellpadding='5'>
+  <tr valign='top'>
+    <td class='attr-rw'>
+[R]
+    </td>
+    <td class='attr-name'>args</td>
+    <td class='attr-desc'></td>
+  </tr>
+  <tr valign='top'>
+    <td class='attr-rw'>
+[R]
+    </td>
+    <td class='attr-name'>destination_root</td>
+    <td class='attr-desc'></td>
+  </tr>
+  <tr valign='top'>
+    <td class='attr-rw'>
+[R]
+    </td>
+    <td class='attr-name'>source_root</td>
+    <td class='attr-desc'></td>
+  </tr>
+  </table>
+
+<div class="sectiontitle">Public Class methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M002484"></a><b>new</b>(runtime_args, runtime_options = {})
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002484_source')" id="l_M002484_source">show source</a> ]</p>
+  <div id="M002484_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/rails_generator/base.rb, line 101</span>
+101:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">runtime_args</span>, <span class="ruby-identifier">runtime_options</span> = {})
+102:         <span class="ruby-ivar">@args</span> = <span class="ruby-identifier">runtime_args</span>
+103:         <span class="ruby-identifier">parse!</span>(<span class="ruby-ivar">@args</span>, <span class="ruby-identifier">runtime_options</span>)
+104: 
+105:         <span class="ruby-comment cmt"># Derive source and destination paths.</span>
+106:         <span class="ruby-ivar">@source_root</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:source</span>] <span class="ruby-operator">||</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">spec</span>.<span class="ruby-identifier">path</span>, <span class="ruby-value str">'templates'</span>)
+107:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:destination</span>]
+108:           <span class="ruby-ivar">@destination_root</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:destination</span>]
+109:         <span class="ruby-keyword kw">elsif</span> <span class="ruby-keyword kw">defined?</span> <span class="ruby-operator">::</span><span class="ruby-constant">RAILS_ROOT</span>
+110:           <span class="ruby-ivar">@destination_root</span> = <span class="ruby-operator">::</span><span class="ruby-constant">RAILS_ROOT</span>
+111:         <span class="ruby-keyword kw">end</span>
+112: 
+113:         <span class="ruby-comment cmt"># Silence the logger if requested.</span>
+114:         <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">quiet</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:quiet</span>]
+115: 
+116:         <span class="ruby-comment cmt"># Raise usage error if help is requested.</span>
+117:         <span class="ruby-identifier">usage</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:help</span>]
+118:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M002488"></a><b>after_generate</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002488_source')" id="l_M002488_source">show source</a> ]</p>
+  <div id="M002488_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/rails_generator/base.rb, line 157</span>
+157:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">after_generate</span>
+158:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M002487"></a><b>destination_path</b>(relative_destination)
+  </div>
+  <div class="description">
+  <p>
+Return the full path from the destination root for the given path. Example
+for destination_root = &#8217;/dest&#8217;:
+</p>
+<pre>
+  destination_path('some/path.rb') == '/dest/some/path.rb'
+</pre>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002487_source')" id="l_M002487_source">show source</a> ]</p>
+  <div id="M002487_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/rails_generator/base.rb, line 153</span>
+153:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">destination_path</span>(<span class="ruby-identifier">relative_destination</span>)
+154:         <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">destination_root</span>, <span class="ruby-identifier">relative_destination</span>)
+155:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M002485"></a><b>manifest</b>()
+  </div>
+  <div class="description">
+  <p>
+Generators must provide a <a href="Base.html#M002485">manifest</a>. Use the
+<tt><a href="Base.html#M002489">record</a></tt> method to create a <a
+href="Base.html#M002484">new</a> <a href="Base.html#M002485">manifest</a>
+and <a href="Base.html#M002489">record</a> your generator&#8216;s actions.
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002485_source')" id="l_M002485_source">show source</a> ]</p>
+  <div id="M002485_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/rails_generator/base.rb, line 122</span>
+122:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">manifest</span>
+123:         <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotImplementedError</span>, <span class="ruby-node">&quot;No manifest for '#{spec.name}' generator.&quot;</span>
+124:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M002486"></a><b>source_path</b>(relative_source)
+  </div>
+  <div class="description">
+  <p>
+Return the full path from the source root for the given path. Example for
+source_root = &#8217;/source&#8217;:
+</p>
+<pre>
+  source_path('some/path.rb') == '/source/some/path.rb'
+</pre>
+<p>
+The given path may include a colon &#8217;:&#8217; character to indicate
+that the file belongs to another generator. This notation allows any
+generator to borrow files from another. Example:
+</p>
+<pre>
+  source_path('model:fixture.yml') = '/model/source/path/fixture.yml'
+</pre>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002486_source')" id="l_M002486_source">show source</a> ]</p>
+  <div id="M002486_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/rails_generator/base.rb, line 134</span>
+134:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">source_path</span>(<span class="ruby-identifier">relative_source</span>)
+135:         <span class="ruby-comment cmt"># Check whether we're referring to another generator's file.</span>
+136:         <span class="ruby-identifier">name</span>, <span class="ruby-identifier">path</span> = <span class="ruby-identifier">relative_source</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">':'</span>, <span class="ruby-value">2</span>)
+137: 
+138:         <span class="ruby-comment cmt"># If not, return the full path to our source file.</span>
+139:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">path</span>.<span class="ruby-identifier">nil?</span>
+140:           <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">source_root</span>, <span class="ruby-identifier">name</span>)
+141: 
+142:         <span class="ruby-comment cmt"># Otherwise, ask our referral for the file.</span>
+143:         <span class="ruby-keyword kw">else</span>
+144:           <span class="ruby-comment cmt"># FIXME: this is broken, though almost always true.  Others'</span>
+145:           <span class="ruby-comment cmt"># source_root are not necessarily the templates dir.</span>
+146:           <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">lookup</span>(<span class="ruby-identifier">name</span>).<span class="ruby-identifier">path</span>, <span class="ruby-value str">'templates'</span>, <span class="ruby-identifier">path</span>)
+147:         <span class="ruby-keyword kw">end</span>
+148:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="sectiontitle">Protected Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M002490"></a><b>banner</b>()
+  </div>
+  <div class="description">
+  <p>
+Override with your own usage <a href="Base.html#M002490">banner</a>.
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002490_source')" id="l_M002490_source">show source</a> ]</p>
+  <div id="M002490_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/rails_generator/base.rb, line 167</span>
+167:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">banner</span>
+168:           <span class="ruby-node">&quot;Usage: #{$0} #{spec.name} [options]&quot;</span>
+169:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M002489"></a><b>record</b>() {|m| ...}
+  </div>
+  <div class="description">
+  <p>
+Convenience method for generator subclasses to <a
+href="Base.html#M002489">record</a> a <a
+href="Base.html#M002485">manifest</a>.
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002489_source')" id="l_M002489_source">show source</a> ]</p>
+  <div id="M002489_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/rails_generator/base.rb, line 162</span>
+162:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">record</span>
+163:           <span class="ruby-constant">Rails</span><span class="ruby-operator">::</span><span class="ruby-constant">Generator</span><span class="ruby-operator">::</span><span class="ruby-constant">Manifest</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword kw">self</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span> <span class="ruby-keyword kw">yield</span> <span class="ruby-identifier">m</span> }
+164:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M002491"></a><b>usage_message</b>()
+  </div>
+  <div class="description">
+  <p>
+Read USAGE from file in generator base path.
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002491_source')" id="l_M002491_source">show source</a> ]</p>
+  <div id="M002491_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/rails_generator/base.rb, line 172</span>
+172:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">usage_message</span>
+173:           <span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">spec</span>.<span class="ruby-identifier">path</span>, <span class="ruby-value str">'USAGE'</span>)) <span class="ruby-keyword kw">rescue</span> <span class="ruby-value str">''</span>
+174:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

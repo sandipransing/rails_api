@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Class: ActiveRecord::DynamicFinderMatch</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Class</span><br />ActiveRecord::DynamicFinderMatch</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../files/vendor/rails/activerecord/lib/active_record/dynamic_finder_match_rb.html">vendor/rails/activerecord/lib/active_record/dynamic_finder_match.rb</a>
+        </td>
+      </tr>
+    <tr>
+      <td>Parent:</td>
+      <td>
+        <a href="../Object.html">
+Object
+         </a>
+     </td>
+   </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M002228">bang?</a></li>
+  <li><a href="#M002226">finder?</a></li>
+  <li><a href="#M002227">instantiator?</a></li>
+  <li><a href="#M002224">match</a></li>
+  <li><a href="#M002225">new</a></li>
+  </ul>
+
+
+
+
+
+  <div class="sectiontitle">Attributes</div>
+  <table border='0' cellpadding='5'>
+  <tr valign='top'>
+    <td class='attr-rw'>
+[R]
+    </td>
+    <td class='attr-name'>attribute_names</td>
+    <td class='attr-desc'></td>
+  </tr>
+  <tr valign='top'>
+    <td class='attr-rw'>
+[R]
+    </td>
+    <td class='attr-name'>finder</td>
+    <td class='attr-desc'></td>
+  </tr>
+  <tr valign='top'>
+    <td class='attr-rw'>
+[R]
+    </td>
+    <td class='attr-name'>instantiator</td>
+    <td class='attr-desc'></td>
+  </tr>
+  </table>
+
+<div class="sectiontitle">Public Class methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M002224"></a><b>match</b>(method)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002224_source')" id="l_M002224_source">show source</a> ]</p>
+  <div id="M002224_source" class="dyn-source">
+<pre>
+   <span class="ruby-comment cmt"># File vendor/rails/activerecord/lib/active_record/dynamic_finder_match.rb, line 3</span>
+3:     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">match</span>(<span class="ruby-identifier">method</span>)
+4:       <span class="ruby-identifier">df_match</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">method</span>)
+5:       <span class="ruby-identifier">df_match</span>.<span class="ruby-identifier">finder</span> <span class="ruby-value">? </span><span class="ruby-identifier">df_match</span> <span class="ruby-operator">:</span> <span class="ruby-keyword kw">nil</span>
+6:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M002225"></a><b>new</b>(method)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002225_source')" id="l_M002225_source">show source</a> ]</p>
+  <div id="M002225_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activerecord/lib/active_record/dynamic_finder_match.rb, line 8</span>
+ 8:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">method</span>)
+ 9:       <span class="ruby-ivar">@finder</span> = <span class="ruby-identifier">:first</span>
+10:       <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">method</span>.<span class="ruby-identifier">to_s</span>
+11:       <span class="ruby-keyword kw">when</span> <span class="ruby-regexp re">/^find_(all_by|last_by|by)_([_a-zA-Z]\w*)$/</span>
+12:         <span class="ruby-ivar">@finder</span> = <span class="ruby-identifier">:last</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">$1</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'last_by'</span>
+13:         <span class="ruby-ivar">@finder</span> = <span class="ruby-identifier">:all</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">$1</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'all_by'</span>
+14:         <span class="ruby-identifier">names</span> = <span class="ruby-identifier">$2</span>
+15:       <span class="ruby-keyword kw">when</span> <span class="ruby-regexp re">/^find_by_([_a-zA-Z]\w*)\!$/</span>
+16:         <span class="ruby-ivar">@bang</span> = <span class="ruby-keyword kw">true</span>
+17:         <span class="ruby-identifier">names</span> = <span class="ruby-identifier">$1</span>
+18:       <span class="ruby-keyword kw">when</span> <span class="ruby-regexp re">/^find_or_(initialize|create)_by_([_a-zA-Z]\w*)$/</span>
+19:         <span class="ruby-ivar">@instantiator</span> = <span class="ruby-identifier">$1</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'initialize'</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">:new</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">:create</span>
+20:         <span class="ruby-identifier">names</span> = <span class="ruby-identifier">$2</span>
+21:       <span class="ruby-keyword kw">else</span>
+22:         <span class="ruby-ivar">@finder</span> = <span class="ruby-keyword kw">nil</span>
+23:       <span class="ruby-keyword kw">end</span>
+24:       <span class="ruby-ivar">@attribute_names</span> = <span class="ruby-identifier">names</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">names</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">'_and_'</span>)
+25:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M002228"></a><b>bang?</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002228_source')" id="l_M002228_source">show source</a> ]</p>
+  <div id="M002228_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activerecord/lib/active_record/dynamic_finder_match.rb, line 37</span>
+37:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">bang?</span>
+38:       <span class="ruby-ivar">@bang</span>
+39:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M002226"></a><b>finder?</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002226_source')" id="l_M002226_source">show source</a> ]</p>
+  <div id="M002226_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activerecord/lib/active_record/dynamic_finder_match.rb, line 29</span>
+29:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">finder?</span>
+30:       <span class="ruby-operator">!</span><span class="ruby-ivar">@finder</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@instantiator</span>.<span class="ruby-identifier">nil?</span>
+31:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M002227"></a><b>instantiator?</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002227_source')" id="l_M002227_source">show source</a> ]</p>
+  <div id="M002227_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activerecord/lib/active_record/dynamic_finder_match.rb, line 33</span>
+33:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">instantiator?</span>
+34:       <span class="ruby-ivar">@finder</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:first</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@instantiator</span>.<span class="ruby-identifier">nil?</span>
+35:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

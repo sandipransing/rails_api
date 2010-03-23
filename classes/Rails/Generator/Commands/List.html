@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Class: Rails::Generator::Commands::List</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Class</span><br />Rails::Generator::Commands::List</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../../../files/vendor/rails/railties/lib/rails_generator/commands_rb.html">vendor/rails/railties/lib/rails_generator/commands.rb</a>
+        </td>
+      </tr>
+    <tr>
+      <td>Parent:</td>
+      <td>
+        <a href="Base.html">
+Base
+         </a>
+     </td>
+   </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+  <div class="description"><p>
+<a href="List.html">List</a> a generator&#8216;s action manifest.
+</p>
+</div>
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M002430">class_collisions</a></li>
+  <li><a href="#M002433">complex_template</a></li>
+  <li><a href="#M002429">dependency</a></li>
+  <li><a href="#M002434">directory</a></li>
+  <li><a href="#M002431">file</a></li>
+  <li><a href="#M002436">migration_template</a></li>
+  <li><a href="#M002435">readme</a></li>
+  <li><a href="#M002437">route_resources</a></li>
+  <li><a href="#M002432">template</a></li>
+  </ul>
+
+
+
+
+
+
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M002430"></a><b>class_collisions</b>(*class_names)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002430_source')" id="l_M002430_source">show source</a> ]</p>
+  <div id="M002430_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/rails_generator/commands.rb, line 549</span>
+549:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">class_collisions</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">class_names</span>)
+550:           <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">class_collisions</span> <span class="ruby-identifier">class_names</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">', '</span>)
+551:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M002433"></a><b>complex_template</b>(relative_source, relative_destination, options = {})
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002433_source')" id="l_M002433_source">show source</a> ]</p>
+  <div id="M002433_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/rails_generator/commands.rb, line 561</span>
+561:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">complex_template</span>(<span class="ruby-identifier">relative_source</span>, <span class="ruby-identifier">relative_destination</span>, <span class="ruby-identifier">options</span> = {})
+562:           <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">template</span> <span class="ruby-node">&quot;#{options[:insert]} inside #{relative_destination}&quot;</span>
+563:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M002429"></a><b>dependency</b>(generator_name, args, options = {})
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002429_source')" id="l_M002429_source">show source</a> ]</p>
+  <div id="M002429_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/rails_generator/commands.rb, line 545</span>
+545:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">dependency</span>(<span class="ruby-identifier">generator_name</span>, <span class="ruby-identifier">args</span>, <span class="ruby-identifier">options</span> = {})
+546:           <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">dependency</span> <span class="ruby-node">&quot;#{generator_name}(#{args.join(', ')}, #{options.inspect})&quot;</span>
+547:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M002434"></a><b>directory</b>(relative_path)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002434_source')" id="l_M002434_source">show source</a> ]</p>
+  <div id="M002434_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/rails_generator/commands.rb, line 565</span>
+565:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">directory</span>(<span class="ruby-identifier">relative_path</span>)
+566:           <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">directory</span> <span class="ruby-node">&quot;#{destination_path(relative_path)}/&quot;</span>
+567:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M002431"></a><b>file</b>(relative_source, relative_destination, options = {})
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002431_source')" id="l_M002431_source">show source</a> ]</p>
+  <div id="M002431_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/rails_generator/commands.rb, line 553</span>
+553:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">file</span>(<span class="ruby-identifier">relative_source</span>, <span class="ruby-identifier">relative_destination</span>, <span class="ruby-identifier">options</span> = {})
+554:           <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">file</span> <span class="ruby-identifier">relative_destination</span>
+555:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M002436"></a><b>migration_template</b>(relative_source, relative_destination, options = {})
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002436_source')" id="l_M002436_source">show source</a> ]</p>
+  <div id="M002436_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/rails_generator/commands.rb, line 573</span>
+573:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">migration_template</span>(<span class="ruby-identifier">relative_source</span>, <span class="ruby-identifier">relative_destination</span>, <span class="ruby-identifier">options</span> = {})
+574:           <span class="ruby-identifier">migration_directory</span> <span class="ruby-identifier">relative_destination</span>
+575:           <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">migration_template</span> <span class="ruby-identifier">file_name</span>
+576:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M002435"></a><b>readme</b>(*args)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002435_source')" id="l_M002435_source">show source</a> ]</p>
+  <div id="M002435_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/rails_generator/commands.rb, line 569</span>
+569:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">readme</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+570:           <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">readme</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">', '</span>)
+571:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M002437"></a><b>route_resources</b>(*resources)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002437_source')" id="l_M002437_source">show source</a> ]</p>
+  <div id="M002437_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/rails_generator/commands.rb, line 578</span>
+578:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">route_resources</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">resources</span>)
+579:           <span class="ruby-identifier">resource_list</span> = <span class="ruby-identifier">resources</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">r</span><span class="ruby-operator">|</span> <span class="ruby-identifier">r</span>.<span class="ruby-identifier">to_sym</span>.<span class="ruby-identifier">inspect</span> }.<span class="ruby-identifier">join</span>(<span class="ruby-value str">', '</span>)
+580:           <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">route</span> <span class="ruby-node">&quot;map.resources #{resource_list}&quot;</span>
+581:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M002432"></a><b>template</b>(relative_source, relative_destination, options = {})
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002432_source')" id="l_M002432_source">show source</a> ]</p>
+  <div id="M002432_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/rails_generator/commands.rb, line 557</span>
+557:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">template</span>(<span class="ruby-identifier">relative_source</span>, <span class="ruby-identifier">relative_destination</span>, <span class="ruby-identifier">options</span> = {})
+558:           <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">template</span> <span class="ruby-identifier">relative_destination</span>
+559:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

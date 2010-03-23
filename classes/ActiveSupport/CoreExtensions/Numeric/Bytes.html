@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Module: ActiveSupport::CoreExtensions::Numeric::Bytes</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Module</span><br />ActiveSupport::CoreExtensions::Numeric::Bytes</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../../../files/vendor/rails/activesupport/lib/active_support/core_ext/numeric/bytes_rb.html">vendor/rails/activesupport/lib/active_support/core_ext/numeric/bytes.rb</a>
+        </td>
+      </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+  <div class="description"><p>
+Enables the use of <a href="Bytes.html#M001245">byte</a> calculations and
+declarations, like 45.bytes + 2.6.<a
+href="Bytes.html#M001248">megabytes</a>
+</p>
+</div>
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M001245">byte</a></li>
+  <li><a href="#M001244">bytes</a></li>
+  <li><a href="#M001257">exabyte</a></li>
+  <li><a href="#M001256">exabytes</a></li>
+  <li><a href="#M001251">gigabyte</a></li>
+  <li><a href="#M001250">gigabytes</a></li>
+  <li><a href="#M001247">kilobyte</a></li>
+  <li><a href="#M001246">kilobytes</a></li>
+  <li><a href="#M001249">megabyte</a></li>
+  <li><a href="#M001248">megabytes</a></li>
+  <li><a href="#M001255">petabyte</a></li>
+  <li><a href="#M001254">petabytes</a></li>
+  <li><a href="#M001253">terabyte</a></li>
+  <li><a href="#M001252">terabytes</a></li>
+  </ul>
+
+
+
+
+  <div class="sectiontitle">Constants</div>
+  <table border='0' cellpadding='5'>
+  <tr valign='top'>
+    <td class="attr-name">KILOBYTE</td>
+    <td>=</td>
+    <td class="attr-value">1024</td>
+  </tr>
+  <tr valign='top'>
+    <td class="attr-name">MEGABYTE</td>
+    <td>=</td>
+    <td class="attr-value">KILOBYTE * 1024</td>
+  </tr>
+  <tr valign='top'>
+    <td class="attr-name">GIGABYTE</td>
+    <td>=</td>
+    <td class="attr-value">MEGABYTE * 1024</td>
+  </tr>
+  <tr valign='top'>
+    <td class="attr-name">TERABYTE</td>
+    <td>=</td>
+    <td class="attr-value">GIGABYTE * 1024</td>
+  </tr>
+  <tr valign='top'>
+    <td class="attr-name">PETABYTE</td>
+    <td>=</td>
+    <td class="attr-value">TERABYTE * 1024</td>
+  </tr>
+  <tr valign='top'>
+    <td class="attr-name">EXABYTE</td>
+    <td>=</td>
+    <td class="attr-value">PETABYTE * 1024</td>
+  </tr>
+  </table>
+
+
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M001245"></a><b>byte</b>()
+  </div>
+  <div class="description">
+  <p>
+Alias for <a href="Bytes.html#M001244">bytes</a>
+</p>
+  </div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001244"></a><b>bytes</b>()
+  </div>
+<div class="aka">
+  This method is also aliased as
+  <a href="Bytes.html#M001245">byte</a>
+</div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001244_source')" id="l_M001244_source">show source</a> ]</p>
+  <div id="M001244_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/core_ext/numeric/bytes.rb, line 13</span>
+13:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">bytes</span>
+14:           <span class="ruby-keyword kw">self</span>
+15:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001257"></a><b>exabyte</b>()
+  </div>
+  <div class="description">
+  <p>
+Alias for <a href="Bytes.html#M001256">exabytes</a>
+</p>
+  </div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001256"></a><b>exabytes</b>()
+  </div>
+<div class="aka">
+  This method is also aliased as
+  <a href="Bytes.html#M001257">exabyte</a>
+</div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001256_source')" id="l_M001256_source">show source</a> ]</p>
+  <div id="M001256_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/core_ext/numeric/bytes.rb, line 43</span>
+43:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">exabytes</span>
+44:           <span class="ruby-keyword kw">self</span> <span class="ruby-operator">*</span> <span class="ruby-constant">EXABYTE</span>
+45:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001251"></a><b>gigabyte</b>()
+  </div>
+  <div class="description">
+  <p>
+Alias for <a href="Bytes.html#M001250">gigabytes</a>
+</p>
+  </div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001250"></a><b>gigabytes</b>()
+  </div>
+<div class="aka">
+  This method is also aliased as
+  <a href="Bytes.html#M001251">gigabyte</a>
+</div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001250_source')" id="l_M001250_source">show source</a> ]</p>
+  <div id="M001250_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/core_ext/numeric/bytes.rb, line 28</span>
+28:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">gigabytes</span>
+29:           <span class="ruby-keyword kw">self</span> <span class="ruby-operator">*</span> <span class="ruby-constant">GIGABYTE</span>
+30:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001247"></a><b>kilobyte</b>()
+  </div>
+  <div class="description">
+  <p>
+Alias for <a href="Bytes.html#M001246">kilobytes</a>
+</p>
+  </div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001246"></a><b>kilobytes</b>()
+  </div>
+<div class="aka">
+  This method is also aliased as
+  <a href="Bytes.html#M001247">kilobyte</a>
+</div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001246_source')" id="l_M001246_source">show source</a> ]</p>
+  <div id="M001246_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/core_ext/numeric/bytes.rb, line 18</span>
+18:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">kilobytes</span>
+19:           <span class="ruby-keyword kw">self</span> <span class="ruby-operator">*</span> <span class="ruby-constant">KILOBYTE</span>
+20:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001249"></a><b>megabyte</b>()
+  </div>
+  <div class="description">
+  <p>
+Alias for <a href="Bytes.html#M001248">megabytes</a>
+</p>
+  </div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001248"></a><b>megabytes</b>()
+  </div>
+<div class="aka">
+  This method is also aliased as
+  <a href="Bytes.html#M001249">megabyte</a>
+</div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001248_source')" id="l_M001248_source">show source</a> ]</p>
+  <div id="M001248_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/core_ext/numeric/bytes.rb, line 23</span>
+23:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">megabytes</span>
+24:           <span class="ruby-keyword kw">self</span> <span class="ruby-operator">*</span> <span class="ruby-constant">MEGABYTE</span>
+25:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001255"></a><b>petabyte</b>()
+  </div>
+  <div class="description">
+  <p>
+Alias for <a href="Bytes.html#M001254">petabytes</a>
+</p>
+  </div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001254"></a><b>petabytes</b>()
+  </div>
+<div class="aka">
+  This method is also aliased as
+  <a href="Bytes.html#M001255">petabyte</a>
+</div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001254_source')" id="l_M001254_source">show source</a> ]</p>
+  <div id="M001254_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/core_ext/numeric/bytes.rb, line 38</span>
+38:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">petabytes</span>
+39:           <span class="ruby-keyword kw">self</span> <span class="ruby-operator">*</span> <span class="ruby-constant">PETABYTE</span>
+40:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001253"></a><b>terabyte</b>()
+  </div>
+  <div class="description">
+  <p>
+Alias for <a href="Bytes.html#M001252">terabytes</a>
+</p>
+  </div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001252"></a><b>terabytes</b>()
+  </div>
+<div class="aka">
+  This method is also aliased as
+  <a href="Bytes.html#M001253">terabyte</a>
+</div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001252_source')" id="l_M001252_source">show source</a> ]</p>
+  <div id="M001252_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/core_ext/numeric/bytes.rb, line 33</span>
+33:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">terabytes</span>
+34:           <span class="ruby-keyword kw">self</span> <span class="ruby-operator">*</span> <span class="ruby-constant">TERABYTE</span>
+35:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Class: ActionController::Session::AbstractStore::SessionHash</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Class</span><br />ActionController::Session::AbstractStore::SessionHash</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../../../files/vendor/rails/actionpack/lib/action_controller/session/abstract_store_rb.html">vendor/rails/actionpack/lib/action_controller/session/abstract_store.rb</a>
+        </td>
+      </tr>
+    <tr>
+      <td>Parent:</td>
+      <td>
+Hash
+     </td>
+   </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M000476">[]</a></li>
+  <li><a href="#M000477">[]=</a></li>
+  <li><a href="#M000479">data</a></li>
+  <li><a href="#M000480">inspect</a></li>
+  <li><a href="#M000474">new</a></li>
+  <li><a href="#M000475">session_id</a></li>
+  <li><a href="#M000478">to_hash</a></li>
+  </ul>
+
+
+
+
+
+
+<div class="sectiontitle">Public Class methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M000474"></a><b>new</b>(by, env)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000474_source')" id="l_M000474_source">show source</a> ]</p>
+  <div id="M000474_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/session/abstract_store.rb, line 13</span>
+13:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">by</span>, <span class="ruby-identifier">env</span>)
+14:           <span class="ruby-keyword kw">super</span>()
+15:           <span class="ruby-ivar">@by</span> = <span class="ruby-identifier">by</span>
+16:           <span class="ruby-ivar">@env</span> = <span class="ruby-identifier">env</span>
+17:           <span class="ruby-ivar">@loaded</span> = <span class="ruby-keyword kw">false</span>
+18:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M000476"></a><b>[]</b>(key)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000476_source')" id="l_M000476_source">show source</a> ]</p>
+  <div id="M000476_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/session/abstract_store.rb, line 27</span>
+27:         <span class="ruby-keyword kw">def</span> <span class="ruby-operator">[]</span>(<span class="ruby-identifier">key</span>)
+28:           <span class="ruby-identifier">load!</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@loaded</span>
+29:           <span class="ruby-keyword kw">super</span>
+30:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000477"></a><b>[]=</b>(key, value)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000477_source')" id="l_M000477_source">show source</a> ]</p>
+  <div id="M000477_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/session/abstract_store.rb, line 32</span>
+32:         <span class="ruby-keyword kw">def</span> <span class="ruby-operator">[]=</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>)
+33:           <span class="ruby-identifier">load!</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@loaded</span>
+34:           <span class="ruby-keyword kw">super</span>
+35:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000479"></a><b>data</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000479_source')" id="l_M000479_source">show source</a> ]</p>
+  <div id="M000479_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/session/abstract_store.rb, line 43</span>
+43:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">data</span>
+44:          <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecation</span>.<span class="ruby-identifier">warn</span>(
+45:            <span class="ruby-value str">&quot;ActionController::Session::AbstractStore::SessionHash#data &quot;</span> <span class="ruby-operator">+</span>
+46:            <span class="ruby-value str">&quot;has been deprecated. Please use #to_hash instead.&quot;</span>, <span class="ruby-identifier">caller</span>)
+47:           <span class="ruby-identifier">to_hash</span>
+48:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000480"></a><b>inspect</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000480_source')" id="l_M000480_source">show source</a> ]</p>
+  <div id="M000480_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/session/abstract_store.rb, line 50</span>
+50:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">inspect</span>
+51:           <span class="ruby-identifier">load!</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@loaded</span>
+52:           <span class="ruby-keyword kw">super</span>
+53:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000475"></a><b>session_id</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000475_source')" id="l_M000475_source">show source</a> ]</p>
+  <div id="M000475_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/session/abstract_store.rb, line 20</span>
+20:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">session_id</span>
+21:           <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecation</span>.<span class="ruby-identifier">warn</span>(
+22:             <span class="ruby-value str">&quot;ActionController::Session::AbstractStore::SessionHash#session_id &quot;</span> <span class="ruby-operator">+</span>
+23:             <span class="ruby-value str">&quot;has been deprecated. Please use request.session_options[:id] instead.&quot;</span>, <span class="ruby-identifier">caller</span>)
+24:           <span class="ruby-ivar">@env</span>[<span class="ruby-constant">ENV_SESSION_OPTIONS_KEY</span>][<span class="ruby-identifier">:id</span>]
+25:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000478"></a><b>to_hash</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000478_source')" id="l_M000478_source">show source</a> ]</p>
+  <div id="M000478_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/session/abstract_store.rb, line 37</span>
+37:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_hash</span>
+38:           <span class="ruby-identifier">h</span> = {}.<span class="ruby-identifier">replace</span>(<span class="ruby-keyword kw">self</span>)
+39:           <span class="ruby-identifier">h</span>.<span class="ruby-identifier">delete_if</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">nil?</span> }
+40:           <span class="ruby-identifier">h</span>
+41:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

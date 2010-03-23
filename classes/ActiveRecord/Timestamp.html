@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Module: ActiveRecord::Timestamp</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Module</span><br />ActiveRecord::Timestamp</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../files/vendor/rails/activerecord/lib/active_record/timestamp_rb.html">vendor/rails/activerecord/lib/active_record/timestamp.rb</a>
+        </td>
+      </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+  <div class="description"><p>
+Active Record automatically timestamps create and update operations if the
+table has fields named created_at/created_on or updated_at/updated_on.
+</p>
+<p>
+Timestamping can be turned off by setting
+</p>
+<pre>
+  &lt;tt&gt;ActiveRecord::Base.record_timestamps = false&lt;/tt&gt;
+</pre>
+<p>
+Timestamps are in the local timezone by default but you can use UTC by
+setting
+</p>
+<pre>
+  &lt;tt&gt;ActiveRecord::Base.default_timezone = :utc&lt;/tt&gt;
+</pre>
+</div>
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M001856">touch</a></li>
+  </ul>
+
+
+
+
+
+
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M001856"></a><b>touch</b>(attribute = nil)
+  </div>
+  <div class="description">
+  <p>
+Saves the record with the updated_at/on attributes set to the current time.
+If the save fails because of validation errors, an <a
+href="RecordInvalid.html">ActiveRecord::RecordInvalid</a> exception is
+raised. If an attribute name is passed, that attribute is used for the <a
+href="Timestamp.html#M001856">touch</a> instead of the updated_at/on
+attributes.
+</p>
+<p>
+Examples:
+</p>
+<pre>
+  product.touch               # updates updated_at
+  product.touch(:designed_at) # updates the designed_at attribute
+</pre>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001856_source')" id="l_M001856_source">show source</a> ]</p>
+  <div id="M001856_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activerecord/lib/active_record/timestamp.rb, line 27</span>
+27:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">touch</span>(<span class="ruby-identifier">attribute</span> = <span class="ruby-keyword kw">nil</span>)
+28:       <span class="ruby-identifier">current_time</span> = <span class="ruby-identifier">current_time_from_proper_timezone</span>
+29: 
+30:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">attribute</span>
+31:         <span class="ruby-identifier">write_attribute</span>(<span class="ruby-identifier">attribute</span>, <span class="ruby-identifier">current_time</span>)
+32:       <span class="ruby-keyword kw">else</span>
+33:         <span class="ruby-identifier">write_attribute</span>(<span class="ruby-value str">'updated_at'</span>, <span class="ruby-identifier">current_time</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:updated_at</span>)
+34:         <span class="ruby-identifier">write_attribute</span>(<span class="ruby-value str">'updated_on'</span>, <span class="ruby-identifier">current_time</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:updated_on</span>)
+35:       <span class="ruby-keyword kw">end</span>
+36: 
+37:       <span class="ruby-identifier">save!</span>
+38:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

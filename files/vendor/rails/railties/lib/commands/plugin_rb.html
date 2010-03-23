@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>File: plugin.rb</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../../../../../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table border='0' cellpadding='0' cellspacing='0' width="100%" class='banner'>
+  <tr><td>
+    <table width="100%" border='0' cellpadding='0' cellspacing='0'><tr>
+      <td class="file-title" colspan="2"><span class="file-title-prefix">File</span><br />plugin.rb</td>
+      <td align="right">
+        <table border='0' cellspacing="0" cellpadding="2">
+          <tr>
+            <td>Path:</td>
+            <td>vendor/rails/railties/lib/commands/plugin.rb
+            </td>
+          </tr>
+          <tr>
+            <td>Modified:</td>
+            <td>Mon Jul 20 10:34:14 -0500 2009</td>
+          </tr>
+        </table>
+      </td></tr>
+    </table>
+  </td></tr>
+</table><br>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+  <div class="description"><p>
+<a href="../../../../../../classes/Rails.html">Rails</a> <a
+href="../../../../../../classes/Plugin.html">Plugin</a> Manager.
+</p>
+<p>
+Listing available plugins:
+</p>
+<pre>
+  $ ./script/plugin list
+  continuous_builder            http://dev.rubyonrails.com/svn/rails/plugins/continuous_builder
+  asset_timestamping            http://svn.aviditybytes.com/rails/plugins/asset_timestamping
+  enumerations_mixin            http://svn.protocool.com/rails/plugins/enumerations_mixin/trunk
+  calculations                  http://techno-weenie.net/svn/projects/calculations/
+  ...
+</pre>
+<p>
+Installing plugins:
+</p>
+<pre>
+  $ ./script/plugin install continuous_builder asset_timestamping
+</pre>
+<p>
+Finding <a
+href="../../../../../../classes/Repositories.html">Repositories</a>:
+</p>
+<pre>
+  $ ./script/plugin discover
+</pre>
+<p>
+Adding <a
+href="../../../../../../classes/Repositories.html">Repositories</a>:
+</p>
+<pre>
+  $ ./script/plugin source http://svn.protocool.com/rails/plugins/
+</pre>
+<p>
+How it works:
+</p>
+<pre>
+  * Maintains a list of subversion repositories that are assumed to have
+    a plugin directory structure. Manage them with the (source, unsource,
+    and sources commands)
+
+  * The discover command scrapes the following page for things that
+    look like subversion repositories with plugins:
+    http://wiki.rubyonrails.org/rails/pages/Plugins
+
+  * Unless you specify that you want to use svn, script/plugin uses plain old
+    HTTP for downloads.  The following bullets are true if you specify
+    that you want to use svn.
+
+  * If `vendor/plugins` is under subversion control, the script will
+    modify the svn:externals property and perform an update. You can
+    use normal subversion commands to keep the plugins up to date.
+
+  * Or, if `vendor/plugins` is not under subversion control, the
+    plugin is pulled via `svn checkout` or `svn export` but looks
+    exactly the same.
+</pre>
+<p>
+Specifying revisions:
+</p>
+<pre>
+  * Subversion revision is a single integer.
+
+  * Git revision format:
+    - full - 'refs/tags/1.8.0' or 'refs/heads/experimental'
+    - short: 'experimental' (equivalent to 'refs/heads/experimental')
+             'tag 1.8.0' (equivalent to 'refs/tags/1.8.0')
+</pre>
+<p>
+This is Free Software, copyright 2005 by Ryan Tomayko (rtomayko@gmail.com)
+and is licensed MIT: (<a
+href="http://www.opensource.org/licenses/mit-license.php">www.opensource.org/licenses/mit-license.php</a>)
+</p>
+</div>
+
+  <div class="sectiontitle">Required Files</div>
+  <ul>
+  <li>open-uri</li>
+  <li>fileutils</li>
+  <li>tempfile</li>
+  <li>active_support/core_ext/kernel</li>
+  <li>optparse</li>
+  <li>open-uri</li>
+  </ul>
+
+
+
+<div class="sectiontitle">Included Modules</div>
+<ul>
+  <li>FileUtils</li>
+</ul>
+
+
+
+
+
+</div>
+
+  </div>
+
+    </body>
+</html>

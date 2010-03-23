@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Module: ActiveSupport::CoreExtensions::Integer::Time</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Module</span><br />ActiveSupport::CoreExtensions::Integer::Time</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../../../files/vendor/rails/activesupport/lib/active_support/core_ext/integer/time_rb.html">vendor/rails/activesupport/lib/active_support/core_ext/integer/time.rb</a>
+        </td>
+      </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+  <div class="description"><p>
+Enables the use of time calculations and declarations, like 45.minutes +
+2.hours + 4.years.
+</p>
+<p>
+These methods use Time#advance for precise date calculations when using
+from_now, ago, etc. as well as adding or subtracting their results from a
+<a href="Time.html">Time</a> object. For example:
+</p>
+<pre>
+  # equivalent to Time.now.advance(:months =&gt; 1)
+  1.month.from_now
+
+  # equivalent to Time.now.advance(:years =&gt; 2)
+  2.years.from_now
+
+  # equivalent to Time.now.advance(:months =&gt; 4, :years =&gt; 5)
+  (4.months + 5.years).from_now
+</pre>
+<p>
+While these methods provide precise calculation when used as in the
+examples above, care should be taken to note that this is not true if the
+result of `<a href="Time.html#M001115">months</a>&#8217;, `<a
+href="Time.html#M001117">years</a>&#8217;, etc is converted before use:
+</p>
+<pre>
+  # equivalent to 30.days.to_i.from_now
+  1.month.to_i.from_now
+
+  # equivalent to 365.25.days.to_f.from_now
+  1.year.to_f.from_now
+</pre>
+<p>
+In such cases, Ruby&#8216;s core <a
+href="http://stdlib.rubyonrails.org/libdoc/date/rdoc/index.html">Date</a>
+and <a
+href="http://stdlib.rubyonrails.org/libdoc/time/rdoc/index.html">Time</a>
+should be used for precision date and time arithmetic
+</p>
+</div>
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M001116">month</a></li>
+  <li><a href="#M001115">months</a></li>
+  <li><a href="#M001118">year</a></li>
+  <li><a href="#M001117">years</a></li>
+  </ul>
+
+
+
+
+
+
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M001116"></a><b>month</b>()
+  </div>
+  <div class="description">
+  <p>
+Alias for <a href="Time.html#M001115">months</a>
+</p>
+  </div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001115"></a><b>months</b>()
+  </div>
+<div class="aka">
+  This method is also aliased as
+  <a href="Time.html#M001116">month</a>
+</div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001115_source')" id="l_M001115_source">show source</a> ]</p>
+  <div id="M001115_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/core_ext/integer/time.rb, line 33</span>
+33:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">months</span>
+34:           <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Duration</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword kw">self</span> <span class="ruby-operator">*</span> <span class="ruby-value">30</span>.<span class="ruby-identifier">days</span>, [[<span class="ruby-identifier">:months</span>, <span class="ruby-keyword kw">self</span>]])
+35:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001118"></a><b>year</b>()
+  </div>
+  <div class="description">
+  <p>
+Alias for <a href="Time.html#M001117">years</a>
+</p>
+  </div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001117"></a><b>years</b>()
+  </div>
+<div class="aka">
+  This method is also aliased as
+  <a href="Time.html#M001118">year</a>
+</div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001117_source')" id="l_M001117_source">show source</a> ]</p>
+  <div id="M001117_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/core_ext/integer/time.rb, line 38</span>
+38:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">years</span>
+39:           <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Duration</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword kw">self</span> <span class="ruby-operator">*</span> <span class="ruby-value">365.25</span>.<span class="ruby-identifier">days</span>, [[<span class="ruby-identifier">:years</span>, <span class="ruby-keyword kw">self</span>]])
+40:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

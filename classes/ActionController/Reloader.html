@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Class: ActionController::Reloader</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Class</span><br />ActionController::Reloader</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../files/vendor/rails/actionpack/lib/action_controller/reloader_rb.html">vendor/rails/actionpack/lib/action_controller/reloader.rb</a>
+        </td>
+      </tr>
+    <tr>
+      <td>Parent:</td>
+      <td>
+        <a href="../Object.html">
+Object
+         </a>
+     </td>
+   </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M000632">call</a></li>
+  <li><a href="#M000631">new</a></li>
+  </ul>
+
+
+
+  <div class="sectiontitle">Classes and Modules</div>
+  Class <a href="Reloader/BodyWrapper.html" class="link">ActionController::Reloader::BodyWrapper</a><br />
+
+
+
+
+<div class="sectiontitle">Public Class methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M000631"></a><b>new</b>(app)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000631_source')" id="l_M000631_source">show source</a> ]</p>
+  <div id="M000631_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/reloader.rb, line 23</span>
+23:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">app</span>)
+24:       <span class="ruby-ivar">@app</span> = <span class="ruby-identifier">app</span>
+25:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M000632"></a><b>call</b>(env)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000632_source')" id="l_M000632_source">show source</a> ]</p>
+  <div id="M000632_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/reloader.rb, line 27</span>
+27:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">call</span>(<span class="ruby-identifier">env</span>)
+28:       <span class="ruby-constant">Dispatcher</span>.<span class="ruby-identifier">reload_application</span>
+29:       <span class="ruby-identifier">status</span>, <span class="ruby-identifier">headers</span>, <span class="ruby-identifier">body</span> = <span class="ruby-ivar">@app</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">env</span>)
+30:       <span class="ruby-comment cmt"># We do not want to call 'cleanup_application' in an ensure block</span>
+31:       <span class="ruby-comment cmt"># because the returned Rack response body may lazily generate its data. This</span>
+32:       <span class="ruby-comment cmt"># is for example the case if one calls</span>
+33:       <span class="ruby-comment cmt">#</span>
+34:       <span class="ruby-comment cmt">#   render :text =&gt; lambda { ... code here which refers to application models ... }</span>
+35:       <span class="ruby-comment cmt">#</span>
+36:       <span class="ruby-comment cmt"># in an ActionController.</span>
+37:       <span class="ruby-comment cmt">#</span>
+38:       <span class="ruby-comment cmt"># Instead, we will want to cleanup the application code after the request is</span>
+39:       <span class="ruby-comment cmt"># completely finished. So we wrap the body in a BodyWrapper class so that</span>
+40:       <span class="ruby-comment cmt"># when the Rack handler calls #close during the end of the request, we get to</span>
+41:       <span class="ruby-comment cmt"># run our cleanup code.</span>
+42:       [<span class="ruby-identifier">status</span>, <span class="ruby-identifier">headers</span>, <span class="ruby-constant">BodyWrapper</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">body</span>)]
+43:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

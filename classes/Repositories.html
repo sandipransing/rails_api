@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Class: Repositories</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Class</span><br />Repositories</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../files/vendor/rails/railties/lib/commands/plugin_rb.html">vendor/rails/railties/lib/commands/plugin.rb</a>
+        </td>
+      </tr>
+    <tr>
+      <td>Parent:</td>
+      <td>
+        <a href="Object.html">
+Object
+         </a>
+     </td>
+   </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M000206">add</a></li>
+  <li><a href="#M000209">all</a></li>
+  <li><a href="#M000213">defaults</a></li>
+  <li><a href="#M000205">each</a></li>
+  <li><a href="#M000216">each</a></li>
+  <li><a href="#M000208">exist?</a></li>
+  <li><a href="#M000214">find_home</a></li>
+  <li><a href="#M000210">find_plugin</a></li>
+  <li><a href="#M000215">instance</a></li>
+  <li><a href="#M000211">load!</a></li>
+  <li><a href="#M000204">new</a></li>
+  <li><a href="#M000207">remove</a></li>
+  <li><a href="#M000212">save</a></li>
+  </ul>
+
+<div class="sectiontitle">Included Modules</div>
+<ul>
+  <li><a href="Enumerable.html">Enumerable</a></li>
+</ul>
+
+
+
+
+
+<div class="sectiontitle">Public Class methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M000216"></a><b>each</b>(&amp;block)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000216_source')" id="l_M000216_source">show source</a> ]</p>
+  <div id="M000216_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/commands/plugin.rb, line 398</span>
+398:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+399:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">instance</span>.<span class="ruby-identifier">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+400:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000215"></a><b>instance</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000215_source')" id="l_M000215_source">show source</a> ]</p>
+  <div id="M000215_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/commands/plugin.rb, line 394</span>
+394:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">instance</span>
+395:     <span class="ruby-ivar">@instance</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Repositories</span>.<span class="ruby-identifier">new</span>
+396:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000204"></a><b>new</b>(cache_file = File.join(find_home, &quot;.rails-plugin-sources&quot;))
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000204_source')" id="l_M000204_source">show source</a> ]</p>
+  <div id="M000204_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/commands/plugin.rb, line 316</span>
+316:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">cache_file</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">find_home</span>, <span class="ruby-value str">&quot;.rails-plugin-sources&quot;</span>))
+317:     <span class="ruby-ivar">@cache_file</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-identifier">cache_file</span>)
+318:     <span class="ruby-identifier">load!</span>
+319:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M000206"></a><b>add</b>(uri)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000206_source')" id="l_M000206_source">show source</a> ]</p>
+  <div id="M000206_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/commands/plugin.rb, line 325</span>
+325:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">add</span>(<span class="ruby-identifier">uri</span>)
+326:     <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">find</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">repo</span><span class="ruby-operator">|</span> <span class="ruby-identifier">repo</span>.<span class="ruby-identifier">uri</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">uri</span> }
+327:       <span class="ruby-ivar">@repositories</span>.<span class="ruby-identifier">push</span>(<span class="ruby-constant">Repository</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">uri</span>)).<span class="ruby-identifier">last</span>
+328:     <span class="ruby-keyword kw">end</span>
+329:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000209"></a><b>all</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000209_source')" id="l_M000209_source">show source</a> ]</p>
+  <div id="M000209_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/commands/plugin.rb, line 339</span>
+339:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">all</span>
+340:     <span class="ruby-ivar">@repositories</span>
+341:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000213"></a><b>defaults</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000213_source')" id="l_M000213_source">show source</a> ]</p>
+  <div id="M000213_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/commands/plugin.rb, line 369</span>
+369:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">defaults</span>
+370:     <span class="ruby-value str">&quot;http://dev.rubyonrails.com/svn/rails/plugins/\n&quot;</span>
+371:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000205"></a><b>each</b>(&amp;block)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000205_source')" id="l_M000205_source">show source</a> ]</p>
+  <div id="M000205_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/commands/plugin.rb, line 321</span>
+321:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+322:     <span class="ruby-ivar">@repositories</span>.<span class="ruby-identifier">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+323:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000208"></a><b>exist?</b>(uri)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000208_source')" id="l_M000208_source">show source</a> ]</p>
+  <div id="M000208_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/commands/plugin.rb, line 335</span>
+335:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">uri</span>)
+336:     <span class="ruby-ivar">@repositories</span>.<span class="ruby-identifier">detect</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">repo</span><span class="ruby-operator">|</span> <span class="ruby-identifier">repo</span>.<span class="ruby-identifier">uri</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">uri</span> }
+337:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000214"></a><b>find_home</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000214_source')" id="l_M000214_source">show source</a> ]</p>
+  <div id="M000214_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/commands/plugin.rb, line 376</span>
+376:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">find_home</span>
+377:     [<span class="ruby-value str">'HOME'</span>, <span class="ruby-value str">'USERPROFILE'</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">homekey</span><span class="ruby-operator">|</span>
+378:       <span class="ruby-keyword kw">return</span> <span class="ruby-constant">ENV</span>[<span class="ruby-identifier">homekey</span>] <span class="ruby-keyword kw">if</span> <span class="ruby-constant">ENV</span>[<span class="ruby-identifier">homekey</span>]
+379:     <span class="ruby-keyword kw">end</span>
+380:     <span class="ruby-keyword kw">if</span> <span class="ruby-constant">ENV</span>[<span class="ruby-value str">'HOMEDRIVE'</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-constant">ENV</span>[<span class="ruby-value str">'HOMEPATH'</span>]
+381:       <span class="ruby-keyword kw">return</span> <span class="ruby-node">&quot;#{ENV['HOMEDRIVE']}:#{ENV['HOMEPATH']}&quot;</span>
+382:     <span class="ruby-keyword kw">end</span>
+383:     <span class="ruby-keyword kw">begin</span>
+384:       <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-value str">&quot;~&quot;</span>)
+385:     <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">StandardError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">ex</span>
+386:       <span class="ruby-keyword kw">if</span> <span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-constant">ALT_SEPARATOR</span>
+387:         <span class="ruby-value str">&quot;C:/&quot;</span>
+388:       <span class="ruby-keyword kw">else</span>
+389:         <span class="ruby-value str">&quot;/&quot;</span>
+390:       <span class="ruby-keyword kw">end</span>
+391:     <span class="ruby-keyword kw">end</span>
+392:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000210"></a><b>find_plugin</b>(name)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000210_source')" id="l_M000210_source">show source</a> ]</p>
+  <div id="M000210_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/commands/plugin.rb, line 343</span>
+343:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">find_plugin</span>(<span class="ruby-identifier">name</span>)
+344:     <span class="ruby-ivar">@repositories</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">repo</span><span class="ruby-operator">|</span>
+345:       <span class="ruby-identifier">repo</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">plugin</span><span class="ruby-operator">|</span>
+346:         <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">plugin</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">plugin</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">name</span>
+347:       <span class="ruby-keyword kw">end</span>
+348:     <span class="ruby-keyword kw">end</span>
+349:     <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span>
+350:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000211"></a><b>load!</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000211_source')" id="l_M000211_source">show source</a> ]</p>
+  <div id="M000211_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/commands/plugin.rb, line 352</span>
+352:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">load!</span>
+353:     <span class="ruby-identifier">contents</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-ivar">@cache_file</span>) <span class="ruby-operator">?</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-ivar">@cache_file</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">defaults</span>
+354:     <span class="ruby-identifier">contents</span> = <span class="ruby-identifier">defaults</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">contents</span>.<span class="ruby-identifier">empty?</span>
+355:     <span class="ruby-ivar">@repositories</span> = <span class="ruby-identifier">contents</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp re">/\n/</span>).<span class="ruby-identifier">reject</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
+356:       <span class="ruby-identifier">line</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/^\s*#/</span> <span class="ruby-keyword kw">or</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/^\s*$/</span>
+357:     <span class="ruby-keyword kw">end</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">source</span><span class="ruby-operator">|</span> <span class="ruby-constant">Repository</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">source</span>.<span class="ruby-identifier">strip</span>) }
+358:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000207"></a><b>remove</b>(uri)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000207_source')" id="l_M000207_source">show source</a> ]</p>
+  <div id="M000207_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/commands/plugin.rb, line 331</span>
+331:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">remove</span>(<span class="ruby-identifier">uri</span>)
+332:     <span class="ruby-ivar">@repositories</span>.<span class="ruby-identifier">reject!</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">repo</span><span class="ruby-operator">|</span> <span class="ruby-identifier">repo</span>.<span class="ruby-identifier">uri</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">uri</span>}
+333:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000212"></a><b>save</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000212_source')" id="l_M000212_source">show source</a> ]</p>
+  <div id="M000212_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/commands/plugin.rb, line 360</span>
+360:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">save</span>
+361:     <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-ivar">@cache_file</span>, <span class="ruby-value str">'w'</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
+362:       <span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">repo</span><span class="ruby-operator">|</span>
+363:         <span class="ruby-identifier">f</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">repo</span>.<span class="ruby-identifier">uri</span>)
+364:         <span class="ruby-identifier">f</span>.<span class="ruby-identifier">write</span>(<span class="ruby-value str">&quot;\n&quot;</span>)
+365:       <span class="ruby-keyword kw">end</span>
+366:     <span class="ruby-keyword kw">end</span>
+367:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

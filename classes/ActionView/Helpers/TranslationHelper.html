@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Module: ActionView::Helpers::TranslationHelper</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Module</span><br />ActionView::Helpers::TranslationHelper</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../../files/vendor/rails/actionpack/lib/action_view/helpers/translation_helper_rb.html">vendor/rails/actionpack/lib/action_view/helpers/translation_helper.rb</a>
+        </td>
+      </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M001635">l</a></li>
+  <li><a href="#M001634">localize</a></li>
+  <li><a href="#M001633">t</a></li>
+  <li><a href="#M001632">translate</a></li>
+  </ul>
+
+
+
+
+
+
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M001635"></a><b>l</b>(*args)
+  </div>
+  <div class="description">
+  <p>
+Alias for <a href="TranslationHelper.html#M001634">localize</a>
+</p>
+  </div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001634"></a><b>localize</b>(*args)
+  </div>
+  <div class="description">
+  <p>
+Delegates to <a href="../../I18n.html#M002588">I18n.localize</a> with no
+additional functionality.
+</p>
+  </div>
+<div class="aka">
+  This method is also aliased as
+  <a href="TranslationHelper.html#M001635">l</a>
+</div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001634_source')" id="l_M001634_source">show source</a> ]</p>
+  <div id="M001634_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_view/helpers/translation_helper.rb, line 23</span>
+23:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">localize</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+24:         <span class="ruby-constant">I18n</span>.<span class="ruby-identifier">localize</span> <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>
+25:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001633"></a><b>t</b>(key, options = {})
+  </div>
+  <div class="description">
+  <p>
+Alias for <a href="TranslationHelper.html#M001632">translate</a>
+</p>
+  </div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001632"></a><b>translate</b>(key, options = {})
+  </div>
+  <div class="description">
+  <p>
+Delegates to <a href="../../I18n.html#M002587">I18n#translate</a> but also
+performs two additional functions. First, it&#8216;ll catch
+MissingTranslationData exceptions and turn them into inline spans that
+contains the missing key, such that you can see in a view what is missing
+where.
+</p>
+<p>
+Second, it&#8216;ll scope the key by the current partial if the key starts
+with a period. So if you call <a
+href="TranslationHelper.html#M001632">translate</a>(&quot;.foo&quot;) from
+the people/index.html.erb template, you&#8216;ll actually be calling <a
+href="../../I18n.html#M002587">I18n.translate</a>(&quot;people.index.foo&quot;).
+This makes it less repetitive to <a
+href="TranslationHelper.html#M001632">translate</a> many keys within the
+same partials and gives you a simple framework for scoping them
+consistently. If you don&#8216;<a
+href="TranslationHelper.html#M001633">t</a> prepend the key with a period,
+nothing is converted.
+</p>
+  </div>
+<div class="aka">
+  This method is also aliased as
+  <a href="TranslationHelper.html#M001633">t</a>
+</div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001632_source')" id="l_M001632_source">show source</a> ]</p>
+  <div id="M001632_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_view/helpers/translation_helper.rb, line 13</span>
+13:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">translate</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">options</span> = {})
+14:         <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:raise</span>] = <span class="ruby-keyword kw">true</span>
+15:         <span class="ruby-constant">I18n</span>.<span class="ruby-identifier">translate</span>(<span class="ruby-identifier">scope_key_by_partial</span>(<span class="ruby-identifier">key</span>), <span class="ruby-identifier">options</span>)
+16:       <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">I18n</span><span class="ruby-operator">::</span><span class="ruby-constant">MissingTranslationData</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+17:         <span class="ruby-identifier">keys</span> = <span class="ruby-constant">I18n</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">:normalize_translation_keys</span>, <span class="ruby-identifier">e</span>.<span class="ruby-identifier">locale</span>, <span class="ruby-identifier">e</span>.<span class="ruby-identifier">key</span>, <span class="ruby-identifier">e</span>.<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:scope</span>])
+18:         <span class="ruby-identifier">content_tag</span>(<span class="ruby-value str">'span'</span>, <span class="ruby-identifier">keys</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">', '</span>), <span class="ruby-identifier">:class</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'translation_missing'</span>)
+19:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

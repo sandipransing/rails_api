@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Module: ActionView::Helpers::BenchmarkHelper</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Module</span><br />ActionView::Helpers::BenchmarkHelper</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../../files/vendor/rails/actionpack/lib/action_view/helpers/benchmark_helper_rb.html">vendor/rails/actionpack/lib/action_view/helpers/benchmark_helper.rb</a>
+        </td>
+      </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+  <div class="description"><p>
+This helper offers a method to measure the execution time of a block in a
+template.
+</p>
+</div>
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M001614">benchmark</a></li>
+  </ul>
+
+
+
+
+
+
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M001614"></a><b>benchmark</b>(message = &quot;Benchmarking&quot;, options = {}) {|| ...}
+  </div>
+  <div class="description">
+  <p>
+Allows you to measure the execution time of a block in a template and
+records the result to the log. Wrap this block around expensive operations
+or possible bottlenecks to get a time reading for the operation. For
+example, let&#8216;s say you thought your file processing method was taking
+too long; you could wrap it in a <a
+href="BenchmarkHelper.html#M001614">benchmark</a> block.
+</p>
+<pre>
+ &lt;% benchmark &quot;Process data files&quot; do %&gt;
+   &lt;%= expensive_files_operation %&gt;
+ &lt;% end %&gt;
+</pre>
+<p>
+That would add something like &quot;<a
+href="../../Process.html">Process</a> data files (345.2ms)&quot; to the
+log, which you can then use to compare timings when optimizing your code.
+</p>
+<p>
+You may give an optional logger level as the :level option. (:debug, :info,
+:warn, :error); the default value is :info.
+</p>
+<pre>
+ &lt;% benchmark &quot;Low-level files&quot;, :level =&gt; :debug do %&gt;
+   &lt;%= lowlevel_files_operation %&gt;
+ &lt;% end %&gt;
+</pre>
+<p>
+Finally, you can pass true as the third argument to silence all log
+activity inside the block. This is great for boiling down a noisy block to
+just a single statement:
+</p>
+<pre>
+ &lt;% benchmark &quot;Process data files&quot;, :level =&gt; :info, :silence =&gt; true do %&gt;
+   &lt;%= expensive_and_chatty_files_operation %&gt;
+ &lt;% end %&gt;
+</pre>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001614_source')" id="l_M001614_source">show source</a> ]</p>
+  <div id="M001614_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_view/helpers/benchmark_helper.rb, line 34</span>
+34:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">benchmark</span>(<span class="ruby-identifier">message</span> = <span class="ruby-value str">&quot;Benchmarking&quot;</span>, <span class="ruby-identifier">options</span> = {})
+35:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">logger</span>
+36:           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Symbol</span>)
+37:             <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecation</span>.<span class="ruby-identifier">warn</span>(<span class="ruby-node">&quot;use benchmark('#{message}', :level =&gt; :#{options}) instead&quot;</span>, <span class="ruby-identifier">caller</span>)
+38:             <span class="ruby-identifier">options</span> = { <span class="ruby-identifier">:level</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">options</span>, <span class="ruby-identifier">:silence</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span> }
+39:           <span class="ruby-keyword kw">else</span>
+40:             <span class="ruby-identifier">options</span>.<span class="ruby-identifier">assert_valid_keys</span>(<span class="ruby-identifier">:level</span>, <span class="ruby-identifier">:silence</span>)
+41:             <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:level</span>] <span class="ruby-operator">||=</span> <span class="ruby-identifier">:info</span>
+42:           <span class="ruby-keyword kw">end</span>
+43:           
+44:           <span class="ruby-identifier">result</span> = <span class="ruby-keyword kw">nil</span>
+45:           <span class="ruby-identifier">ms</span> = <span class="ruby-constant">Benchmark</span>.<span class="ruby-identifier">ms</span> { <span class="ruby-identifier">result</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:silence</span>] <span class="ruby-operator">?</span> <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">logger</span>.<span class="ruby-identifier">silence</span> { <span class="ruby-keyword kw">yield</span> } <span class="ruby-operator">:</span> <span class="ruby-keyword kw">yield</span> }
+46:           <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">logger</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:level</span>], <span class="ruby-value str">'%s (%.1fms)'</span> <span class="ruby-operator">%</span> [ <span class="ruby-identifier">message</span>, <span class="ruby-identifier">ms</span> ])
+47:           <span class="ruby-identifier">result</span>
+48:         <span class="ruby-keyword kw">else</span>
+49:           <span class="ruby-keyword kw">yield</span>
+50:         <span class="ruby-keyword kw">end</span>
+51:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

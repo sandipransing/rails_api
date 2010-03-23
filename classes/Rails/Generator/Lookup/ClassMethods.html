@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Module: Rails::Generator::Lookup::ClassMethods</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Module</span><br />Rails::Generator::Lookup::ClassMethods</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../../../files/vendor/rails/railties/lib/rails_generator/lookup_rb.html">vendor/rails/railties/lib/rails_generator/lookup.rb</a>
+        </td>
+      </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M002454">append_sources</a></li>
+  <li><a href="#M002460">instance</a></li>
+  <li><a href="#M002459">lookup</a></li>
+  <li><a href="#M002455">prepend_sources</a></li>
+  <li><a href="#M002456">reset_sources</a></li>
+  <li><a href="#M002453">sources</a></li>
+  <li><a href="#M002457">use_application_sources!</a></li>
+  <li><a href="#M002458">use_component_sources!</a></li>
+  </ul>
+
+
+
+
+
+
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M002454"></a><b>append_sources</b>(*args)
+  </div>
+  <div class="description">
+  <p>
+Add a source to the end of the list.
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002454_source')" id="l_M002454_source">show source</a> ]</p>
+  <div id="M002454_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/railties/lib/rails_generator/lookup.rb, line 70</span>
+70:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">append_sources</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+71:           <span class="ruby-identifier">sources</span>.<span class="ruby-identifier">concat</span>(<span class="ruby-identifier">args</span>.<span class="ruby-identifier">flatten</span>)
+72:           <span class="ruby-identifier">invalidate_cache!</span>
+73:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M002460"></a><b>instance</b>(generator_name, args = [], runtime_options = {})
+  </div>
+  <div class="description">
+  <p>
+Convenience method to <a href="ClassMethods.html#M002459">lookup</a> and
+instantiate a generator.
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002460_source')" id="l_M002460_source">show source</a> ]</p>
+  <div id="M002460_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/rails_generator/lookup.rb, line 139</span>
+139:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">instance</span>(<span class="ruby-identifier">generator_name</span>, <span class="ruby-identifier">args</span> = [], <span class="ruby-identifier">runtime_options</span> = {})
+140:           <span class="ruby-identifier">lookup</span>(<span class="ruby-identifier">generator_name</span>).<span class="ruby-identifier">klass</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">args</span>, <span class="ruby-identifier">full_options</span>(<span class="ruby-identifier">runtime_options</span>))
+141:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M002459"></a><b>lookup</b>(generator_name)
+  </div>
+  <div class="description">
+  <p>
+<a href="../Lookup.html">Lookup</a> knows how to find generators&#8217;
+Specs from a list of Sources. Searches the <a
+href="ClassMethods.html#M002453">sources</a>, in order, for the first
+matching name.
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002459_source')" id="l_M002459_source">show source</a> ]</p>
+  <div id="M002459_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/rails_generator/lookup.rb, line 124</span>
+124:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">lookup</span>(<span class="ruby-identifier">generator_name</span>)
+125:           <span class="ruby-ivar">@found</span> <span class="ruby-operator">||=</span> {}
+126:           <span class="ruby-identifier">generator_name</span> = <span class="ruby-identifier">generator_name</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">downcase</span>
+127:           <span class="ruby-ivar">@found</span>[<span class="ruby-identifier">generator_name</span>] <span class="ruby-operator">||=</span> <span class="ruby-identifier">cache</span>.<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">spec</span><span class="ruby-operator">|</span> <span class="ruby-identifier">spec</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">generator_name</span> }
+128:           <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@found</span>[<span class="ruby-identifier">generator_name</span>] 
+129:             <span class="ruby-identifier">chars</span> = <span class="ruby-identifier">generator_name</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp re">/./</span>).<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span><span class="ruby-node">&quot;#{c}.*?&quot;</span>}
+130:             <span class="ruby-identifier">rx</span> = <span class="ruby-node">/^#{chars}$/</span>
+131:             <span class="ruby-identifier">gns</span> = <span class="ruby-identifier">cache</span>.<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">spec</span><span class="ruby-operator">|</span> <span class="ruby-identifier">spec</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">rx</span> }
+132:             <span class="ruby-ivar">@found</span>[<span class="ruby-identifier">generator_name</span>] <span class="ruby-operator">||=</span> <span class="ruby-identifier">gns</span>.<span class="ruby-identifier">first</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">gns</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
+133:             <span class="ruby-identifier">raise</span> <span class="ruby-constant">GeneratorError</span>, <span class="ruby-node">&quot;Pattern '#{generator_name}' matches more than one generator: #{gns.map{|sp|sp.name}.join(', ')}&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">gns</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>
+134:           <span class="ruby-keyword kw">end</span>
+135:           <span class="ruby-ivar">@found</span>[<span class="ruby-identifier">generator_name</span>] <span class="ruby-keyword kw">or</span> <span class="ruby-identifier">raise</span> <span class="ruby-constant">GeneratorError</span>, <span class="ruby-node">&quot;Couldn't find '#{generator_name}' generator&quot;</span>
+136:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M002455"></a><b>prepend_sources</b>(*args)
+  </div>
+  <div class="description">
+  <p>
+Add a source to the beginning of the list.
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002455_source')" id="l_M002455_source">show source</a> ]</p>
+  <div id="M002455_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/railties/lib/rails_generator/lookup.rb, line 76</span>
+76:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">prepend_sources</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+77:           <span class="ruby-identifier">write_inheritable_array</span>(<span class="ruby-identifier">:sources</span>, <span class="ruby-identifier">args</span>.<span class="ruby-identifier">flatten</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">sources</span>)
+78:           <span class="ruby-identifier">invalidate_cache!</span>
+79:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M002456"></a><b>reset_sources</b>()
+  </div>
+  <div class="description">
+  <p>
+Reset the source list.
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002456_source')" id="l_M002456_source">show source</a> ]</p>
+  <div id="M002456_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/railties/lib/rails_generator/lookup.rb, line 82</span>
+82:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">reset_sources</span>
+83:           <span class="ruby-identifier">write_inheritable_attribute</span>(<span class="ruby-identifier">:sources</span>, [])
+84:           <span class="ruby-identifier">invalidate_cache!</span>
+85:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M002453"></a><b>sources</b>()
+  </div>
+  <div class="description">
+  <p>
+The list of <a href="ClassMethods.html#M002453">sources</a> where we look,
+in order, for generators.
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002453_source')" id="l_M002453_source">show source</a> ]</p>
+  <div id="M002453_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/railties/lib/rails_generator/lookup.rb, line 65</span>
+65:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">sources</span>
+66:           <span class="ruby-identifier">read_inheritable_attribute</span>(<span class="ruby-identifier">:sources</span>) <span class="ruby-keyword kw">or</span> <span class="ruby-identifier">use_component_sources!</span>
+67:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M002457"></a><b>use_application_sources!</b>()
+  </div>
+  <div class="description">
+  <p>
+Use application generators (app, ?).
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002457_source')" id="l_M002457_source">show source</a> ]</p>
+  <div id="M002457_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/railties/lib/rails_generator/lookup.rb, line 88</span>
+88:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">use_application_sources!</span>
+89:           <span class="ruby-identifier">reset_sources</span>
+90:           <span class="ruby-identifier">sources</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">PathSource</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">:builtin</span>, <span class="ruby-node">&quot;#{File.dirname(__FILE__)}/generators/applications&quot;</span>)
+91:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M002458"></a><b>use_component_sources!</b>()
+  </div>
+  <div class="description">
+  <p>
+Use component generators (model, controller, etc).
+</p>
+<ol>
+<li><a href="../../../Rails.html">Rails</a> application. If RAILS_ROOT is
+defined we know we&#8216;re generating in the context of a <a
+href="../../../Rails.html">Rails</a> application, so search
+RAILS_ROOT/generators.
+
+</li>
+<li>Look in plugins, either for generators/ or rails_generators/ directories
+within each plugin
+
+</li>
+<li>User home directory. Search ~/.rails/generators.
+
+</li>
+<li>RubyGems. Search for gems named *_generator, and look for generators within
+any RubyGem&#8216;s /rails_generators/&lt;generator_name&gt;_generator.rb
+file.
+
+</li>
+<li>Builtins. Model, controller, mailer, scaffold, and so on.
+
+</li>
+</ol>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002458_source')" id="l_M002458_source">show source</a> ]</p>
+  <div id="M002458_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/rails_generator/lookup.rb, line 104</span>
+104:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">use_component_sources!</span>
+105:           <span class="ruby-identifier">reset_sources</span>
+106:           <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">defined?</span> <span class="ruby-operator">::</span><span class="ruby-constant">RAILS_ROOT</span>
+107:             <span class="ruby-identifier">sources</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">PathSource</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">:lib</span>, <span class="ruby-node">&quot;#{::RAILS_ROOT}/lib/generators&quot;</span>)
+108:             <span class="ruby-identifier">sources</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">PathSource</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">:vendor</span>, <span class="ruby-node">&quot;#{::RAILS_ROOT}/vendor/generators&quot;</span>)
+109:             <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">configuration</span>.<span class="ruby-identifier">plugin_paths</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>
+110:               <span class="ruby-identifier">relative_path</span> = <span class="ruby-constant">Pathname</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-identifier">path</span>)).<span class="ruby-identifier">relative_path_from</span>(<span class="ruby-constant">Pathname</span>.<span class="ruby-identifier">new</span>(<span class="ruby-operator">::</span><span class="ruby-constant">RAILS_ROOT</span>))
+111:               <span class="ruby-identifier">sources</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">PathSource</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;plugins (#{relative_path})&quot;</span><span class="ruby-node">&quot;plugins (#{relative_path})&quot;</span>, <span class="ruby-node">&quot;#{path}/*/**/{,rails_}generators&quot;</span>)
+112:             <span class="ruby-keyword kw">end</span>
+113:           <span class="ruby-keyword kw">end</span>
+114:           <span class="ruby-identifier">sources</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">PathSource</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">:user</span>, <span class="ruby-node">&quot;#{Dir.user_home}/.rails/generators&quot;</span>)
+115:           <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Object</span>.<span class="ruby-identifier">const_defined?</span>(<span class="ruby-identifier">:Gem</span>)
+116:             <span class="ruby-identifier">sources</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">GemGeneratorSource</span>.<span class="ruby-identifier">new</span>
+117:             <span class="ruby-identifier">sources</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">GemPathSource</span>.<span class="ruby-identifier">new</span>
+118:           <span class="ruby-keyword kw">end</span>
+119:           <span class="ruby-identifier">sources</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">PathSource</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">:builtin</span>, <span class="ruby-node">&quot;#{File.dirname(__FILE__)}/generators/components&quot;</span>)
+120:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

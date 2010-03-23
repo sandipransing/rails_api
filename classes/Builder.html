@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Module: Builder</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Module</span><br />Builder</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../files/vendor/rails/activesupport/lib/active_support/vendor/builder-2_1_2/builder/blankslate_rb.html">vendor/rails/activesupport/lib/active_support/vendor/builder-2.1.2/builder/blankslate.rb</a>
+<a href="../files/vendor/rails/activesupport/lib/active_support/vendor/builder-2_1_2/builder/css_rb.html">vendor/rails/activesupport/lib/active_support/vendor/builder-2.1.2/builder/css.rb</a>
+<a href="../files/vendor/rails/activesupport/lib/active_support/vendor/builder-2_1_2/builder/xchar_rb.html">vendor/rails/activesupport/lib/active_support/vendor/builder-2.1.2/builder/xchar.rb</a>
+<a href="../files/vendor/rails/activesupport/lib/active_support/vendor/builder-2_1_2/builder/xmlbase_rb.html">vendor/rails/activesupport/lib/active_support/vendor/builder-2.1.2/builder/xmlbase.rb</a>
+<a href="../files/vendor/rails/activesupport/lib/active_support/vendor/builder-2_1_2/builder/xmlevents_rb.html">vendor/rails/activesupport/lib/active_support/vendor/builder-2.1.2/builder/xmlevents.rb</a>
+<a href="../files/vendor/rails/activesupport/lib/active_support/vendor/builder-2_1_2/builder/xmlmarkup_rb.html">vendor/rails/activesupport/lib/active_support/vendor/builder-2.1.2/builder/xmlmarkup.rb</a>
+        </td>
+      </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M001567">check_for_name_collision</a></li>
+  </ul>
+
+
+
+  <div class="sectiontitle">Classes and Modules</div>
+  Class <a href="Builder/CSS.html" class="link">Builder::CSS</a><br />
+Class <a href="Builder/IllegalBlockError.html" class="link">Builder::IllegalBlockError</a><br />
+Class <a href="Builder/XmlBase.html" class="link">Builder::XmlBase</a><br />
+Class <a href="Builder/XmlEvents.html" class="link">Builder::XmlEvents</a><br />
+Class <a href="Builder/XmlMarkup.html" class="link">Builder::XmlMarkup</a><br />
+
+
+  <div class="sectiontitle">Constants</div>
+  <table border='0' cellpadding='5'>
+  <tr valign='top'>
+    <td class="attr-name">BlankSlate</td>
+    <td>=</td>
+    <td class="attr-value">::BlankSlate</td>
+  </tr>
+  </table>
+
+
+<div class="sectiontitle">Public Class methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M001567"></a><b>check_for_name_collision</b>(klass, method_name, defined_constant=nil)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001567_source')" id="l_M001567_source">show source</a> ]</p>
+  <div id="M001567_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/vendor/builder-2.1.2/builder/xchar.rb, line 12</span>
+12:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">check_for_name_collision</span>(<span class="ruby-identifier">klass</span>, <span class="ruby-identifier">method_name</span>, <span class="ruby-identifier">defined_constant</span>=<span class="ruby-keyword kw">nil</span>)
+13:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">instance_methods</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">method_name</span>.<span class="ruby-identifier">to_s</span>)
+14:       <span class="ruby-identifier">fail</span> <span class="ruby-constant">RuntimeError</span>,
+15:         <span class="ruby-node">&quot;Name Collision: Method '#{method_name}' is already defined in #{klass}&quot;</span>
+16:     <span class="ruby-keyword kw">end</span>
+17:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

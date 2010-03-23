@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Class: I18nSimpleBackendPluralizeTest</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Class</span><br />I18nSimpleBackendPluralizeTest</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../files/vendor/rails/activesupport/lib/active_support/vendor/i18n-0_1_3/test/simple_backend_test_rb.html">vendor/rails/activesupport/lib/active_support/vendor/i18n-0.1.3/test/simple_backend_test.rb</a>
+        </td>
+      </tr>
+    <tr>
+      <td>Parent:</td>
+      <td>
+Test::Unit::TestCase
+     </td>
+   </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M000186">test_interpolate_given_incomplete_pluralization_data_raises_invalid_pluralization_data</a></li>
+  <li><a href="#M000182">test_pluralize_given_0_returns_plural_string_if_no_zero_key_given</a></li>
+  <li><a href="#M000181">test_pluralize_given_0_returns_zero_string_if_zero_key_given</a></li>
+  <li><a href="#M000183">test_pluralize_given_1_returns_singular_string</a></li>
+  <li><a href="#M000184">test_pluralize_given_2_returns_plural_string</a></li>
+  <li><a href="#M000185">test_pluralize_given_3_returns_plural_string</a></li>
+  <li><a href="#M000180">test_pluralize_given_nil_returns_the_given_entry</a></li>
+  </ul>
+
+<div class="sectiontitle">Included Modules</div>
+<ul>
+  <li><a href="I18nSimpleBackendTestSetup.html">I18nSimpleBackendTestSetup</a></li>
+</ul>
+
+
+
+
+
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M000186"></a><b>test_interpolate_given_incomplete_pluralization_data_raises_invalid_pluralization_data</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000186_source')" id="l_M000186_source">show source</a> ]</p>
+  <div id="M000186_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/vendor/i18n-0.1.3/test/simple_backend_test.rb, line 231</span>
+231:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_interpolate_given_incomplete_pluralization_data_raises_invalid_pluralization_data</span>
+232:     <span class="ruby-identifier">assert_raise</span>(<span class="ruby-constant">I18n</span><span class="ruby-operator">::</span><span class="ruby-constant">InvalidPluralizationData</span>){ <span class="ruby-ivar">@backend</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">:pluralize</span>, <span class="ruby-keyword kw">nil</span>, {<span class="ruby-identifier">:one</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'bar'</span>}, <span class="ruby-value">2</span>) }
+233:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000182"></a><b>test_pluralize_given_0_returns_plural_string_if_no_zero_key_given</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000182_source')" id="l_M000182_source">show source</a> ]</p>
+  <div id="M000182_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/vendor/i18n-0.1.3/test/simple_backend_test.rb, line 215</span>
+215:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_pluralize_given_0_returns_plural_string_if_no_zero_key_given</span>
+216:     <span class="ruby-identifier">assert_equal</span> <span class="ruby-value str">'bars'</span>, <span class="ruby-ivar">@backend</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">:pluralize</span>, <span class="ruby-keyword kw">nil</span>, {<span class="ruby-identifier">:one</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'bar'</span>, <span class="ruby-identifier">:other</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'bars'</span>}, <span class="ruby-value">0</span>)
+217:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000181"></a><b>test_pluralize_given_0_returns_zero_string_if_zero_key_given</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000181_source')" id="l_M000181_source">show source</a> ]</p>
+  <div id="M000181_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/vendor/i18n-0.1.3/test/simple_backend_test.rb, line 211</span>
+211:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_pluralize_given_0_returns_zero_string_if_zero_key_given</span>
+212:     <span class="ruby-identifier">assert_equal</span> <span class="ruby-value str">'zero'</span>, <span class="ruby-ivar">@backend</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">:pluralize</span>, <span class="ruby-keyword kw">nil</span>, {<span class="ruby-identifier">:zero</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'zero'</span>, <span class="ruby-identifier">:one</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'bar'</span>, <span class="ruby-identifier">:other</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'bars'</span>}, <span class="ruby-value">0</span>)
+213:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000183"></a><b>test_pluralize_given_1_returns_singular_string</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000183_source')" id="l_M000183_source">show source</a> ]</p>
+  <div id="M000183_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/vendor/i18n-0.1.3/test/simple_backend_test.rb, line 219</span>
+219:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_pluralize_given_1_returns_singular_string</span>
+220:     <span class="ruby-identifier">assert_equal</span> <span class="ruby-value str">'bar'</span>, <span class="ruby-ivar">@backend</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">:pluralize</span>, <span class="ruby-keyword kw">nil</span>, {<span class="ruby-identifier">:one</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'bar'</span>, <span class="ruby-identifier">:other</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'bars'</span>}, <span class="ruby-value">1</span>)
+221:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000184"></a><b>test_pluralize_given_2_returns_plural_string</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000184_source')" id="l_M000184_source">show source</a> ]</p>
+  <div id="M000184_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/vendor/i18n-0.1.3/test/simple_backend_test.rb, line 223</span>
+223:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_pluralize_given_2_returns_plural_string</span>
+224:     <span class="ruby-identifier">assert_equal</span> <span class="ruby-value str">'bars'</span>, <span class="ruby-ivar">@backend</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">:pluralize</span>, <span class="ruby-keyword kw">nil</span>, {<span class="ruby-identifier">:one</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'bar'</span>, <span class="ruby-identifier">:other</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'bars'</span>}, <span class="ruby-value">2</span>)
+225:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000185"></a><b>test_pluralize_given_3_returns_plural_string</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000185_source')" id="l_M000185_source">show source</a> ]</p>
+  <div id="M000185_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/vendor/i18n-0.1.3/test/simple_backend_test.rb, line 227</span>
+227:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_pluralize_given_3_returns_plural_string</span>
+228:     <span class="ruby-identifier">assert_equal</span> <span class="ruby-value str">'bars'</span>, <span class="ruby-ivar">@backend</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">:pluralize</span>, <span class="ruby-keyword kw">nil</span>, {<span class="ruby-identifier">:one</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'bar'</span>, <span class="ruby-identifier">:other</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'bars'</span>}, <span class="ruby-value">3</span>)
+229:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000180"></a><b>test_pluralize_given_nil_returns_the_given_entry</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000180_source')" id="l_M000180_source">show source</a> ]</p>
+  <div id="M000180_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/vendor/i18n-0.1.3/test/simple_backend_test.rb, line 206</span>
+206:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_pluralize_given_nil_returns_the_given_entry</span>
+207:     <span class="ruby-identifier">entry</span> = {<span class="ruby-identifier">:one</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'bar'</span>, <span class="ruby-identifier">:other</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'bars'</span>}
+208:     <span class="ruby-identifier">assert_equal</span> <span class="ruby-identifier">entry</span>, <span class="ruby-ivar">@backend</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">:pluralize</span>, <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">entry</span>, <span class="ruby-keyword kw">nil</span>)
+209:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Class: ActiveSupport::Cache::MemoryStore</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Class</span><br />ActiveSupport::Cache::MemoryStore</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../../files/vendor/rails/activesupport/lib/active_support/cache/memory_store_rb.html">vendor/rails/activesupport/lib/active_support/cache/memory_store.rb</a>
+        </td>
+      </tr>
+    <tr>
+      <td>Parent:</td>
+      <td>
+        <a href="Store.html">
+Store
+         </a>
+     </td>
+   </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+  <div class="description"><p>
+A cache store implementation which stores everything into memory in the
+same process. If you&#8216;re running multiple Ruby on <a
+href="../../Rails.html">Rails</a> server processes (which is the case if
+you&#8216;re using mongrel_cluster or Phusion Passenger), then this means
+that your <a href="../../Rails.html">Rails</a> server process instances
+won&#8216;t be able to share cache data with each other. If your
+application never performs manual cache item expiry (e.g. when you&#8216;re
+using generational cache keys), then using <a
+href="MemoryStore.html">MemoryStore</a> is ok. Otherwise, consider
+carefully whether you should be using this cache store.
+</p>
+<p>
+<a href="MemoryStore.html">MemoryStore</a> is not only able to store
+strings, but also arbitrary Ruby objects.
+</p>
+<p>
+<a href="MemoryStore.html">MemoryStore</a> is not thread-safe. Use <a
+href="SynchronizedMemoryStore.html">SynchronizedMemoryStore</a> instead if
+you need thread-safety.
+</p>
+</div>
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M001045">clear</a></li>
+  <li><a href="#M001042">delete</a></li>
+  <li><a href="#M001043">delete_matched</a></li>
+  <li><a href="#M001044">exist?</a></li>
+  <li><a href="#M001039">new</a></li>
+  <li><a href="#M001040">read</a></li>
+  <li><a href="#M001041">write</a></li>
+  </ul>
+
+
+
+
+
+
+<div class="sectiontitle">Public Class methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M001039"></a><b>new</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001039_source')" id="l_M001039_source">show source</a> ]</p>
+  <div id="M001039_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/cache/memory_store.rb, line 18</span>
+18:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>
+19:         <span class="ruby-ivar">@data</span> = {}
+20:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M001045"></a><b>clear</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001045_source')" id="l_M001045_source">show source</a> ]</p>
+  <div id="M001045_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/cache/memory_store.rb, line 47</span>
+47:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">clear</span>
+48:         <span class="ruby-ivar">@data</span>.<span class="ruby-identifier">clear</span>
+49:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001042"></a><b>delete</b>(name, options = nil)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001042_source')" id="l_M001042_source">show source</a> ]</p>
+  <div id="M001042_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/cache/memory_store.rb, line 32</span>
+32:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">delete</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">options</span> = <span class="ruby-keyword kw">nil</span>)
+33:         <span class="ruby-keyword kw">super</span>
+34:         <span class="ruby-ivar">@data</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">name</span>)
+35:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001043"></a><b>delete_matched</b>(matcher, options = nil)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001043_source')" id="l_M001043_source">show source</a> ]</p>
+  <div id="M001043_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/cache/memory_store.rb, line 37</span>
+37:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">delete_matched</span>(<span class="ruby-identifier">matcher</span>, <span class="ruby-identifier">options</span> = <span class="ruby-keyword kw">nil</span>)
+38:         <span class="ruby-keyword kw">super</span>
+39:         <span class="ruby-ivar">@data</span>.<span class="ruby-identifier">delete_if</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">k</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">matcher</span> }
+40:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001044"></a><b>exist?</b>(name,options = nil)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001044_source')" id="l_M001044_source">show source</a> ]</p>
+  <div id="M001044_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/cache/memory_store.rb, line 42</span>
+42:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">name</span>,<span class="ruby-identifier">options</span> = <span class="ruby-keyword kw">nil</span>)
+43:         <span class="ruby-keyword kw">super</span>
+44:         <span class="ruby-ivar">@data</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">name</span>)
+45:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001040"></a><b>read</b>(name, options = nil)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001040_source')" id="l_M001040_source">show source</a> ]</p>
+  <div id="M001040_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/cache/memory_store.rb, line 22</span>
+22:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">read</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">options</span> = <span class="ruby-keyword kw">nil</span>)
+23:         <span class="ruby-keyword kw">super</span>
+24:         <span class="ruby-ivar">@data</span>[<span class="ruby-identifier">name</span>]
+25:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001041"></a><b>write</b>(name, value, options = nil)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001041_source')" id="l_M001041_source">show source</a> ]</p>
+  <div id="M001041_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/cache/memory_store.rb, line 27</span>
+27:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">write</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">value</span>, <span class="ruby-identifier">options</span> = <span class="ruby-keyword kw">nil</span>)
+28:         <span class="ruby-keyword kw">super</span>
+29:         <span class="ruby-ivar">@data</span>[<span class="ruby-identifier">name</span>] = <span class="ruby-identifier">value</span>.<span class="ruby-identifier">freeze</span>
+30:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

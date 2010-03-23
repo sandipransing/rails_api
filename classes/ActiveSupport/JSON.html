@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Module: ActiveSupport::JSON</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Module</span><br />ActiveSupport::JSON</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../files/vendor/rails/activesupport/lib/active_support/json/backends/jsongem_rb.html">vendor/rails/activesupport/lib/active_support/json/backends/jsongem.rb</a>
+<a href="../../files/vendor/rails/activesupport/lib/active_support/json/backends/yaml_rb.html">vendor/rails/activesupport/lib/active_support/json/backends/yaml.rb</a>
+<a href="../../files/vendor/rails/activesupport/lib/active_support/json/decoding_rb.html">vendor/rails/activesupport/lib/active_support/json/decoding.rb</a>
+<a href="../../files/vendor/rails/activesupport/lib/active_support/json/encoding_rb.html">vendor/rails/activesupport/lib/active_support/json/encoding.rb</a>
+<a href="../../files/vendor/rails/activesupport/lib/active_support/json/variable_rb.html">vendor/rails/activesupport/lib/active_support/json/variable.rb</a>
+        </td>
+      </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M000991">backend</a></li>
+  <li><a href="#M000992">backend=</a></li>
+  <li><a href="#M000993">with_backend</a></li>
+  </ul>
+
+
+
+  <div class="sectiontitle">Classes and Modules</div>
+  Module <a href="JSON/Backends.html" class="link">ActiveSupport::JSON::Backends</a><br />
+Class <a href="JSON/ParseError.html" class="link">ActiveSupport::JSON::ParseError</a><br />
+Class <a href="JSON/Variable.html" class="link">ActiveSupport::JSON::Variable</a><br />
+
+
+  <div class="sectiontitle">Constants</div>
+  <table border='0' cellpadding='5'>
+  <tr valign='top'>
+    <td class="attr-name">ParseError</td>
+    <td>=</td>
+    <td class="attr-value">::JSON::ParserError unless const_defined?(:ParseError)</td>
+  </tr>
+  <tr valign='top'>
+    <td class="attr-name">DATE_REGEX</td>
+    <td>=</td>
+    <td class="attr-value">/^(?:\d{4}-\d{2}-\d{2}|\d{4}-\d{1,2}-\d{1,2}[ \t]+\d{1,2}:\d{2}:\d{2}(\.[0-9]*)?(([ \t]*)Z|[-+]\d{2}?(:\d{2})?))$/</td>
+  </tr>
+  <tr valign='top'>
+    <td>&nbsp;</td>
+    <td colspan="2" class="attr-desc">
+matches YAML-formatted dates
+
+</td>
+  </tr>
+  <tr valign='top'>
+    <td class="attr-name">CircularReferenceError</td>
+    <td>=</td>
+    <td class="attr-value">Deprecation::DeprecatedConstantProxy.new('ActiveSupport::JSON::CircularReferenceError', Encoding::CircularReferenceError)</td>
+  </tr>
+  </table>
+
+
+<div class="sectiontitle">Public Class methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M000991"></a><b>backend</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000991_source')" id="l_M000991_source">show source</a> ]</p>
+  <div id="M000991_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/json/decoding.rb, line 11</span>
+11:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">backend</span>
+12:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">backend</span> = <span class="ruby-value str">&quot;Yaml&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-keyword kw">defined?</span>(<span class="ruby-ivar">@backend</span>)
+13:         <span class="ruby-ivar">@backend</span>
+14:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000992"></a><b>backend=</b>(name)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000992_source')" id="l_M000992_source">show source</a> ]</p>
+  <div id="M000992_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/json/decoding.rb, line 16</span>
+16:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">backend=</span>(<span class="ruby-identifier">name</span>)
+17:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Module</span>)
+18:           <span class="ruby-ivar">@backend</span> = <span class="ruby-identifier">name</span>
+19:         <span class="ruby-keyword kw">else</span>
+20:           <span class="ruby-identifier">require</span> <span class="ruby-node">&quot;active_support/json/backends/#{name.to_s.downcase}.rb&quot;</span>
+21:           <span class="ruby-ivar">@backend</span> = <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">JSON</span><span class="ruby-operator">::</span><span class="ruby-constant">Backends</span><span class="ruby-operator">::</span><span class="ruby-identifier">const_get</span>(<span class="ruby-identifier">name</span>)
+22:         <span class="ruby-keyword kw">end</span>
+23:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000993"></a><b>with_backend</b>(name) {|| ...}
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000993_source')" id="l_M000993_source">show source</a> ]</p>
+  <div id="M000993_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/json/decoding.rb, line 25</span>
+25:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">with_backend</span>(<span class="ruby-identifier">name</span>)
+26:         <span class="ruby-identifier">old_backend</span>, <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">backend</span> = <span class="ruby-identifier">backend</span>, <span class="ruby-identifier">name</span>
+27:         <span class="ruby-keyword kw">yield</span>
+28:       <span class="ruby-keyword kw">ensure</span>
+29:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">backend</span> = <span class="ruby-identifier">old_backend</span>
+30:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

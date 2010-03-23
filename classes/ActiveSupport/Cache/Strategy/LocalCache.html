@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Module: ActiveSupport::Cache::Strategy::LocalCache</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Module</span><br />ActiveSupport::Cache::Strategy::LocalCache</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../../../files/vendor/rails/activesupport/lib/active_support/cache/strategy/local_cache_rb.html">vendor/rails/activesupport/lib/active_support/cache/strategy/local_cache.rb</a>
+        </td>
+      </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M001021">clear</a></li>
+  <li><a href="#M001020">decrement</a></li>
+  <li><a href="#M001017">delete</a></li>
+  <li><a href="#M001018">exist</a></li>
+  <li><a href="#M001019">increment</a></li>
+  <li><a href="#M001014">middleware</a></li>
+  <li><a href="#M001015">read</a></li>
+  <li><a href="#M001013">with_local_cache</a></li>
+  <li><a href="#M001016">write</a></li>
+  </ul>
+
+
+
+
+  <div class="sectiontitle">Constants</div>
+  <table border='0' cellpadding='5'>
+  <tr valign='top'>
+    <td class="attr-name">NULL</td>
+    <td>=</td>
+    <td class="attr-value">'remote_cache_store:null'</td>
+  </tr>
+  <tr valign='top'>
+    <td>&nbsp;</td>
+    <td colspan="2" class="attr-desc">
+this allows caching of the fact that there is nothing in the remote cache
+
+</td>
+  </tr>
+  </table>
+
+
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M001021"></a><b>clear</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001021_source')" id="l_M001021_source">show source</a> ]</p>
+  <div id="M001021_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/cache/strategy/local_cache.rb, line 89</span>
+89:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">clear</span>
+90:           <span class="ruby-identifier">local_cache</span>.<span class="ruby-identifier">clear</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">local_cache</span>
+91:           <span class="ruby-keyword kw">super</span>
+92:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001020"></a><b>decrement</b>(key, amount = 1)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001020_source')" id="l_M001020_source">show source</a> ]</p>
+  <div id="M001020_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/cache/strategy/local_cache.rb, line 80</span>
+80:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">decrement</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">amount</span> = <span class="ruby-value">1</span>)
+81:           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">value</span> = <span class="ruby-keyword kw">super</span>
+82:             <span class="ruby-identifier">local_cache</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_s</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">local_cache</span>
+83:             <span class="ruby-identifier">value</span>
+84:           <span class="ruby-keyword kw">else</span>
+85:             <span class="ruby-keyword kw">nil</span>
+86:           <span class="ruby-keyword kw">end</span>
+87:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001017"></a><b>delete</b>(key, options = nil)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001017_source')" id="l_M001017_source">show source</a> ]</p>
+  <div id="M001017_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/cache/strategy/local_cache.rb, line 55</span>
+55:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">delete</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">options</span> = <span class="ruby-keyword kw">nil</span>)
+56:           <span class="ruby-identifier">local_cache</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">key</span>, <span class="ruby-constant">NULL</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">local_cache</span>
+57:           <span class="ruby-keyword kw">super</span>
+58:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001018"></a><b>exist</b>(key, options = nil)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001018_source')" id="l_M001018_source">show source</a> ]</p>
+  <div id="M001018_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/cache/strategy/local_cache.rb, line 60</span>
+60:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">exist</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">options</span> = <span class="ruby-keyword kw">nil</span>)
+61:           <span class="ruby-identifier">value</span> = <span class="ruby-identifier">local_cache</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">key</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">local_cache</span>
+62:           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">value</span> <span class="ruby-operator">==</span> <span class="ruby-constant">NULL</span>
+63:             <span class="ruby-keyword kw">false</span>
+64:           <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">value</span>
+65:             <span class="ruby-keyword kw">true</span>
+66:           <span class="ruby-keyword kw">else</span>
+67:             <span class="ruby-keyword kw">super</span>
+68:           <span class="ruby-keyword kw">end</span>
+69:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001019"></a><b>increment</b>(key, amount = 1)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001019_source')" id="l_M001019_source">show source</a> ]</p>
+  <div id="M001019_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/cache/strategy/local_cache.rb, line 71</span>
+71:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">increment</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">amount</span> = <span class="ruby-value">1</span>)
+72:           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">value</span> = <span class="ruby-keyword kw">super</span>
+73:             <span class="ruby-identifier">local_cache</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_s</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">local_cache</span>
+74:             <span class="ruby-identifier">value</span>
+75:           <span class="ruby-keyword kw">else</span>
+76:             <span class="ruby-keyword kw">nil</span>
+77:           <span class="ruby-keyword kw">end</span>
+78:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001014"></a><b>middleware</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001014_source')" id="l_M001014_source">show source</a> ]</p>
+  <div id="M001014_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/cache/strategy/local_cache.rb, line 15</span>
+15:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">middleware</span>
+16:           <span class="ruby-ivar">@middleware</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword kw">begin</span>
+17:             <span class="ruby-identifier">klass</span> = <span class="ruby-constant">Class</span>.<span class="ruby-identifier">new</span>
+18:             <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">class_eval</span>(<span class="ruby-value str">&quot;def initialize(app)\n@app = app\nend\n\ndef call(env)\nThread.current[:\#{thread_local_key}] = MemoryStore.new\n@app.call(env)\nensure\nThread.current[:\#{thread_local_key}] = nil\nend\n&quot;</span>, <span class="ruby-keyword kw">__FILE__</span>, <span class="ruby-keyword kw">__LINE__</span>)
+19:             <span class="ruby-identifier">klass</span>
+20:           <span class="ruby-keyword kw">end</span>
+21:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001015"></a><b>read</b>(key, options = nil)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001015_source')" id="l_M001015_source">show source</a> ]</p>
+  <div id="M001015_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/cache/strategy/local_cache.rb, line 35</span>
+35:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">read</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">options</span> = <span class="ruby-keyword kw">nil</span>)
+36:           <span class="ruby-identifier">value</span> = <span class="ruby-identifier">local_cache</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">local_cache</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">key</span>)
+37:           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">value</span> <span class="ruby-operator">==</span> <span class="ruby-constant">NULL</span>
+38:             <span class="ruby-keyword kw">nil</span>
+39:           <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">nil?</span>
+40:             <span class="ruby-identifier">value</span> = <span class="ruby-keyword kw">super</span>
+41:             <span class="ruby-identifier">local_cache</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span> <span class="ruby-operator">||</span> <span class="ruby-constant">NULL</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">local_cache</span>
+42:             <span class="ruby-identifier">value</span>.<span class="ruby-identifier">duplicable?</span> <span class="ruby-value">? </span><span class="ruby-identifier">value</span>.<span class="ruby-identifier">dup</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">value</span>
+43:           <span class="ruby-keyword kw">else</span>
+44:             <span class="ruby-comment cmt"># forcing the value to be immutable</span>
+45:             <span class="ruby-identifier">value</span>.<span class="ruby-identifier">duplicable?</span> <span class="ruby-value">? </span><span class="ruby-identifier">value</span>.<span class="ruby-identifier">dup</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">value</span>
+46:           <span class="ruby-keyword kw">end</span>
+47:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001013"></a><b>with_local_cache</b>() {|| ...}
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001013_source')" id="l_M001013_source">show source</a> ]</p>
+  <div id="M001013_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/cache/strategy/local_cache.rb, line 8</span>
+ 8:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">with_local_cache</span>
+ 9:           <span class="ruby-constant">Thread</span>.<span class="ruby-identifier">current</span>[<span class="ruby-identifier">thread_local_key</span>] = <span class="ruby-constant">MemoryStore</span>.<span class="ruby-identifier">new</span>
+10:           <span class="ruby-keyword kw">yield</span>
+11:         <span class="ruby-keyword kw">ensure</span>
+12:           <span class="ruby-constant">Thread</span>.<span class="ruby-identifier">current</span>[<span class="ruby-identifier">thread_local_key</span>] = <span class="ruby-keyword kw">nil</span>
+13:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001016"></a><b>write</b>(key, value, options = nil)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001016_source')" id="l_M001016_source">show source</a> ]</p>
+  <div id="M001016_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/cache/strategy/local_cache.rb, line 49</span>
+49:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">write</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>, <span class="ruby-identifier">options</span> = <span class="ruby-keyword kw">nil</span>)
+50:           <span class="ruby-identifier">value</span> = <span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:raw?</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">raw?</span>(<span class="ruby-identifier">options</span>)
+51:           <span class="ruby-identifier">local_cache</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span> <span class="ruby-operator">||</span> <span class="ruby-constant">NULL</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">local_cache</span>
+52:           <span class="ruby-keyword kw">super</span>
+53:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

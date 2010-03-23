@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Module: Rails::Generator::Lookup</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Module</span><br />Rails::Generator::Lookup</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../../files/vendor/rails/railties/lib/rails_generator/lookup_rb.html">vendor/rails/railties/lib/rails_generator/lookup.rb</a>
+        </td>
+      </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+  <div class="description"><p>
+<a href="../Generator.html">Generator</a> lookup is managed by a list of
+sources which return specs describing where to find and how to create
+generators. This module provides class methods for manipulating the source
+list and looking up generator specs, and an <a
+href="Lookup.html#M002452">instance</a> wrapper for quickly instantiating
+generators by name.
+</p>
+<p>
+A spec is not a generator: it&#8216;s a description of where to find the
+generator and how to create it. A source is anything that yields generators
+from each. <a href="PathSource.html">PathSource</a> and <a
+href="GemGeneratorSource.html">GemGeneratorSource</a> are provided.
+</p>
+</div>
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M002451">included</a></li>
+  <li><a href="#M002452">instance</a></li>
+  </ul>
+
+
+
+  <div class="sectiontitle">Classes and Modules</div>
+  Module <a href="Lookup/ClassMethods.html" class="link">Rails::Generator::Lookup::ClassMethods</a><br />
+
+
+
+
+<div class="sectiontitle">Public Class methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M002451"></a><b>included</b>(base)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002451_source')" id="l_M002451_source">show source</a> ]</p>
+  <div id="M002451_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/railties/lib/rails_generator/lookup.rb, line 53</span>
+53:       <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">included</span>(<span class="ruby-identifier">base</span>)
+54:         <span class="ruby-identifier">base</span>.<span class="ruby-identifier">extend</span>(<span class="ruby-constant">ClassMethods</span>)
+55:         <span class="ruby-identifier">base</span>.<span class="ruby-identifier">use_component_sources!</span>
+56:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M002452"></a><b>instance</b>(generator_name, args, runtime_options = {})
+  </div>
+  <div class="description">
+  <p>
+Convenience method to instantiate another generator.
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002452_source')" id="l_M002452_source">show source</a> ]</p>
+  <div id="M002452_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/railties/lib/rails_generator/lookup.rb, line 59</span>
+59:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">instance</span>(<span class="ruby-identifier">generator_name</span>, <span class="ruby-identifier">args</span>, <span class="ruby-identifier">runtime_options</span> = {})
+60:         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">instance</span>(<span class="ruby-identifier">generator_name</span>, <span class="ruby-identifier">args</span>, <span class="ruby-identifier">runtime_options</span>)
+61:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

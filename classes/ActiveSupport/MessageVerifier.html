@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Class: ActiveSupport::MessageVerifier</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Class</span><br />ActiveSupport::MessageVerifier</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../files/vendor/rails/activesupport/lib/active_support/message_verifier_rb.html">vendor/rails/activesupport/lib/active_support/message_verifier.rb</a>
+        </td>
+      </tr>
+    <tr>
+      <td>Parent:</td>
+      <td>
+        <a href="../Object.html">
+Object
+         </a>
+     </td>
+   </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+  <div class="description"><p>
+<a href="MessageVerifier.html">MessageVerifier</a> makes it easy to <a
+href="MessageVerifier.html#M001445">generate</a> and <a
+href="MessageVerifier.html#M001444">verify</a> messages which are signed to
+prevent tampering.
+</p>
+<p>
+This is useful for cases like remember-me tokens and auto-unsubscribe links
+where the session store isn&#8216;t suitable or available.
+</p>
+<p>
+Remember Me:
+</p>
+<pre>
+  cookies[:remember_me] = @verifier.generate([@user.id, 2.weeks.from_now])
+</pre>
+<p>
+In the authentication filter:
+</p>
+<pre>
+  id, time = @verifier.verify(cookies[:remember_me])
+  if time &lt; Time.now
+    self.current_user = User.find(id)
+  end
+</pre>
+</div>
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M001445">generate</a></li>
+  <li><a href="#M001443">new</a></li>
+  <li><a href="#M001444">verify</a></li>
+  </ul>
+
+
+
+  <div class="sectiontitle">Classes and Modules</div>
+  Class <a href="MessageVerifier/InvalidSignature.html" class="link">ActiveSupport::MessageVerifier::InvalidSignature</a><br />
+
+
+
+
+<div class="sectiontitle">Public Class methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M001443"></a><b>new</b>(secret, digest = 'SHA1')
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001443_source')" id="l_M001443_source">show source</a> ]</p>
+  <div id="M001443_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/message_verifier.rb, line 21</span>
+21:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">secret</span>, <span class="ruby-identifier">digest</span> = <span class="ruby-value str">'SHA1'</span>)
+22:       <span class="ruby-ivar">@secret</span> = <span class="ruby-identifier">secret</span>
+23:       <span class="ruby-ivar">@digest</span> = <span class="ruby-identifier">digest</span>
+24:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M001445"></a><b>generate</b>(value)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001445_source')" id="l_M001445_source">show source</a> ]</p>
+  <div id="M001445_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/message_verifier.rb, line 35</span>
+35:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">generate</span>(<span class="ruby-identifier">value</span>)
+36:       <span class="ruby-identifier">data</span> = <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Base64</span>.<span class="ruby-identifier">encode64s</span>(<span class="ruby-constant">Marshal</span>.<span class="ruby-identifier">dump</span>(<span class="ruby-identifier">value</span>))
+37:       <span class="ruby-node">&quot;#{data}--#{generate_digest(data)}&quot;</span>
+38:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001444"></a><b>verify</b>(signed_message)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001444_source')" id="l_M001444_source">show source</a> ]</p>
+  <div id="M001444_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/message_verifier.rb, line 26</span>
+26:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">verify</span>(<span class="ruby-identifier">signed_message</span>)
+27:       <span class="ruby-identifier">data</span>, <span class="ruby-identifier">digest</span> = <span class="ruby-identifier">signed_message</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">&quot;--&quot;</span>)
+28:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">digest</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">generate_digest</span>(<span class="ruby-identifier">data</span>)
+29:         <span class="ruby-identifier">raise</span> <span class="ruby-constant">InvalidSignature</span>
+30:       <span class="ruby-keyword kw">else</span>
+31:         <span class="ruby-constant">Marshal</span>.<span class="ruby-identifier">load</span>(<span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Base64</span>.<span class="ruby-identifier">decode64</span>(<span class="ruby-identifier">data</span>))
+32:       <span class="ruby-keyword kw">end</span>
+33:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

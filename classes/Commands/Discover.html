@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Class: Commands::Discover</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Class</span><br />Commands::Discover</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../files/vendor/rails/railties/lib/commands/plugin_rb.html">vendor/rails/railties/lib/commands/plugin.rb</a>
+        </td>
+      </tr>
+    <tr>
+      <td>Parent:</td>
+      <td>
+        <a href="../Object.html">
+Object
+         </a>
+     </td>
+   </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M000745">extract_repository_uri</a></li>
+  <li><a href="#M000741">new</a></li>
+  <li><a href="#M000742">options</a></li>
+  <li><a href="#M000743">parse!</a></li>
+  <li><a href="#M000744">scrape</a></li>
+  </ul>
+
+
+
+
+
+
+<div class="sectiontitle">Public Class methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M000741"></a><b>new</b>(base_command)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000741_source')" id="l_M000741_source">show source</a> ]</p>
+  <div id="M000741_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/commands/plugin.rb, line 679</span>
+679:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">base_command</span>)
+680:       <span class="ruby-ivar">@base_command</span> = <span class="ruby-identifier">base_command</span>
+681:       <span class="ruby-ivar">@list</span> = <span class="ruby-keyword kw">false</span>
+682:       <span class="ruby-ivar">@prompt</span> = <span class="ruby-keyword kw">true</span>
+683:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M000745"></a><b>extract_repository_uri</b>(uri)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000745_source')" id="l_M000745_source">show source</a> ]</p>
+  <div id="M000745_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/commands/plugin.rb, line 746</span>
+746:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">extract_repository_uri</span>(<span class="ruby-identifier">uri</span>)
+747:       <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp re">/(svn|https?):.*\/plugins\//i</span>)[<span class="ruby-value">0</span>]
+748:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000742"></a><b>options</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000742_source')" id="l_M000742_source">show source</a> ]</p>
+  <div id="M000742_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/commands/plugin.rb, line 685</span>
+685:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">options</span>
+686:       <span class="ruby-constant">OptionParser</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">o</span><span class="ruby-operator">|</span>
+687:         <span class="ruby-identifier">o</span>.<span class="ruby-identifier">set_summary_indent</span>(<span class="ruby-value str">'  '</span>)
+688:         <span class="ruby-identifier">o</span>.<span class="ruby-identifier">banner</span> =    <span class="ruby-node">&quot;Usage: #{@base_command.script_name} discover URI [URI [URI]...]&quot;</span>
+689:         <span class="ruby-identifier">o</span>.<span class="ruby-identifier">define_head</span> <span class="ruby-value str">&quot;Discover repositories referenced on a page.&quot;</span>
+690:         <span class="ruby-identifier">o</span>.<span class="ruby-identifier">separator</span>   <span class="ruby-value str">&quot;&quot;</span>        
+691:         <span class="ruby-identifier">o</span>.<span class="ruby-identifier">separator</span>   <span class="ruby-value str">&quot;Options:&quot;</span>
+692:         <span class="ruby-identifier">o</span>.<span class="ruby-identifier">separator</span>   <span class="ruby-value str">&quot;&quot;</span>
+693:         <span class="ruby-identifier">o</span>.<span class="ruby-identifier">on</span>(         <span class="ruby-value str">&quot;-l&quot;</span>, <span class="ruby-value str">&quot;--list&quot;</span>, 
+694:                       <span class="ruby-value str">&quot;List but don't prompt or add discovered repositories.&quot;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">list</span><span class="ruby-operator">|</span> <span class="ruby-ivar">@list</span>, <span class="ruby-ivar">@prompt</span> = <span class="ruby-identifier">list</span>, <span class="ruby-operator">!</span><span class="ruby-ivar">@list</span> }
+695:         <span class="ruby-identifier">o</span>.<span class="ruby-identifier">on</span>(         <span class="ruby-value str">&quot;-n&quot;</span>, <span class="ruby-value str">&quot;--no-prompt&quot;</span>, 
+696:                       <span class="ruby-value str">&quot;Add all new repositories without prompting.&quot;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-ivar">@prompt</span> = <span class="ruby-operator">!</span><span class="ruby-identifier">v</span> }
+697:       <span class="ruby-keyword kw">end</span>
+698:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000743"></a><b>parse!</b>(args)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000743_source')" id="l_M000743_source">show source</a> ]</p>
+  <div id="M000743_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/commands/plugin.rb, line 700</span>
+700:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">parse!</span>(<span class="ruby-identifier">args</span>)
+701:       <span class="ruby-identifier">options</span>.<span class="ruby-identifier">parse!</span>(<span class="ruby-identifier">args</span>)
+702:       <span class="ruby-identifier">args</span> = [<span class="ruby-value str">'http://wiki.rubyonrails.org/rails/pages/Plugins'</span>] <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">empty?</span>
+703:       <span class="ruby-identifier">args</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">uri</span><span class="ruby-operator">|</span>
+704:         <span class="ruby-identifier">scrape</span>(<span class="ruby-identifier">uri</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">repo_uri</span><span class="ruby-operator">|</span>
+705:           <span class="ruby-identifier">catch</span>(<span class="ruby-identifier">:next_uri</span>) <span class="ruby-keyword kw">do</span>
+706:             <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@prompt</span>
+707:               <span class="ruby-keyword kw">begin</span>
+708:                 <span class="ruby-identifier">$stdout</span>.<span class="ruby-identifier">print</span> <span class="ruby-node">&quot;Add #{repo_uri}? [Y/n] &quot;</span>
+709:                 <span class="ruby-identifier">throw</span> <span class="ruby-identifier">:next_uri</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">$stdin</span>.<span class="ruby-identifier">gets</span> <span class="ruby-operator">!~</span> <span class="ruby-regexp re">/^y?$/i</span>
+710:               <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">Interrupt</span>
+711:                 <span class="ruby-identifier">$stdout</span>.<span class="ruby-identifier">puts</span>
+712:                 <span class="ruby-identifier">exit</span> <span class="ruby-value">1</span>
+713:               <span class="ruby-keyword kw">end</span>
+714:             <span class="ruby-keyword kw">elsif</span> <span class="ruby-ivar">@list</span>
+715:               <span class="ruby-identifier">puts</span> <span class="ruby-identifier">repo_uri</span>
+716:               <span class="ruby-identifier">throw</span> <span class="ruby-identifier">:next_uri</span>
+717:             <span class="ruby-keyword kw">end</span>
+718:             <span class="ruby-constant">Repositories</span>.<span class="ruby-identifier">instance</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">repo_uri</span>)
+719:             <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;discovered: #{repo_uri}&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">$verbose</span> <span class="ruby-keyword kw">or</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@prompt</span>
+720:           <span class="ruby-keyword kw">end</span>
+721:         <span class="ruby-keyword kw">end</span>
+722:       <span class="ruby-keyword kw">end</span>
+723:       <span class="ruby-constant">Repositories</span>.<span class="ruby-identifier">instance</span>.<span class="ruby-identifier">save</span>
+724:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000744"></a><b>scrape</b>(uri) {|uri unless dupes.include?(uri) || Repositories.instance.exist?(uri)| ...}
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000744_source')" id="l_M000744_source">show source</a> ]</p>
+  <div id="M000744_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/commands/plugin.rb, line 726</span>
+726:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">scrape</span>(<span class="ruby-identifier">uri</span>)
+727:       <span class="ruby-identifier">require</span> <span class="ruby-value str">'open-uri'</span>
+728:       <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Scraping #{uri}&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">$verbose</span>
+729:       <span class="ruby-identifier">dupes</span> = []
+730:       <span class="ruby-identifier">content</span> = <span class="ruby-identifier">open</span>(<span class="ruby-identifier">uri</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
+731:         <span class="ruby-keyword kw">begin</span>
+732:           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/&lt;a[^&gt;]*href=['&quot;]([^'&quot;]*)['&quot;]/</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/(svn:\/\/[^&lt;|\n]*)/</span>
+733:             <span class="ruby-identifier">uri</span> = <span class="ruby-identifier">$1</span>
+734:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">uri</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/^\w+:\/\//</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">uri</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/\/plugins\//</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">uri</span> <span class="ruby-operator">!~</span> <span class="ruby-regexp re">/\/browser\//</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">uri</span> <span class="ruby-operator">!~</span> <span class="ruby-regexp re">/^http:\/\/wiki\.rubyonrails/</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">uri</span> <span class="ruby-operator">!~</span> <span class="ruby-regexp re">/http:\/\/instiki/</span>
+735:               <span class="ruby-identifier">uri</span> = <span class="ruby-identifier">extract_repository_uri</span>(<span class="ruby-identifier">uri</span>)
+736:               <span class="ruby-keyword kw">yield</span> <span class="ruby-identifier">uri</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">dupes</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">uri</span>) <span class="ruby-operator">||</span> <span class="ruby-constant">Repositories</span>.<span class="ruby-identifier">instance</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">uri</span>)
+737:               <span class="ruby-identifier">dupes</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">uri</span>
+738:             <span class="ruby-keyword kw">end</span>
+739:           <span class="ruby-keyword kw">end</span>
+740:         <span class="ruby-keyword kw">rescue</span>
+741:           <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Problems scraping '#{uri}': #{$!.to_s}&quot;</span>
+742:         <span class="ruby-keyword kw">end</span>
+743:       <span class="ruby-keyword kw">end</span>
+744:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

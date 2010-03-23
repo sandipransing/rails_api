@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Class: ActionController::CGIHandler</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Class</span><br />ActionController::CGIHandler</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../files/vendor/rails/actionpack/lib/action_controller/cgi_process_rb.html">vendor/rails/actionpack/lib/action_controller/cgi_process.rb</a>
+        </td>
+      </tr>
+    <tr>
+      <td>Parent:</td>
+      <td>
+        <a href="../Object.html">
+Object
+         </a>
+     </td>
+   </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M000738">dispatch_cgi</a></li>
+  </ul>
+
+
+
+  <div class="sectiontitle">Classes and Modules</div>
+  Module <a href="CGIHandler/ProperStream.html" class="link">ActionController::CGIHandler::ProperStream</a><br />
+
+
+
+
+<div class="sectiontitle">Public Class methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M000738"></a><b>dispatch_cgi</b>(app, cgi, out = $stdout)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000738_source')" id="l_M000738_source">show source</a> ]</p>
+  <div id="M000738_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/cgi_process.rb, line 21</span>
+21:     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">dispatch_cgi</span>(<span class="ruby-identifier">app</span>, <span class="ruby-identifier">cgi</span>, <span class="ruby-identifier">out</span> = <span class="ruby-identifier">$stdout</span>)
+22:       <span class="ruby-identifier">env</span> = <span class="ruby-identifier">cgi</span>.<span class="ruby-identifier">__send__</span>(<span class="ruby-identifier">:env_table</span>)
+23:       <span class="ruby-identifier">env</span>.<span class="ruby-identifier">delete</span> <span class="ruby-value str">&quot;HTTP_CONTENT_LENGTH&quot;</span>
+24: 
+25:       <span class="ruby-identifier">cgi</span>.<span class="ruby-identifier">stdinput</span>.<span class="ruby-identifier">extend</span> <span class="ruby-constant">ProperStream</span>
+26: 
+27:       <span class="ruby-identifier">env</span>[<span class="ruby-value str">&quot;SCRIPT_NAME&quot;</span>] = <span class="ruby-value str">&quot;&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">env</span>[<span class="ruby-value str">&quot;SCRIPT_NAME&quot;</span>] <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;/&quot;</span>
+28: 
+29:       <span class="ruby-identifier">env</span>.<span class="ruby-identifier">update</span>({
+30:         <span class="ruby-value str">&quot;rack.version&quot;</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-value">0</span>,<span class="ruby-value">1</span>],
+31:         <span class="ruby-value str">&quot;rack.input&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">cgi</span>.<span class="ruby-identifier">stdinput</span>,
+32:         <span class="ruby-value str">&quot;rack.errors&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">$stderr</span>,
+33:         <span class="ruby-value str">&quot;rack.multithread&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>,
+34:         <span class="ruby-value str">&quot;rack.multiprocess&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span>,
+35:         <span class="ruby-value str">&quot;rack.run_once&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">false</span>,
+36:         <span class="ruby-value str">&quot;rack.url_scheme&quot;</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-value str">&quot;yes&quot;</span>, <span class="ruby-value str">&quot;on&quot;</span>, <span class="ruby-value str">&quot;1&quot;</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">env</span>[<span class="ruby-value str">&quot;HTTPS&quot;</span>]) <span class="ruby-operator">?</span> <span class="ruby-value str">&quot;https&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-value str">&quot;http&quot;</span>
+37:       })
+38: 
+39:       <span class="ruby-identifier">env</span>[<span class="ruby-value str">&quot;QUERY_STRING&quot;</span>] <span class="ruby-operator">||=</span> <span class="ruby-value str">&quot;&quot;</span>
+40:       <span class="ruby-identifier">env</span>[<span class="ruby-value str">&quot;HTTP_VERSION&quot;</span>] <span class="ruby-operator">||=</span> <span class="ruby-identifier">env</span>[<span class="ruby-value str">&quot;SERVER_PROTOCOL&quot;</span>]
+41:       <span class="ruby-identifier">env</span>[<span class="ruby-value str">&quot;REQUEST_PATH&quot;</span>] <span class="ruby-operator">||=</span> <span class="ruby-value str">&quot;/&quot;</span>
+42:       <span class="ruby-identifier">env</span>.<span class="ruby-identifier">delete</span> <span class="ruby-value str">&quot;PATH_INFO&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">env</span>[<span class="ruby-value str">&quot;PATH_INFO&quot;</span>] <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;&quot;</span>
+43: 
+44:       <span class="ruby-identifier">status</span>, <span class="ruby-identifier">headers</span>, <span class="ruby-identifier">body</span> = <span class="ruby-identifier">app</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">env</span>)
+45:       <span class="ruby-keyword kw">begin</span>
+46:         <span class="ruby-identifier">out</span>.<span class="ruby-identifier">binmode</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">out</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:binmode</span>)
+47:         <span class="ruby-identifier">out</span>.<span class="ruby-identifier">sync</span> = <span class="ruby-keyword kw">false</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">out</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:sync=</span>)
+48: 
+49:         <span class="ruby-identifier">headers</span>[<span class="ruby-value str">'Status'</span>] = <span class="ruby-identifier">status</span>.<span class="ruby-identifier">to_s</span>
+50: 
+51:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">headers</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-value str">'Set-Cookie'</span>)
+52:           <span class="ruby-identifier">headers</span>[<span class="ruby-value str">'cookie'</span>] = <span class="ruby-identifier">headers</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value str">'Set-Cookie'</span>).<span class="ruby-identifier">split</span>(<span class="ruby-value str">&quot;\n&quot;</span>)
+53:         <span class="ruby-keyword kw">end</span>
+54: 
+55:         <span class="ruby-identifier">out</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">cgi</span>.<span class="ruby-identifier">header</span>(<span class="ruby-identifier">headers</span>))
+56: 
+57:         <span class="ruby-identifier">body</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">part</span><span class="ruby-operator">|</span>
+58:           <span class="ruby-identifier">out</span>.<span class="ruby-identifier">write</span> <span class="ruby-identifier">part</span>
+59:           <span class="ruby-identifier">out</span>.<span class="ruby-identifier">flush</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">out</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:flush</span>)
+60:         }
+61:       <span class="ruby-keyword kw">ensure</span>
+62:         <span class="ruby-identifier">body</span>.<span class="ruby-identifier">close</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">body</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:close</span>)
+63:       <span class="ruby-keyword kw">end</span>
+64:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Class: ActiveSupport::Testing::Metrics::Objects</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Class</span><br />ActiveSupport::Testing::Metrics::Objects</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../../../files/vendor/rails/activesupport/lib/active_support/testing/performance_rb.html">vendor/rails/activesupport/lib/active_support/testing/performance.rb</a>
+        </td>
+      </tr>
+    <tr>
+      <td>Parent:</td>
+      <td>
+        <a href="Base.html">
+Base
+         </a>
+     </td>
+   </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M001424">format</a></li>
+  <li><a href="#M001423">measure</a></li>
+  <li><a href="#M001422">measure</a></li>
+  <li><a href="#M001421">measure</a></li>
+  </ul>
+
+
+
+
+  <div class="sectiontitle">Constants</div>
+  <table border='0' cellpadding='5'>
+  <tr valign='top'>
+    <td class="attr-name">Mode</td>
+    <td>=</td>
+    <td class="attr-value">RubyProf::ALLOCATIONS if RubyProf.const_defined?(:ALLOCATIONS)</td>
+  </tr>
+  </table>
+
+
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M001424"></a><b>format</b>(measurement)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001424_source')" id="l_M001424_source">show source</a> ]</p>
+  <div id="M001424_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/testing/performance.rb, line 405</span>
+405:           <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">format</span>(<span class="ruby-identifier">measurement</span>)
+406:             <span class="ruby-identifier">measurement</span>.<span class="ruby-identifier">to_i</span>.<span class="ruby-identifier">to_s</span>
+407:           <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001423"></a><b>measure</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001423_source')" id="l_M001423_source">show source</a> ]</p>
+  <div id="M001423_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/testing/performance.rb, line 395</span>
+395:             <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">measure</span>
+396:               <span class="ruby-constant">GC</span>.<span class="ruby-identifier">enable</span>
+397:               <span class="ruby-constant">GC</span>.<span class="ruby-identifier">start</span>
+398:               <span class="ruby-identifier">last</span> = <span class="ruby-constant">GC</span><span class="ruby-operator">::</span><span class="ruby-constant">Profiler</span>.<span class="ruby-identifier">data</span>.<span class="ruby-identifier">last</span>
+399:               <span class="ruby-identifier">count</span> = <span class="ruby-identifier">last</span>[<span class="ruby-identifier">:HEAP_LIVE_OBJECTS</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">last</span>[<span class="ruby-identifier">:HEAP_FREE_OBJECTS</span>]
+400:               <span class="ruby-constant">GC</span>.<span class="ruby-identifier">disable</span>
+401:               <span class="ruby-identifier">count</span>
+402:             <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001422"></a><b>measure</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001422_source')" id="l_M001422_source">show source</a> ]</p>
+  <div id="M001422_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/testing/performance.rb, line 389</span>
+389:             <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">measure</span>
+390:               <span class="ruby-constant">ObjectSpace</span>.<span class="ruby-identifier">allocated_objects</span>
+391:             <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001421"></a><b>measure</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001421_source')" id="l_M001421_source">show source</a> ]</p>
+  <div id="M001421_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/testing/performance.rb, line 383</span>
+383:             <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">measure</span>
+384:               <span class="ruby-constant">RubyProf</span>.<span class="ruby-identifier">measure_allocations</span>
+385:             <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

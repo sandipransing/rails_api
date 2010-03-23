@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Module: ActiveSupport::CoreExtensions::Range::IncludeRange</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Module</span><br />ActiveSupport::CoreExtensions::Range::IncludeRange</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../../../files/vendor/rails/activesupport/lib/active_support/core_ext/range/include_range_rb.html">vendor/rails/activesupport/lib/active_support/core_ext/range/include_range.rb</a>
+        </td>
+      </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+  <div class="description"><p>
+Check if a Range includes another Range.
+</p>
+</div>
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M001113">include_with_range?</a></li>
+  </ul>
+
+
+
+
+
+
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M001113"></a><b>include_with_range?</b>(value)
+  </div>
+  <div class="description">
+  <p>
+Extends the default Range#include? to support range comparisons.
+</p>
+<pre>
+ (1..5).include?(1..5) # =&gt; true
+ (1..5).include?(2..3) # =&gt; true
+ (1..5).include?(2..6) # =&gt; false
+</pre>
+<p>
+The native Range#include? behavior is untouched.
+</p>
+<pre>
+ (&quot;a&quot;..&quot;f&quot;).include?(&quot;c&quot;) # =&gt; true
+ (5..9).include?(11) # =&gt; false
+</pre>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001113_source')" id="l_M001113_source">show source</a> ]</p>
+  <div id="M001113_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/core_ext/range/include_range.rb, line 18</span>
+18:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">include_with_range?</span>(<span class="ruby-identifier">value</span>)
+19:           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-operator">::</span><span class="ruby-constant">Range</span>)
+20:             <span class="ruby-identifier">operator</span> = <span class="ruby-identifier">exclude_end?</span> <span class="ruby-value">? </span><span class="ruby-operator">:</span><span class="ruby-operator">&lt;</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">:&lt;=</span>
+21:             <span class="ruby-identifier">end_value</span> = <span class="ruby-identifier">value</span>.<span class="ruby-identifier">exclude_end?</span> <span class="ruby-value">? </span><span class="ruby-identifier">last</span>.<span class="ruby-identifier">succ</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">last</span>
+22:             <span class="ruby-identifier">include?</span>(<span class="ruby-identifier">value</span>.<span class="ruby-identifier">first</span>) <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">value</span>.<span class="ruby-identifier">last</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">end_value</span>).<span class="ruby-identifier">send</span>(<span class="ruby-identifier">operator</span>, <span class="ruby-value">0</span>)
+23:           <span class="ruby-keyword kw">else</span>
+24:             <span class="ruby-identifier">include_without_range?</span>(<span class="ruby-identifier">value</span>)
+25:           <span class="ruby-keyword kw">end</span>
+26:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

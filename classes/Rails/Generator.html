@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Module: Rails::Generator</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Module</span><br />Rails::Generator</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../files/vendor/rails/railties/lib/rails_generator/base_rb.html">vendor/rails/railties/lib/rails_generator/base.rb</a>
+<a href="../../files/vendor/rails/railties/lib/rails_generator/commands_rb.html">vendor/rails/railties/lib/rails_generator/commands.rb</a>
+<a href="../../files/vendor/rails/railties/lib/rails_generator/generated_attribute_rb.html">vendor/rails/railties/lib/rails_generator/generated_attribute.rb</a>
+<a href="../../files/vendor/rails/railties/lib/rails_generator/lookup_rb.html">vendor/rails/railties/lib/rails_generator/lookup.rb</a>
+<a href="../../files/vendor/rails/railties/lib/rails_generator/manifest_rb.html">vendor/rails/railties/lib/rails_generator/manifest.rb</a>
+<a href="../../files/vendor/rails/railties/lib/rails_generator/options_rb.html">vendor/rails/railties/lib/rails_generator/options.rb</a>
+<a href="../../files/vendor/rails/railties/lib/rails_generator/scripts_rb.html">vendor/rails/railties/lib/rails_generator/scripts.rb</a>
+<a href="../../files/vendor/rails/railties/lib/rails_generator/simple_logger_rb.html">vendor/rails/railties/lib/rails_generator/simple_logger.rb</a>
+<a href="../../files/vendor/rails/railties/lib/rails_generator/spec_rb.html">vendor/rails/railties/lib/rails_generator/spec.rb</a>
+        </td>
+      </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+  <div class="description"><p>
+<a href="Generator.html">Rails::Generator</a> is a code generation platform
+tailored for the <a href="../Rails.html">Rails</a> web application
+framework. Generators are easily invoked within <a
+href="../Rails.html">Rails</a> applications to add and remove components
+such as models and controllers. New generators are easy to create and may
+be distributed as RubyGems, tarballs, or <a href="../Rails.html">Rails</a>
+plugins for inclusion system-wide, per-user, or per-application.
+</p>
+<p>
+For actual examples see the rails_generator/generators directory in the <a
+href="../Rails.html">Rails</a> source (or the <tt>railties</tt> directory
+if you have frozen the <a href="../Rails.html">Rails</a> source in your
+application).
+</p>
+<p>
+Generators may subclass other generators to provide variations that require
+little or no new logic but replace the template files.
+</p>
+<p>
+For a RubyGem, put your generator class and templates in the <tt>lib</tt>
+directory. For a <a href="../Rails.html">Rails</a> plugin, make a
+<tt>generators</tt> directory at the root of your plugin.
+</p>
+<p>
+The layout of generator files can be seen in the built-in
+<tt>controller</tt> generator:
+</p>
+<pre>
+  generators/
+    components/
+      controller/
+        controller_generator.rb
+        templates/
+          controller.rb
+          functional_test.rb
+          helper.rb
+          view.html.erb
+</pre>
+<p>
+The directory name (<tt>controller</tt>) matches the name of the generator
+file (controller_generator.rb) and class (ControllerGenerator). The files
+that will be copied or used as templates are stored in the
+<tt>templates</tt> directory.
+</p>
+<p>
+The filenames of the templates don&#8216;t matter, but choose something
+that will be self-explanatory since you will be referencing these in the
+<tt>manifest</tt> method inside your generator subclass.
+</p>
+</div>
+
+
+
+
+
+
+  <div class="sectiontitle">Classes and Modules</div>
+  Module <a href="Generator/Commands.html" class="link">Rails::Generator::Commands</a><br />
+Module <a href="Generator/Lookup.html" class="link">Rails::Generator::Lookup</a><br />
+Module <a href="Generator/Options.html" class="link">Rails::Generator::Options</a><br />
+Module <a href="Generator/Scripts.html" class="link">Rails::Generator::Scripts</a><br />
+Class <a href="Generator/AbstractGemSource.html" class="link">Rails::Generator::AbstractGemSource</a><br />
+Class <a href="Generator/Base.html" class="link">Rails::Generator::Base</a><br />
+Class <a href="Generator/GemGeneratorSource.html" class="link">Rails::Generator::GemGeneratorSource</a><br />
+Class <a href="Generator/GemPathSource.html" class="link">Rails::Generator::GemPathSource</a><br />
+Class <a href="Generator/GeneratedAttribute.html" class="link">Rails::Generator::GeneratedAttribute</a><br />
+Class <a href="Generator/GeneratorError.html" class="link">Rails::Generator::GeneratorError</a><br />
+Class <a href="Generator/Manifest.html" class="link">Rails::Generator::Manifest</a><br />
+Class <a href="Generator/NamedBase.html" class="link">Rails::Generator::NamedBase</a><br />
+Class <a href="Generator/PathSource.html" class="link">Rails::Generator::PathSource</a><br />
+Class <a href="Generator/Source.html" class="link">Rails::Generator::Source</a><br />
+Class <a href="Generator/Spec.html" class="link">Rails::Generator::Spec</a><br />
+Class <a href="Generator/UsageError.html" class="link">Rails::Generator::UsageError</a><br />
+
+
+
+
+</div>
+
+  </div>
+
+    </body>
+</html>

@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Class: ActiveRecord::SessionStore::Session</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Class</span><br />ActiveRecord::SessionStore::Session</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../../files/vendor/rails/activerecord/lib/active_record/session_store_rb.html">vendor/rails/activerecord/lib/active_record/session_store.rb</a>
+        </td>
+      </tr>
+    <tr>
+      <td>Parent:</td>
+      <td>
+        <a href="../Base.html">
+ActiveRecord::Base
+         </a>
+     </td>
+   </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+  <div class="description"><p>
+The default Active Record class.
+</p>
+</div>
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M002254">create_table!</a></li>
+  <li><a href="#M002256">data</a></li>
+  <li><a href="#M002250">data_column_size_limit</a></li>
+  <li><a href="#M002255">drop_table!</a></li>
+  <li><a href="#M002251">find_by_session_id</a></li>
+  <li><a href="#M002257">loaded?</a></li>
+  <li><a href="#M002252">marshal</a></li>
+  <li><a href="#M002253">unmarshal</a></li>
+  </ul>
+
+
+
+
+
+  <div class="sectiontitle">Attributes</div>
+  <table border='0' cellpadding='5'>
+  <tr valign='top'>
+    <td class='attr-rw'>
+[W]
+    </td>
+    <td class='attr-name'>data</td>
+    <td class='attr-desc'></td>
+  </tr>
+  </table>
+
+<div class="sectiontitle">Public Class methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M002254"></a><b>create_table!</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002254_source')" id="l_M002254_source">show source</a> ]</p>
+  <div id="M002254_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activerecord/lib/active_record/session_store.rb, line 74</span>
+74:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">create_table!</span>
+75:           <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">execute</span> <span class="ruby-value str">&quot;CREATE TABLE \#{table_name} (\nid INTEGER PRIMARY KEY,\n\#{connection.quote_column_name('session_id')} TEXT UNIQUE,\n\#{connection.quote_column_name(@@data_column_name)} TEXT(255)\n)\n&quot;</span>
+76:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M002250"></a><b>data_column_size_limit</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002250_source')" id="l_M002250_source">show source</a> ]</p>
+  <div id="M002250_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activerecord/lib/active_record/session_store.rb, line 56</span>
+56:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">data_column_size_limit</span>
+57:           <span class="ruby-ivar">@data_column_size_limit</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">columns_hash</span>[<span class="ruby-ivar">@@data_column_name</span>].<span class="ruby-identifier">limit</span>
+58:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M002255"></a><b>drop_table!</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002255_source')" id="l_M002255_source">show source</a> ]</p>
+  <div id="M002255_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activerecord/lib/active_record/session_store.rb, line 85</span>
+85:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">drop_table!</span>
+86:           <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">execute</span> <span class="ruby-node">&quot;DROP TABLE #{table_name}&quot;</span>
+87:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M002251"></a><b>find_by_session_id</b>(session_id)
+  </div>
+  <div class="description">
+  <p>
+Hook to set up sessid compatibility.
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002251_source')" id="l_M002251_source">show source</a> ]</p>
+  <div id="M002251_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activerecord/lib/active_record/session_store.rb, line 61</span>
+61:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">find_by_session_id</span>(<span class="ruby-identifier">session_id</span>)
+62:           <span class="ruby-identifier">setup_sessid_compatibility!</span>
+63:           <span class="ruby-identifier">find_by_session_id</span>(<span class="ruby-identifier">session_id</span>)
+64:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M002252"></a><b>marshal</b>(data)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002252_source')" id="l_M002252_source">show source</a> ]</p>
+  <div id="M002252_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activerecord/lib/active_record/session_store.rb, line 66</span>
+66:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">marshal</span>(<span class="ruby-identifier">data</span>)
+67:           <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Base64</span>.<span class="ruby-identifier">encode64</span>(<span class="ruby-constant">Marshal</span>.<span class="ruby-identifier">dump</span>(<span class="ruby-identifier">data</span>)) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">data</span>
+68:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M002253"></a><b>unmarshal</b>(data)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002253_source')" id="l_M002253_source">show source</a> ]</p>
+  <div id="M002253_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activerecord/lib/active_record/session_store.rb, line 70</span>
+70:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">unmarshal</span>(<span class="ruby-identifier">data</span>)
+71:           <span class="ruby-constant">Marshal</span>.<span class="ruby-identifier">load</span>(<span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Base64</span>.<span class="ruby-identifier">decode64</span>(<span class="ruby-identifier">data</span>)) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">data</span>
+72:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M002256"></a><b>data</b>()
+  </div>
+  <div class="description">
+  <p>
+Lazy-<a href="Session.html#M002253">unmarshal</a> session state.
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002256_source')" id="l_M002256_source">show source</a> ]</p>
+  <div id="M002256_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/activerecord/lib/active_record/session_store.rb, line 110</span>
+110:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">data</span>
+111:         <span class="ruby-ivar">@data</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">unmarshal</span>(<span class="ruby-identifier">read_attribute</span>(<span class="ruby-ivar">@@data_column_name</span>)) <span class="ruby-operator">||</span> {}
+112:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M002257"></a><b>loaded?</b>()
+  </div>
+  <div class="description">
+  <p>
+Has the session been loaded yet?
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002257_source')" id="l_M002257_source">show source</a> ]</p>
+  <div id="M002257_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/activerecord/lib/active_record/session_store.rb, line 117</span>
+117:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">loaded?</span>
+118:         <span class="ruby-operator">!</span><span class="ruby-operator">!</span><span class="ruby-ivar">@data</span>
+119:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

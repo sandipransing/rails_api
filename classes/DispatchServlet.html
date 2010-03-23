@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Class: DispatchServlet</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Class</span><br />DispatchServlet</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../files/vendor/rails/railties/lib/webrick_server_rb.html">vendor/rails/railties/lib/webrick_server.rb</a>
+        </td>
+      </tr>
+    <tr>
+      <td>Parent:</td>
+      <td>
+WEBrick::HTTPServlet::AbstractServlet
+     </td>
+   </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+  <div class="description"><p>
+A custom <a href="DispatchServlet.html#M000010">dispatch</a> servlet for
+use with WEBrick. It dispatches requests (using the <a
+href="Rails.html">Rails</a> Dispatcher) to the appropriate
+controller/action. By default, it restricts WEBrick to a managing a single
+<a href="Rails.html">Rails</a> request at a time, but you can change this
+behavior by setting ActionController::Base.allow_concurrency to true.
+</p>
+</div>
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M000010">dispatch</a></li>
+  </ul>
+
+
+
+
+
+
+<div class="sectiontitle">Public Class methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M000010"></a><b>dispatch</b>(options = {})
+  </div>
+  <div class="description">
+  <p>
+Start the WEBrick server with the given options, mounting the <a
+href="DispatchServlet.html">DispatchServlet</a> at <tt>/</tt>.
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000010_source')" id="l_M000010_source">show source</a> ]</p>
+  <div id="M000010_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/railties/lib/webrick_server.rb, line 48</span>
+48:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">dispatch</span>(<span class="ruby-identifier">options</span> = {})
+49:     <span class="ruby-constant">Socket</span>.<span class="ruby-identifier">do_not_reverse_lookup</span> = <span class="ruby-keyword kw">true</span> <span class="ruby-comment cmt"># patch for OS X</span>
+50: 
+51:     <span class="ruby-identifier">params</span> = { <span class="ruby-identifier">:Port</span>        =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:port</span>].<span class="ruby-identifier">to_i</span>,
+52:                <span class="ruby-identifier">:ServerType</span>  =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:server_type</span>],
+53:                <span class="ruby-identifier">:BindAddress</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:ip</span>] }
+54:     <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:MimeTypes</span>] = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:mime_types</span>] <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:mime_types</span>]
+55: 
+56:     <span class="ruby-identifier">server</span> = <span class="ruby-constant">WEBrick</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTPServer</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>)
+57:     <span class="ruby-identifier">server</span>.<span class="ruby-identifier">mount</span>(<span class="ruby-value str">'/'</span>, <span class="ruby-constant">DispatchServlet</span>, <span class="ruby-identifier">options</span>)
+58: 
+59:     <span class="ruby-identifier">trap</span>(<span class="ruby-value str">&quot;INT&quot;</span>) { <span class="ruby-identifier">server</span>.<span class="ruby-identifier">shutdown</span> }
+60:     <span class="ruby-identifier">server</span>.<span class="ruby-identifier">start</span>
+61:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

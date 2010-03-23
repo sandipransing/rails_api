@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Class: Rails::Generator::Commands::Destroy</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Class</span><br />Rails::Generator::Commands::Destroy</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../../../files/vendor/rails/railties/lib/rails_generator/commands_rb.html">vendor/rails/railties/lib/rails_generator/commands.rb</a>
+        </td>
+      </tr>
+    <tr>
+      <td>Parent:</td>
+      <td>
+        <a href="RewindBase.html">
+RewindBase
+         </a>
+     </td>
+   </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+  <div class="description"><p>
+Undo the actions performed by a generator. Rewind the action manifest and
+attempt to completely erase the results of each action.
+</p>
+</div>
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M002414">complex_template</a></li>
+  <li><a href="#M002413">directory</a></li>
+  <li><a href="#M002411">file</a></li>
+  <li><a href="#M002415">migration_template</a></li>
+  <li><a href="#M002416">route_resources</a></li>
+  <li><a href="#M002412">template</a></li>
+  </ul>
+
+
+
+
+
+
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M002414"></a><b>complex_template</b>(*args)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002414_source')" id="l_M002414_source">show source</a> ]</p>
+  <div id="M002414_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/rails_generator/commands.rb, line 514</span>
+514:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">complex_template</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+515:           <span class="ruby-comment cmt"># nothing should be done here</span>
+516:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M002413"></a><b>directory</b>(relative_path)
+  </div>
+  <div class="description">
+  <p>
+Remove each <a href="Destroy.html#M002413">directory</a> in the given path
+from right to left. Remove each subdirectory if it exists and is a <a
+href="Destroy.html#M002413">directory</a>.
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002413_source')" id="l_M002413_source">show source</a> ]</p>
+  <div id="M002413_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/rails_generator/commands.rb, line 478</span>
+478:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">directory</span>(<span class="ruby-identifier">relative_path</span>)
+479:           <span class="ruby-identifier">parts</span> = <span class="ruby-identifier">relative_path</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">'/'</span>)
+480:           <span class="ruby-keyword kw">until</span> <span class="ruby-identifier">parts</span>.<span class="ruby-identifier">empty?</span>
+481:             <span class="ruby-identifier">partial</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">parts</span>)
+482:             <span class="ruby-identifier">path</span> = <span class="ruby-identifier">destination_path</span>(<span class="ruby-identifier">partial</span>)
+483:             <span class="ruby-keyword kw">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">path</span>)
+484:               <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Dir</span>[<span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">path</span>, <span class="ruby-value str">'*'</span>)].<span class="ruby-identifier">empty?</span>
+485:                 <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">rmdir</span> <span class="ruby-identifier">partial</span>
+486:                 <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:pretend</span>]
+487:                   <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:svn</span>]
+488:                     <span class="ruby-comment cmt"># If the directory has been marked to be added</span>
+489:                     <span class="ruby-comment cmt"># but has not yet been checked in, revert and delete</span>
+490:                     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:svn</span>][<span class="ruby-identifier">relative_path</span>]
+491:                       <span class="ruby-identifier">system</span>(<span class="ruby-node">&quot;svn revert #{path}&quot;</span>)
+492:                       <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">rmdir</span>(<span class="ruby-identifier">path</span>)
+493:                     <span class="ruby-keyword kw">else</span>
+494:                     <span class="ruby-comment cmt"># If the directory is not in the status list, it</span>
+495:                     <span class="ruby-comment cmt"># has no modifications so we can simply remove it</span>
+496:                       <span class="ruby-identifier">system</span>(<span class="ruby-node">&quot;svn rm #{path}&quot;</span>)
+497:                     <span class="ruby-keyword kw">end</span>
+498:                   <span class="ruby-comment cmt"># I don't think git needs to remove directories?..</span>
+499:                   <span class="ruby-comment cmt"># or maybe they have special consideration...</span>
+500:                   <span class="ruby-keyword kw">else</span>
+501:                     <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">rmdir</span>(<span class="ruby-identifier">path</span>)
+502:                   <span class="ruby-keyword kw">end</span>
+503:                 <span class="ruby-keyword kw">end</span>
+504:               <span class="ruby-keyword kw">else</span>
+505:                 <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">notempty</span> <span class="ruby-identifier">partial</span>
+506:               <span class="ruby-keyword kw">end</span>
+507:             <span class="ruby-keyword kw">else</span>
+508:               <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">missing</span> <span class="ruby-identifier">partial</span>
+509:             <span class="ruby-keyword kw">end</span>
+510:             <span class="ruby-identifier">parts</span>.<span class="ruby-identifier">pop</span>
+511:           <span class="ruby-keyword kw">end</span>
+512:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M002411"></a><b>file</b>(relative_source, relative_destination, file_options = {})
+  </div>
+  <div class="description">
+  <p>
+Remove a <a href="Destroy.html#M002411">file</a> if it exists and is a <a
+href="Destroy.html#M002411">file</a>.
+</p>
+  </div>
+<div class="aka">
+  This method is also aliased as
+  <a href="Destroy.html#M002412">template</a>
+</div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002411_source')" id="l_M002411_source">show source</a> ]</p>
+  <div id="M002411_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/rails_generator/commands.rb, line 433</span>
+433:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">file</span>(<span class="ruby-identifier">relative_source</span>, <span class="ruby-identifier">relative_destination</span>, <span class="ruby-identifier">file_options</span> = {})
+434:           <span class="ruby-identifier">destination</span> = <span class="ruby-identifier">destination_path</span>(<span class="ruby-identifier">relative_destination</span>)
+435:           <span class="ruby-keyword kw">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">destination</span>)
+436:             <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">rm</span> <span class="ruby-identifier">relative_destination</span>
+437:             <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:pretend</span>]
+438:               <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:svn</span>]
+439:                 <span class="ruby-comment cmt"># If the file has been marked to be added</span>
+440:                 <span class="ruby-comment cmt"># but has not yet been checked in, revert and delete</span>
+441:                 <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:svn</span>][<span class="ruby-identifier">relative_destination</span>]
+442:                   <span class="ruby-identifier">system</span>(<span class="ruby-node">&quot;svn revert #{destination}&quot;</span>)
+443:                   <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">rm</span>(<span class="ruby-identifier">destination</span>)
+444:                 <span class="ruby-keyword kw">else</span>
+445:                 <span class="ruby-comment cmt"># If the directory is not in the status list, it</span>
+446:                 <span class="ruby-comment cmt"># has no modifications so we can simply remove it</span>
+447:                   <span class="ruby-identifier">system</span>(<span class="ruby-node">&quot;svn rm #{destination}&quot;</span>)
+448:                 <span class="ruby-keyword kw">end</span>
+449:               <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:git</span>]
+450:                 <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:git</span>][<span class="ruby-identifier">:new</span>][<span class="ruby-identifier">relative_destination</span>]
+451:                   <span class="ruby-comment cmt"># file has been added, but not committed</span>
+452:                   <span class="ruby-identifier">system</span>(<span class="ruby-node">&quot;git reset HEAD #{relative_destination}&quot;</span>)
+453:                   <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">rm</span>(<span class="ruby-identifier">destination</span>)
+454:                 <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:git</span>][<span class="ruby-identifier">:modified</span>][<span class="ruby-identifier">relative_destination</span>]
+455:                   <span class="ruby-comment cmt"># file is committed and modified</span>
+456:                   <span class="ruby-identifier">system</span>(<span class="ruby-node">&quot;git rm -f #{relative_destination}&quot;</span>)
+457:                 <span class="ruby-keyword kw">else</span>
+458:                   <span class="ruby-comment cmt"># If the directory is not in the status list, it</span>
+459:                   <span class="ruby-comment cmt"># has no modifications so we can simply remove it</span>
+460:                   <span class="ruby-identifier">system</span>(<span class="ruby-node">&quot;git rm #{relative_destination}&quot;</span>)
+461:                 <span class="ruby-keyword kw">end</span>
+462:               <span class="ruby-keyword kw">else</span>
+463:                 <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">rm</span>(<span class="ruby-identifier">destination</span>)
+464:               <span class="ruby-keyword kw">end</span>
+465:             <span class="ruby-keyword kw">end</span>
+466:           <span class="ruby-keyword kw">else</span>
+467:             <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">missing</span> <span class="ruby-identifier">relative_destination</span>
+468:             <span class="ruby-keyword kw">return</span>
+469:           <span class="ruby-keyword kw">end</span>
+470:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M002415"></a><b>migration_template</b>(relative_source, relative_destination, template_options = {})
+  </div>
+  <div class="description">
+  <p>
+When deleting a migration, it knows to delete every <a
+href="Destroy.html#M002411">file</a> named &quot;[0-9]*_#{file_name}&quot;.
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002415_source')" id="l_M002415_source">show source</a> ]</p>
+  <div id="M002415_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/rails_generator/commands.rb, line 519</span>
+519:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">migration_template</span>(<span class="ruby-identifier">relative_source</span>, <span class="ruby-identifier">relative_destination</span>, <span class="ruby-identifier">template_options</span> = {})
+520:           <span class="ruby-identifier">migration_directory</span> <span class="ruby-identifier">relative_destination</span>
+521: 
+522:           <span class="ruby-identifier">migration_file_name</span> = <span class="ruby-identifier">template_options</span>[<span class="ruby-identifier">:migration_file_name</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">file_name</span>
+523:           <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">migration_exists?</span>(<span class="ruby-identifier">migration_file_name</span>)
+524:             <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;There is no migration named #{migration_file_name}&quot;</span>
+525:             <span class="ruby-keyword kw">return</span>
+526:           <span class="ruby-keyword kw">end</span>
+527: 
+528: 
+529:           <span class="ruby-identifier">existing_migrations</span>(<span class="ruby-identifier">migration_file_name</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file_path</span><span class="ruby-operator">|</span>
+530:             <span class="ruby-identifier">file</span>(<span class="ruby-identifier">relative_source</span>, <span class="ruby-identifier">file_path</span>, <span class="ruby-identifier">template_options</span>)
+531:           <span class="ruby-keyword kw">end</span>
+532:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M002416"></a><b>route_resources</b>(*resources)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002416_source')" id="l_M002416_source">show source</a> ]</p>
+  <div id="M002416_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/rails_generator/commands.rb, line 534</span>
+534:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">route_resources</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">resources</span>)
+535:           <span class="ruby-identifier">resource_list</span> = <span class="ruby-identifier">resources</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">r</span><span class="ruby-operator">|</span> <span class="ruby-identifier">r</span>.<span class="ruby-identifier">to_sym</span>.<span class="ruby-identifier">inspect</span> }.<span class="ruby-identifier">join</span>(<span class="ruby-value str">', '</span>)
+536:           <span class="ruby-identifier">look_for</span> = <span class="ruby-node">&quot;\n  map.resources #{resource_list}\n&quot;</span>
+537:           <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">route</span> <span class="ruby-node">&quot;map.resources #{resource_list}&quot;</span>
+538:           <span class="ruby-identifier">gsub_file</span> <span class="ruby-value str">'config/routes.rb'</span>, <span class="ruby-node">/(#{look_for})/</span><span class="ruby-identifier">mi</span>, <span class="ruby-value str">''</span>
+539:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M002412"></a><b>template</b>(relative_source, relative_destination, file_options = {})
+  </div>
+  <div class="description">
+  <p>
+Alias for <a href="Destroy.html#M002411">file</a>
+</p>
+  </div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Module: ActiveSupport::CoreExtensions::Array::Access</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Module</span><br />ActiveSupport::CoreExtensions::Array::Access</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../../../files/vendor/rails/activesupport/lib/active_support/core_ext/array/access_rb.html">vendor/rails/activesupport/lib/active_support/core_ext/array/access.rb</a>
+        </td>
+      </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+  <div class="description"><p>
+Makes it easier <a href="Access.html#M001210">to</a> access parts of an
+array.
+</p>
+</div>
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M001214">fifth</a></li>
+  <li><a href="#M001215">forty_two</a></li>
+  <li><a href="#M001213">fourth</a></li>
+  <li><a href="#M001209">from</a></li>
+  <li><a href="#M001211">second</a></li>
+  <li><a href="#M001212">third</a></li>
+  <li><a href="#M001210">to</a></li>
+  </ul>
+
+
+
+
+
+
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M001214"></a><b>fifth</b>()
+  </div>
+  <div class="description">
+  <p>
+Equal <a href="Access.html#M001210">to</a> <tt>self[4]</tt>.
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001214_source')" id="l_M001214_source">show source</a> ]</p>
+  <div id="M001214_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/core_ext/array/access.rb, line 42</span>
+42:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">fifth</span>
+43:           <span class="ruby-keyword kw">self</span>[<span class="ruby-value">4</span>]
+44:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001215"></a><b>forty_two</b>()
+  </div>
+  <div class="description">
+  <p>
+Equal <a href="Access.html#M001210">to</a> <tt>self[41]</tt>. Also known as
+accessing &quot;the reddit&quot;.
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001215_source')" id="l_M001215_source">show source</a> ]</p>
+  <div id="M001215_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/core_ext/array/access.rb, line 47</span>
+47:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">forty_two</span>
+48:           <span class="ruby-keyword kw">self</span>[<span class="ruby-value">41</span>]
+49:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001213"></a><b>fourth</b>()
+  </div>
+  <div class="description">
+  <p>
+Equal <a href="Access.html#M001210">to</a> <tt>self[3]</tt>.
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001213_source')" id="l_M001213_source">show source</a> ]</p>
+  <div id="M001213_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/core_ext/array/access.rb, line 37</span>
+37:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">fourth</span>
+38:           <span class="ruby-keyword kw">self</span>[<span class="ruby-value">3</span>]
+39:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001209"></a><b>from</b>(position)
+  </div>
+  <div class="description">
+  <p>
+Returns the tail of the array <a href="Access.html#M001209">from</a>
+<tt>position</tt>.
+</p>
+<pre>
+  %w( a b c d ).from(0)  # =&gt; %w( a b c d )
+  %w( a b c d ).from(2)  # =&gt; %w( c d )
+  %w( a b c d ).from(10) # =&gt; nil
+  %w().from(0)           # =&gt; nil
+</pre>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001209_source')" id="l_M001209_source">show source</a> ]</p>
+  <div id="M001209_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/core_ext/array/access.rb, line 12</span>
+12:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">from</span>(<span class="ruby-identifier">position</span>)
+13:           <span class="ruby-keyword kw">self</span>[<span class="ruby-identifier">position</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>]
+14:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001211"></a><b>second</b>()
+  </div>
+  <div class="description">
+  <p>
+Equal <a href="Access.html#M001210">to</a> <tt>self[1]</tt>.
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001211_source')" id="l_M001211_source">show source</a> ]</p>
+  <div id="M001211_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/core_ext/array/access.rb, line 27</span>
+27:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">second</span>
+28:           <span class="ruby-keyword kw">self</span>[<span class="ruby-value">1</span>]
+29:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001212"></a><b>third</b>()
+  </div>
+  <div class="description">
+  <p>
+Equal <a href="Access.html#M001210">to</a> <tt>self[2]</tt>.
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001212_source')" id="l_M001212_source">show source</a> ]</p>
+  <div id="M001212_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/core_ext/array/access.rb, line 32</span>
+32:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">third</span>
+33:           <span class="ruby-keyword kw">self</span>[<span class="ruby-value">2</span>]
+34:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001210"></a><b>to</b>(position)
+  </div>
+  <div class="description">
+  <p>
+Returns the beginning of the array up <a href="Access.html#M001210">to</a>
+<tt>position</tt>.
+</p>
+<pre>
+  %w( a b c d ).to(0)  # =&gt; %w( a )
+  %w( a b c d ).to(2)  # =&gt; %w( a b c )
+  %w( a b c d ).to(10) # =&gt; %w( a b c d )
+  %w().to(0)           # =&gt; %w()
+</pre>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001210_source')" id="l_M001210_source">show source</a> ]</p>
+  <div id="M001210_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/core_ext/array/access.rb, line 22</span>
+22:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to</span>(<span class="ruby-identifier">position</span>)
+23:           <span class="ruby-keyword kw">self</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-identifier">position</span>]
+24:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

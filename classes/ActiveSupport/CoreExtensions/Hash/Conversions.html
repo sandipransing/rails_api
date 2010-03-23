@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Module: ActiveSupport::CoreExtensions::Hash::Conversions</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Module</span><br />ActiveSupport::CoreExtensions::Hash::Conversions</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../../../files/vendor/rails/activesupport/lib/active_support/core_ext/hash/conversions_rb.html">vendor/rails/activesupport/lib/active_support/core_ext/hash/conversions.rb</a>
+        </td>
+      </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+
+
+
+
+
+
+
+  <div class="sectiontitle">Constants</div>
+  <table border='0' cellpadding='5'>
+  <tr valign='top'>
+    <td class="attr-name">XML_TYPE_NAMES</td>
+    <td>=</td>
+    <td class="attr-value">{           &quot;Symbol&quot;     =&gt; &quot;symbol&quot;,           &quot;Fixnum&quot;     =&gt; &quot;integer&quot;,           &quot;Bignum&quot;     =&gt; &quot;integer&quot;,           &quot;BigDecimal&quot; =&gt; &quot;decimal&quot;,           &quot;Float&quot;      =&gt; &quot;float&quot;,           &quot;TrueClass&quot;  =&gt; &quot;boolean&quot;,           &quot;FalseClass&quot; =&gt; &quot;boolean&quot;,           &quot;Date&quot;       =&gt; &quot;date&quot;,           &quot;DateTime&quot;   =&gt; &quot;datetime&quot;,           &quot;Time&quot;       =&gt; &quot;datetime&quot;,           &quot;ActiveSupport::TimeWithZone&quot; =&gt; &quot;datetime&quot;</td>
+  </tr>
+  <tr valign='top'>
+    <td class="attr-name">XML_FORMATTING</td>
+    <td>=</td>
+    <td class="attr-value">{           &quot;symbol&quot;   =&gt; Proc.new { |symbol| symbol.to_s },           &quot;date&quot;     =&gt; Proc.new { |date| date.to_s(:db) },           &quot;datetime&quot; =&gt; Proc.new { |time| time.xmlschema },           &quot;binary&quot;   =&gt; Proc.new { |binary| ActiveSupport::Base64.encode64(binary) },           &quot;yaml&quot;     =&gt; Proc.new { |yaml| yaml.to_yaml }</td>
+  </tr>
+  <tr valign='top'>
+    <td class="attr-name">XML_PARSING</td>
+    <td>=</td>
+    <td class="attr-value">{             &quot;symbol&quot;       =&gt; Proc.new  { |symbol|  symbol.to_sym },             &quot;date&quot;         =&gt; Proc.new  { |date|    ::Date.parse(date) },             &quot;datetime&quot;     =&gt; Proc.new  { |time|    ::Time.parse(time).utc rescue ::DateTime.parse(time).utc },             &quot;integer&quot;      =&gt; Proc.new  { |integer| integer.to_i },             &quot;float&quot;        =&gt; Proc.new  { |float|   float.to_f },             &quot;decimal&quot;      =&gt; Proc.new  { |number|  BigDecimal(number) },             &quot;boolean&quot;      =&gt; Proc.new  { |boolean| %w(1 true).include?(boolean.strip) },             &quot;string&quot;       =&gt; Proc.new  { |string|  string.to_s },             &quot;yaml&quot;         =&gt; Proc.new  { |yaml|    YAML::load(yaml) rescue yaml },             &quot;base64Binary&quot; =&gt; Proc.new  { |bin|     ActiveSupport::Base64.decode64(bin) },             &quot;file&quot;         =&gt; Proc.new do |file, entity|               f = StringIO.new(ActiveSupport::Base64.decode64(file))</td>
+  </tr>
+  </table>
+
+
+</div>
+
+  </div>
+
+    </body>
+</html>

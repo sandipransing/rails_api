@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Class: ActiveSupport::Duration</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Class</span><br />ActiveSupport::Duration</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../files/vendor/rails/activesupport/lib/active_support/duration_rb.html">vendor/rails/activesupport/lib/active_support/duration.rb</a>
+        </td>
+      </tr>
+    <tr>
+      <td>Parent:</td>
+      <td>
+        <a href="BasicObject.html">
+BasicObject
+         </a>
+     </td>
+   </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+  <div class="description"><p>
+Provides accurate date and time measurements using Date#advance and
+Time#advance, respectively. It mainly supports the methods on Numeric, such
+as in this example:
+</p>
+<pre>
+  1.month.ago       # equivalent to Time.now.advance(:months =&gt; -1)
+</pre>
+</div>
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M001546">+</a></li>
+  <li><a href="#M001547">-</a></li>
+  <li><a href="#M001548">==</a></li>
+  <li><a href="#M001551">ago</a></li>
+  <li><a href="#M001550">from_now</a></li>
+  <li><a href="#M001549">since</a></li>
+  <li><a href="#M001552">until</a></li>
+  </ul>
+
+
+
+
+
+  <div class="sectiontitle">Attributes</div>
+  <table border='0' cellpadding='5'>
+  <tr valign='top'>
+    <td class='attr-rw'>
+[RW]
+    </td>
+    <td class='attr-name'>parts</td>
+    <td class='attr-desc'></td>
+  </tr>
+  <tr valign='top'>
+    <td class='attr-rw'>
+[RW]
+    </td>
+    <td class='attr-name'>value</td>
+    <td class='attr-desc'></td>
+  </tr>
+  </table>
+
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M001546"></a><b>+</b>(other)
+  </div>
+  <div class="description">
+  <p>
+Adds another <a href="Duration.html">Duration</a> or a Numeric to this <a
+href="Duration.html">Duration</a>. Numeric values are treated as seconds.
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001546_source')" id="l_M001546_source">show source</a> ]</p>
+  <div id="M001546_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/duration.rb, line 18</span>
+18:     <span class="ruby-keyword kw">def</span> <span class="ruby-operator">+</span>(<span class="ruby-identifier">other</span>)
+19:       <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Duration</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">other</span>
+20:         <span class="ruby-constant">Duration</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">value</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">value</span>, <span class="ruby-ivar">@parts</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">parts</span>)
+21:       <span class="ruby-keyword kw">else</span>
+22:         <span class="ruby-constant">Duration</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">value</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">other</span>, <span class="ruby-ivar">@parts</span> <span class="ruby-operator">+</span> [[<span class="ruby-identifier">:seconds</span>, <span class="ruby-identifier">other</span>]])
+23:       <span class="ruby-keyword kw">end</span>
+24:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001547"></a><b>-</b>(other)
+  </div>
+  <div class="description">
+  <p>
+Subtracts another <a href="Duration.html">Duration</a> or a Numeric from
+this <a href="Duration.html">Duration</a>. Numeric values are treated as
+seconds.
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001547_source')" id="l_M001547_source">show source</a> ]</p>
+  <div id="M001547_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/duration.rb, line 28</span>
+28:     <span class="ruby-keyword kw">def</span> <span class="ruby-operator">-</span>(<span class="ruby-identifier">other</span>)
+29:       <span class="ruby-keyword kw">self</span> <span class="ruby-operator">+</span> (<span class="ruby-operator">-</span><span class="ruby-identifier">other</span>)
+30:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001548"></a><b>==</b>(other)
+  </div>
+  <div class="description">
+  <p>
+Returns true if <tt>other</tt> is also a <a
+href="Duration.html">Duration</a> instance with the same <tt>value</tt>, or
+if <tt>other == value</tt>.
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001548_source')" id="l_M001548_source">show source</a> ]</p>
+  <div id="M001548_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/duration.rb, line 42</span>
+42:     <span class="ruby-keyword kw">def</span> <span class="ruby-operator">==</span>(<span class="ruby-identifier">other</span>)
+43:       <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Duration</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">other</span>
+44:         <span class="ruby-identifier">other</span>.<span class="ruby-identifier">value</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">value</span>
+45:       <span class="ruby-keyword kw">else</span>
+46:         <span class="ruby-identifier">other</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">value</span>
+47:       <span class="ruby-keyword kw">end</span>
+48:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001551"></a><b>ago</b>(time = ::Time.current)
+  </div>
+  <div class="description">
+  <p>
+Calculates a new Time or Date that is as far in the past as this <a
+href="Duration.html">Duration</a> represents.
+</p>
+  </div>
+<div class="aka">
+  This method is also aliased as
+  <a href="Duration.html#M001552">until</a>
+</div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001551_source')" id="l_M001551_source">show source</a> ]</p>
+  <div id="M001551_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/duration.rb, line 63</span>
+63:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">ago</span>(<span class="ruby-identifier">time</span> = <span class="ruby-operator">::</span><span class="ruby-constant">Time</span>.<span class="ruby-identifier">current</span>)
+64:       <span class="ruby-identifier">sum</span>(<span class="ruby-value">-1</span>, <span class="ruby-identifier">time</span>)
+65:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001550"></a><b>from_now</b>(time = ::Time.current)
+  </div>
+  <div class="description">
+  <p>
+Alias for <a href="Duration.html#M001549">since</a>
+</p>
+  </div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001549"></a><b>since</b>(time = ::Time.current)
+  </div>
+  <div class="description">
+  <p>
+Calculates a new Time or Date that is as far in the future as this <a
+href="Duration.html">Duration</a> represents.
+</p>
+  </div>
+<div class="aka">
+  This method is also aliased as
+  <a href="Duration.html#M001550">from_now</a>
+</div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001549_source')" id="l_M001549_source">show source</a> ]</p>
+  <div id="M001549_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/duration.rb, line 56</span>
+56:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">since</span>(<span class="ruby-identifier">time</span> = <span class="ruby-operator">::</span><span class="ruby-constant">Time</span>.<span class="ruby-identifier">current</span>)
+57:       <span class="ruby-identifier">sum</span>(<span class="ruby-value">1</span>, <span class="ruby-identifier">time</span>)
+58:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001552"></a><b>until</b>(time = ::Time.current)
+  </div>
+  <div class="description">
+  <p>
+Alias for <a href="Duration.html#M001551">ago</a>
+</p>
+  </div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

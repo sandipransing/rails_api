@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Module: ActiveSupport::CoreExtensions::Module</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Module</span><br />ActiveSupport::CoreExtensions::Module</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../../files/vendor/rails/activesupport/lib/active_support/core_ext/module/aliasing_rb.html">vendor/rails/activesupport/lib/active_support/core_ext/module/aliasing.rb</a>
+<a href="../../../files/vendor/rails/activesupport/lib/active_support/core_ext/module/introspection_rb.html">vendor/rails/activesupport/lib/active_support/core_ext/module/introspection.rb</a>
+<a href="../../../files/vendor/rails/activesupport/lib/active_support/core_ext/module/model_naming_rb.html">vendor/rails/activesupport/lib/active_support/core_ext/module/model_naming.rb</a>
+<a href="../../../files/vendor/rails/activesupport/lib/active_support/core_ext/module_rb.html">vendor/rails/activesupport/lib/active_support/core_ext/module.rb</a>
+        </td>
+      </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+  <div class="description"><p>
+Various extensions for the Ruby core <a href="Module.html">Module</a>
+class.
+</p>
+</div>
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M001220">alias_attribute</a></li>
+  <li><a href="#M001219">alias_method_chain</a></li>
+  <li><a href="#M001225">local_constant_names</a></li>
+  <li><a href="#M001224">local_constants</a></li>
+  <li><a href="#M001226">model_name</a></li>
+  <li><a href="#M001222">parent</a></li>
+  <li><a href="#M001221">parent_name</a></li>
+  <li><a href="#M001223">parents</a></li>
+  </ul>
+
+
+
+
+
+
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M001220"></a><b>alias_attribute</b>(new_name, old_name)
+  </div>
+  <div class="description">
+  <p>
+Allows you to make aliases for attributes, which includes getter, setter,
+and query methods.
+</p>
+<p>
+Example:
+</p>
+<pre>
+  class Content &lt; ActiveRecord::Base
+    # has a title attribute
+  end
+
+  class Email &lt; Content
+    alias_attribute :subject, :title
+  end
+
+  e = Email.find(1)
+  e.title    # =&gt; &quot;Superstars&quot;
+  e.subject  # =&gt; &quot;Superstars&quot;
+  e.subject? # =&gt; true
+  e.subject = &quot;Megastars&quot;
+  e.title    # =&gt; &quot;Megastars&quot;
+</pre>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001220_source')" id="l_M001220_source">show source</a> ]</p>
+  <div id="M001220_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/core_ext/module/aliasing.rb, line 65</span>
+65:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">alias_attribute</span>(<span class="ruby-identifier">new_name</span>, <span class="ruby-identifier">old_name</span>)
+66:         <span class="ruby-identifier">module_eval</span> <span class="ruby-value str">&quot;def \#{new_name}; self.\#{old_name}; end          # def subject; self.title; end\ndef \#{new_name}?; self.\#{old_name}?; end        # def subject?; self.title?; end\ndef \#{new_name}=(v); self.\#{old_name} = v; end  # def subject=(v); self.title = v; end\n&quot;</span>, <span class="ruby-keyword kw">__FILE__</span>, <span class="ruby-keyword kw">__LINE__</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>
+67:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001219"></a><b>alias_method_chain</b>(target, feature) {|aliased_target, punctuation| ...}
+  </div>
+  <div class="description">
+  <p>
+Encapsulates the common pattern of:
+</p>
+<pre>
+  alias_method :foo_without_feature, :foo
+  alias_method :foo, :foo_with_feature
+</pre>
+<p>
+With this, you simply do:
+</p>
+<pre>
+  alias_method_chain :foo, :feature
+</pre>
+<p>
+And both aliases are set up for you.
+</p>
+<p>
+Query and bang methods (foo?, foo!) keep the same punctuation:
+</p>
+<pre>
+  alias_method_chain :foo?, :feature
+</pre>
+<p>
+is equivalent to
+</p>
+<pre>
+  alias_method :foo_without_feature?, :foo?
+  alias_method :foo?, :foo_with_feature?
+</pre>
+<p>
+so you can safely chain foo, foo?, and foo! with the same feature.
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001219_source')" id="l_M001219_source">show source</a> ]</p>
+  <div id="M001219_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/core_ext/module/aliasing.rb, line 25</span>
+25:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">alias_method_chain</span>(<span class="ruby-identifier">target</span>, <span class="ruby-identifier">feature</span>)
+26:         <span class="ruby-comment cmt"># Strip out punctuation on predicates or bang methods since</span>
+27:         <span class="ruby-comment cmt"># e.g. target?_without_feature is not a valid method name.</span>
+28:         <span class="ruby-identifier">aliased_target</span>, <span class="ruby-identifier">punctuation</span> = <span class="ruby-identifier">target</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/([?!=])$/</span>, <span class="ruby-value str">''</span>), <span class="ruby-identifier">$1</span>
+29:         <span class="ruby-keyword kw">yield</span>(<span class="ruby-identifier">aliased_target</span>, <span class="ruby-identifier">punctuation</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block_given?</span>
+30: 
+31:         <span class="ruby-identifier">with_method</span>, <span class="ruby-identifier">without_method</span> = <span class="ruby-node">&quot;#{aliased_target}_with_#{feature}#{punctuation}&quot;</span>, <span class="ruby-node">&quot;#{aliased_target}_without_#{feature}#{punctuation}&quot;</span>
+32: 
+33:         <span class="ruby-identifier">alias_method</span> <span class="ruby-identifier">without_method</span>, <span class="ruby-identifier">target</span>
+34:         <span class="ruby-identifier">alias_method</span> <span class="ruby-identifier">target</span>, <span class="ruby-identifier">with_method</span>
+35: 
+36:         <span class="ruby-keyword kw">case</span>
+37:           <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">public_method_defined?</span>(<span class="ruby-identifier">without_method</span>)
+38:             <span class="ruby-identifier">public</span> <span class="ruby-identifier">target</span>
+39:           <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">protected_method_defined?</span>(<span class="ruby-identifier">without_method</span>)
+40:             <span class="ruby-identifier">protected</span> <span class="ruby-identifier">target</span>
+41:           <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">private_method_defined?</span>(<span class="ruby-identifier">without_method</span>)
+42:             <span class="ruby-identifier">private</span> <span class="ruby-identifier">target</span>
+43:         <span class="ruby-keyword kw">end</span>
+44:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001225"></a><b>local_constant_names</b>()
+  </div>
+  <div class="description">
+  <p>
+Returns the names of the constants defined locally rather than the
+constants themselves. See <tt><a
+href="Module.html#M001224">local_constants</a></tt>.
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001225_source')" id="l_M001225_source">show source</a> ]</p>
+  <div id="M001225_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/core_ext/module/introspection.rb, line 85</span>
+85:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">local_constant_names</span>
+86:         <span class="ruby-identifier">local_constants</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">to_s</span> }
+87:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001224"></a><b>local_constants</b>()
+  </div>
+  <div class="description">
+  <p>
+Returns the constants that have been defined locally by this object and not
+in an ancestor. This method is exact if running under Ruby 1.9. In previous
+versions it may miss some constants if their definition in some ancestor is
+identical to their definition in the receiver.
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001224_source')" id="l_M001224_source">show source</a> ]</p>
+  <div id="M001224_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/core_ext/module/introspection.rb, line 65</span>
+65:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">local_constants</span>
+66:           <span class="ruby-identifier">inherited</span> = {}
+67: 
+68:           <span class="ruby-identifier">ancestors</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">anc</span><span class="ruby-operator">|</span>
+69:             <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">anc</span> <span class="ruby-operator">==</span> <span class="ruby-keyword kw">self</span>
+70:             <span class="ruby-identifier">anc</span>.<span class="ruby-identifier">constants</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">const</span><span class="ruby-operator">|</span> <span class="ruby-identifier">inherited</span>[<span class="ruby-identifier">const</span>] = <span class="ruby-identifier">anc</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-identifier">const</span>) }
+71:           <span class="ruby-keyword kw">end</span>
+72: 
+73:           <span class="ruby-identifier">constants</span>.<span class="ruby-identifier">select</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">const</span><span class="ruby-operator">|</span>
+74:             <span class="ruby-operator">!</span><span class="ruby-identifier">inherited</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-identifier">const</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">inherited</span>[<span class="ruby-identifier">const</span>].<span class="ruby-identifier">object_id</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">const_get</span>(<span class="ruby-identifier">const</span>).<span class="ruby-identifier">object_id</span>
+75:           <span class="ruby-keyword kw">end</span>
+76:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001226"></a><b>model_name</b>()
+  </div>
+  <div class="description">
+  <p>
+Returns an <a href="../ModelName.html">ActiveSupport::ModelName</a> object
+for module. It can be used to retrieve all kinds of naming-related
+information.
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001226_source')" id="l_M001226_source">show source</a> ]</p>
+  <div id="M001226_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/core_ext/module/model_naming.rb, line 20</span>
+20:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">model_name</span>
+21:         <span class="ruby-ivar">@model_name</span> <span class="ruby-operator">||=</span> <span class="ruby-operator">::</span><span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">ModelName</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">name</span>)
+22:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001222"></a><b>parent</b>()
+  </div>
+  <div class="description">
+  <p>
+Returns the module which contains this one according to its name.
+</p>
+<pre>
+  module M
+    module N
+    end
+  end
+  X = M::N
+
+  p M::N.parent # =&gt; M
+  p X.parent    # =&gt; M
+</pre>
+<p>
+The <a href="Module.html#M001222">parent</a> of top-level and anonymous
+modules is <a href="../../Object.html">Object</a>.
+</p>
+<pre>
+  p M.parent          # =&gt; Object
+  p Module.new.parent # =&gt; Object
+</pre>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001222_source')" id="l_M001222_source">show source</a> ]</p>
+  <div id="M001222_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/core_ext/module/introspection.rb, line 30</span>
+30:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">parent</span>
+31:         <span class="ruby-identifier">parent_name</span> <span class="ruby-value">? </span><span class="ruby-identifier">parent_name</span>.<span class="ruby-identifier">constantize</span> <span class="ruby-operator">:</span> <span class="ruby-constant">Object</span>
+32:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001221"></a><b>parent_name</b>()
+  </div>
+  <div class="description">
+  <p>
+Returns the name of the module containing this one.
+</p>
+<pre>
+  p M::N.parent_name # =&gt; &quot;M&quot;
+</pre>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001221_source')" id="l_M001221_source">show source</a> ]</p>
+  <div id="M001221_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/core_ext/module/introspection.rb, line 7</span>
+ 7:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">parent_name</span>
+ 8:         <span class="ruby-keyword kw">unless</span> <span class="ruby-keyword kw">defined?</span> <span class="ruby-ivar">@parent_name</span>
+ 9:           <span class="ruby-ivar">@parent_name</span> = <span class="ruby-identifier">name</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/::[^:]+\Z/</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">$`</span>.<span class="ruby-identifier">freeze</span> <span class="ruby-operator">:</span> <span class="ruby-keyword kw">nil</span>
+10:         <span class="ruby-keyword kw">end</span>
+11:         <span class="ruby-ivar">@parent_name</span>
+12:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001223"></a><b>parents</b>()
+  </div>
+  <div class="description">
+  <p>
+Returns all the <a href="Module.html#M001223">parents</a> of this module
+according to its name, ordered from nested outwards. The receiver is not
+contained within the result.
+</p>
+<pre>
+  module M
+    module N
+    end
+  end
+  X = M::N
+
+  p M.parents    # =&gt; [Object]
+  p M::N.parents # =&gt; [M, Object]
+  p X.parents    # =&gt; [M, Object]
+</pre>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001223_source')" id="l_M001223_source">show source</a> ]</p>
+  <div id="M001223_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/core_ext/module/introspection.rb, line 47</span>
+47:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">parents</span>
+48:         <span class="ruby-identifier">parents</span> = []
+49:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">parent_name</span>
+50:           <span class="ruby-identifier">parts</span> = <span class="ruby-identifier">parent_name</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">'::'</span>)
+51:           <span class="ruby-keyword kw">until</span> <span class="ruby-identifier">parts</span>.<span class="ruby-identifier">empty?</span>
+52:             <span class="ruby-identifier">parents</span> <span class="ruby-operator">&lt;&lt;</span> (<span class="ruby-identifier">parts</span> <span class="ruby-operator">*</span> <span class="ruby-value str">'::'</span>).<span class="ruby-identifier">constantize</span>
+53:             <span class="ruby-identifier">parts</span>.<span class="ruby-identifier">pop</span>
+54:           <span class="ruby-keyword kw">end</span>
+55:         <span class="ruby-keyword kw">end</span>
+56:         <span class="ruby-identifier">parents</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Object</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">parents</span>.<span class="ruby-identifier">include?</span> <span class="ruby-constant">Object</span>
+57:         <span class="ruby-identifier">parents</span>
+58:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

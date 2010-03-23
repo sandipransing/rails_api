@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Class: ActiveResource::Request</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Class</span><br />ActiveResource::Request</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../files/vendor/rails/activeresource/lib/active_resource/http_mock_rb.html">vendor/rails/activeresource/lib/active_resource/http_mock.rb</a>
+        </td>
+      </tr>
+    <tr>
+      <td>Parent:</td>
+      <td>
+        <a href="../Object.html">
+Object
+         </a>
+     </td>
+   </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M000930">==</a></li>
+  <li><a href="#M000929">new</a></li>
+  <li><a href="#M000931">to_s</a></li>
+  </ul>
+
+
+
+
+
+  <div class="sectiontitle">Attributes</div>
+  <table border='0' cellpadding='5'>
+  <tr valign='top'>
+    <td class='attr-rw'>
+[RW]
+    </td>
+    <td class='attr-name'>body</td>
+    <td class='attr-desc'></td>
+  </tr>
+  <tr valign='top'>
+    <td class='attr-rw'>
+[RW]
+    </td>
+    <td class='attr-name'>headers</td>
+    <td class='attr-desc'></td>
+  </tr>
+  <tr valign='top'>
+    <td class='attr-rw'>
+[RW]
+    </td>
+    <td class='attr-name'>method</td>
+    <td class='attr-desc'></td>
+  </tr>
+  <tr valign='top'>
+    <td class='attr-rw'>
+[RW]
+    </td>
+    <td class='attr-name'>path</td>
+    <td class='attr-desc'></td>
+  </tr>
+  </table>
+
+<div class="sectiontitle">Public Class methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M000929"></a><b>new</b>(method, path, body = nil, headers = {})
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000929_source')" id="l_M000929_source">show source</a> ]</p>
+  <div id="M000929_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/activeresource/lib/active_resource/http_mock.rb, line 148</span>
+148:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">method</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">body</span> = <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">headers</span> = {})
+149:       <span class="ruby-ivar">@method</span>, <span class="ruby-ivar">@path</span>, <span class="ruby-ivar">@body</span>, <span class="ruby-ivar">@headers</span> = <span class="ruby-identifier">method</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">body</span>, <span class="ruby-identifier">headers</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-constant">ActiveResource</span><span class="ruby-operator">::</span><span class="ruby-constant">Connection</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP_FORMAT_HEADER_NAMES</span>[<span class="ruby-identifier">method</span>] =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'application/xml'</span>)
+150:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M000930"></a><b>==</b>(req)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000930_source')" id="l_M000930_source">show source</a> ]</p>
+  <div id="M000930_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/activeresource/lib/active_resource/http_mock.rb, line 152</span>
+152:     <span class="ruby-keyword kw">def</span> <span class="ruby-operator">==</span>(<span class="ruby-identifier">req</span>)
+153:       <span class="ruby-identifier">path</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">req</span>.<span class="ruby-identifier">path</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">method</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">req</span>.<span class="ruby-identifier">method</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">headers</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">req</span>.<span class="ruby-identifier">headers</span>
+154:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000931"></a><b>to_s</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000931_source')" id="l_M000931_source">show source</a> ]</p>
+  <div id="M000931_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/activeresource/lib/active_resource/http_mock.rb, line 156</span>
+156:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_s</span>
+157:       <span class="ruby-node">&quot;&lt;#{method.to_s.upcase}: #{path} [#{headers}] (#{body})&gt;&quot;</span>
+158:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

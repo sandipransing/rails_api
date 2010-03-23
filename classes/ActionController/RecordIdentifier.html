@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Module: ActionController::RecordIdentifier</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Module</span><br />ActionController::RecordIdentifier</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../files/vendor/rails/actionpack/lib/action_controller/record_identifier_rb.html">vendor/rails/actionpack/lib/action_controller/record_identifier.rb</a>
+        </td>
+      </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+  <div class="description"><p>
+The record identifier encapsulates a number of naming conventions for
+dealing with records, like Active Records or Active <a
+href="Resources.html">Resources</a> or pretty much any other model type
+that has an id. These patterns are then used to try elevate the view
+actions to a higher logical level. Example:
+</p>
+<pre>
+  # routes
+  map.resources :posts
+
+  # view
+  &lt;% div_for(post) do %&gt;     &lt;div id=&quot;post_45&quot; class=&quot;post&quot;&gt;
+    &lt;%= post.body %&gt;           What a wonderful world!
+  &lt;% end %&gt;                  &lt;/div&gt;
+
+  # controller
+  def destroy
+    post = Post.find(params[:id])
+    post.destroy
+
+    respond_to do |format|
+      format.html { redirect_to(post) } # Calls polymorphic_url(post) which in turn calls post_url(post)
+      format.js do
+        # Calls: new Effect.fade('post_45');
+        render(:update) { |page| page[post].visual_effect(:fade) }
+      end
+    end
+  end
+</pre>
+<p>
+As the example above shows, you can stop caring to a large extent what the
+actual id of the post is. You just know that one is being assigned and that
+the subsequent calls in redirect_to and the RJS expect that same naming
+convention and allows you to write less code if you follow it.
+</p>
+</div>
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M000482">dom_class</a></li>
+  <li><a href="#M000483">dom_id</a></li>
+  <li><a href="#M000481">partial_path</a></li>
+  <li><a href="#M000484">plural_class_name</a></li>
+  <li><a href="#M000485">singular_class_name</a></li>
+  </ul>
+
+
+
+
+  <div class="sectiontitle">Constants</div>
+  <table border='0' cellpadding='5'>
+  <tr valign='top'>
+    <td class="attr-name">JOIN</td>
+    <td>=</td>
+    <td class="attr-value">'_'.freeze</td>
+  </tr>
+  <tr valign='top'>
+    <td class="attr-name">NEW</td>
+    <td>=</td>
+    <td class="attr-value">'new'.freeze</td>
+  </tr>
+  </table>
+
+
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M000482"></a><b>dom_class</b>(record_or_class, prefix = nil)
+  </div>
+  <div class="description">
+  <p>
+The DOM class convention is to use the singular form of an object or class.
+Examples:
+</p>
+<pre>
+  dom_class(post)   # =&gt; &quot;post&quot;
+  dom_class(Person) # =&gt; &quot;person&quot;
+</pre>
+<p>
+If you need to address multiple instances of the same class in the same
+view, you can prefix the <a
+href="RecordIdentifier.html#M000482">dom_class</a>:
+</p>
+<pre>
+  dom_class(post, :edit)   # =&gt; &quot;edit_post&quot;
+  dom_class(Person, :edit) # =&gt; &quot;edit_person&quot;
+</pre>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000482_source')" id="l_M000482_source">show source</a> ]</p>
+  <div id="M000482_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/record_identifier.rb, line 61</span>
+61:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">dom_class</span>(<span class="ruby-identifier">record_or_class</span>, <span class="ruby-identifier">prefix</span> = <span class="ruby-keyword kw">nil</span>)
+62:       <span class="ruby-identifier">singular</span> = <span class="ruby-identifier">singular_class_name</span>(<span class="ruby-identifier">record_or_class</span>)
+63:       <span class="ruby-identifier">prefix</span> <span class="ruby-value">? </span><span class="ruby-node">&quot;#{prefix}#{JOIN}#{singular}&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">singular</span>
+64:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000483"></a><b>dom_id</b>(record, prefix = nil)
+  </div>
+  <div class="description">
+  <p>
+The DOM id convention is to use the singular form of an object or class
+with the id following an underscore. If no id is found, prefix with
+&quot;new_&quot; instead. Examples:
+</p>
+<pre>
+  dom_id(Post.find(45))       # =&gt; &quot;post_45&quot;
+  dom_id(Post.new)            # =&gt; &quot;new_post&quot;
+</pre>
+<p>
+If you need to address multiple instances of the same class in the same
+view, you can prefix the <a
+href="RecordIdentifier.html#M000483">dom_id</a>:
+</p>
+<pre>
+  dom_id(Post.find(45), :edit) # =&gt; &quot;edit_post_45&quot;
+</pre>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000483_source')" id="l_M000483_source">show source</a> ]</p>
+  <div id="M000483_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/record_identifier.rb, line 75</span>
+75:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">dom_id</span>(<span class="ruby-identifier">record</span>, <span class="ruby-identifier">prefix</span> = <span class="ruby-keyword kw">nil</span>) 
+76:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">record_id</span> = <span class="ruby-identifier">record</span>.<span class="ruby-identifier">id</span>
+77:         <span class="ruby-node">&quot;#{dom_class(record, prefix)}#{JOIN}#{record_id}&quot;</span>
+78:       <span class="ruby-keyword kw">else</span>
+79:         <span class="ruby-identifier">dom_class</span>(<span class="ruby-identifier">record</span>, <span class="ruby-identifier">prefix</span> <span class="ruby-operator">||</span> <span class="ruby-constant">NEW</span>)
+80:       <span class="ruby-keyword kw">end</span>
+81:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000481"></a><b>partial_path</b>(record_or_class, controller_path = nil)
+  </div>
+  <div class="description">
+  <p>
+Returns plural/singular for a record or class. Example:
+</p>
+<pre>
+  partial_path(post)                   # =&gt; &quot;posts/post&quot;
+  partial_path(Person)                 # =&gt; &quot;people/person&quot;
+  partial_path(Person, &quot;admin/games&quot;)  # =&gt; &quot;admin/people/person&quot;
+</pre>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000481_source')" id="l_M000481_source">show source</a> ]</p>
+  <div id="M000481_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/record_identifier.rb, line 42</span>
+42:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">partial_path</span>(<span class="ruby-identifier">record_or_class</span>, <span class="ruby-identifier">controller_path</span> = <span class="ruby-keyword kw">nil</span>)
+43:       <span class="ruby-identifier">name</span> = <span class="ruby-identifier">model_name_from_record_or_class</span>(<span class="ruby-identifier">record_or_class</span>)
+44: 
+45:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">controller_path</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">controller_path</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-value str">&quot;/&quot;</span>)
+46:         <span class="ruby-node">&quot;#{File.dirname(controller_path)}/#{name.partial_path}&quot;</span>
+47:       <span class="ruby-keyword kw">else</span>
+48:         <span class="ruby-identifier">name</span>.<span class="ruby-identifier">partial_path</span>
+49:       <span class="ruby-keyword kw">end</span>
+50:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000484"></a><b>plural_class_name</b>(record_or_class)
+  </div>
+  <div class="description">
+  <p>
+Returns the plural class name of a record or class. Examples:
+</p>
+<pre>
+  plural_class_name(post)             # =&gt; &quot;posts&quot;
+  plural_class_name(Highrise::Person) # =&gt; &quot;highrise_people&quot;
+</pre>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000484_source')" id="l_M000484_source">show source</a> ]</p>
+  <div id="M000484_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/record_identifier.rb, line 87</span>
+87:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">plural_class_name</span>(<span class="ruby-identifier">record_or_class</span>)
+88:       <span class="ruby-identifier">model_name_from_record_or_class</span>(<span class="ruby-identifier">record_or_class</span>).<span class="ruby-identifier">plural</span>
+89:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000485"></a><b>singular_class_name</b>(record_or_class)
+  </div>
+  <div class="description">
+  <p>
+Returns the singular class name of a record or class. Examples:
+</p>
+<pre>
+  singular_class_name(post)             # =&gt; &quot;post&quot;
+  singular_class_name(Highrise::Person) # =&gt; &quot;highrise_person&quot;
+</pre>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000485_source')" id="l_M000485_source">show source</a> ]</p>
+  <div id="M000485_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/record_identifier.rb, line 95</span>
+95:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">singular_class_name</span>(<span class="ruby-identifier">record_or_class</span>)
+96:       <span class="ruby-identifier">model_name_from_record_or_class</span>(<span class="ruby-identifier">record_or_class</span>).<span class="ruby-identifier">singular</span>
+97:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Module: ActiveSupport::XmlMini_Nokogiri::Conversions::Node</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Module</span><br />ActiveSupport::XmlMini_Nokogiri::Conversions::Node</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../../../files/vendor/rails/activesupport/lib/active_support/xml_mini/nokogiri_rb.html">vendor/rails/activesupport/lib/active_support/xml_mini/nokogiri.rb</a>
+        </td>
+      </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M001104">attributes_as_hash</a></li>
+  <li><a href="#M001103">to_hash</a></li>
+  </ul>
+
+
+
+
+  <div class="sectiontitle">Constants</div>
+  <table border='0' cellpadding='5'>
+  <tr valign='top'>
+    <td class="attr-name">CONTENT_ROOT</td>
+    <td>=</td>
+    <td class="attr-value">'__content__'</td>
+  </tr>
+  </table>
+
+
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M001104"></a><b>attributes_as_hash</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001104_source')" id="l_M001104_source">show source</a> ]</p>
+  <div id="M001104_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/xml_mini/nokogiri.rb, line 66</span>
+66:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">attributes_as_hash</span>
+67:           <span class="ruby-constant">Hash</span>[<span class="ruby-operator">*</span>(<span class="ruby-identifier">attribute_nodes</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">node</span><span class="ruby-operator">|</span>
+68:             [<span class="ruby-identifier">node</span>.<span class="ruby-identifier">node_name</span>, <span class="ruby-identifier">node</span>.<span class="ruby-identifier">value</span>]
+69:           }.<span class="ruby-identifier">flatten</span>)]
+70:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001103"></a><b>to_hash</b>(hash = {})
+  </div>
+  <div class="description">
+  <p>
+Convert XML document to hash
+</p>
+<table>
+<tr><td valign="top">hash:</td><td>Hash to merge the converted element into.
+
+</td></tr>
+</table>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001103_source')" id="l_M001103_source">show source</a> ]</p>
+  <div id="M001103_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/xml_mini/nokogiri.rb, line 35</span>
+35:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_hash</span>(<span class="ruby-identifier">hash</span> = {})
+36:           <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">name</span>] <span class="ruby-operator">||=</span> <span class="ruby-identifier">attributes_as_hash</span>
+37: 
+38:           <span class="ruby-identifier">walker</span> = <span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">memo</span>, <span class="ruby-identifier">parent</span>, <span class="ruby-identifier">child</span>, <span class="ruby-identifier">callback</span><span class="ruby-operator">|</span>
+39:             <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">child</span>.<span class="ruby-identifier">blank?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-value str">'file'</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">parent</span>[<span class="ruby-value str">'type'</span>]
+40: 
+41:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">child</span>.<span class="ruby-identifier">text?</span>
+42:               (<span class="ruby-identifier">memo</span>[<span class="ruby-constant">CONTENT_ROOT</span>] <span class="ruby-operator">||=</span> <span class="ruby-value str">''</span>) <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">child</span>.<span class="ruby-identifier">content</span>
+43:               <span class="ruby-keyword kw">next</span>
+44:             <span class="ruby-keyword kw">end</span>
+45: 
+46:             <span class="ruby-identifier">name</span> = <span class="ruby-identifier">child</span>.<span class="ruby-identifier">name</span>
+47: 
+48:             <span class="ruby-identifier">child_hash</span> = <span class="ruby-identifier">child</span>.<span class="ruby-identifier">attributes_as_hash</span>
+49:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">memo</span>[<span class="ruby-identifier">name</span>]
+50:               <span class="ruby-identifier">memo</span>[<span class="ruby-identifier">name</span>] = [<span class="ruby-identifier">memo</span>[<span class="ruby-identifier">name</span>]].<span class="ruby-identifier">flatten</span>
+51:               <span class="ruby-identifier">memo</span>[<span class="ruby-identifier">name</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">child_hash</span>
+52:             <span class="ruby-keyword kw">else</span>
+53:               <span class="ruby-identifier">memo</span>[<span class="ruby-identifier">name</span>] = <span class="ruby-identifier">child_hash</span>
+54:             <span class="ruby-keyword kw">end</span>
+55: 
+56:             <span class="ruby-comment cmt"># Recusively walk children</span>
+57:             <span class="ruby-identifier">child</span>.<span class="ruby-identifier">children</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
+58:               <span class="ruby-identifier">callback</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">child_hash</span>, <span class="ruby-identifier">child</span>, <span class="ruby-identifier">c</span>, <span class="ruby-identifier">callback</span>)
+59:             }
+60:           }
+61: 
+62:           <span class="ruby-identifier">children</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">walker</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">hash</span>[<span class="ruby-identifier">name</span>], <span class="ruby-keyword kw">self</span>, <span class="ruby-identifier">c</span>, <span class="ruby-identifier">walker</span>) }
+63:           <span class="ruby-identifier">hash</span>
+64:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

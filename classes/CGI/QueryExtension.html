@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Module: CGI::QueryExtension</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Module</span><br />CGI::QueryExtension</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../files/vendor/rails/actionpack/lib/action_controller/cgi_ext/query_extension_rb.html">vendor/rails/actionpack/lib/action_controller/cgi_ext/query_extension.rb</a>
+        </td>
+      </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M000115">initialize_query</a></li>
+  </ul>
+
+
+
+
+
+
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M000115"></a><b>initialize_query</b>()
+  </div>
+  <div class="description">
+  <p>
+Neuter CGI parameter parsing.
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000115_source')" id="l_M000115_source">show source</a> ]</p>
+  <div id="M000115_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/cgi_ext/query_extension.rb, line 9</span>
+ 9:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize_query</span>
+10:       <span class="ruby-comment cmt"># Fix some strange request environments.</span>
+11:       <span class="ruby-identifier">env_table</span>[<span class="ruby-value str">'REQUEST_METHOD'</span>] <span class="ruby-operator">||=</span> <span class="ruby-value str">'GET'</span>
+12: 
+13:       <span class="ruby-comment cmt"># POST assumes missing Content-Type is application/x-www-form-urlencoded.</span>
+14:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">env_table</span>[<span class="ruby-value str">'CONTENT_TYPE'</span>].<span class="ruby-identifier">blank?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">env_table</span>[<span class="ruby-value str">'REQUEST_METHOD'</span>] <span class="ruby-operator">==</span> <span class="ruby-value str">'POST'</span>
+15:         <span class="ruby-identifier">env_table</span>[<span class="ruby-value str">'CONTENT_TYPE'</span>] = <span class="ruby-value str">'application/x-www-form-urlencoded'</span>
+16:       <span class="ruby-keyword kw">end</span>
+17: 
+18:       <span class="ruby-ivar">@cookies</span> = <span class="ruby-constant">CGI</span><span class="ruby-operator">::</span><span class="ruby-constant">Cookie</span><span class="ruby-operator">::</span><span class="ruby-identifier">parse</span>(<span class="ruby-identifier">env_table</span>[<span class="ruby-value str">'HTTP_COOKIE'</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">env_table</span>[<span class="ruby-value str">'COOKIE'</span>])
+19:       <span class="ruby-ivar">@params</span> = {}
+20:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

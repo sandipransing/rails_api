@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Class: Builder::CSS</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Class</span><br />Builder::CSS</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../files/vendor/rails/activesupport/lib/active_support/vendor/builder-2_1_2/builder/css_rb.html">vendor/rails/activesupport/lib/active_support/vendor/builder-2.1.2/builder/css.rb</a>
+        </td>
+      </tr>
+    <tr>
+      <td>Parent:</td>
+      <td>
+        <a href="../BlankSlate.html">
+BlankSlate
+         </a>
+     </td>
+   </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+  <div class="description"><p>
+Create a Cascading Style Sheet (<a href="CSS.html">CSS</a>) using Ruby.
+</p>
+<p>
+Example usage:
+</p>
+<pre>
+  css = Builder::CSS.new
+
+  text_color      = '#7F7F7F'
+  preferred_fonts = 'Helvetica, Arial, sans_serif'
+
+  css.comment! 'This is our stylesheet'
+  css.body {
+    background_color '#FAFAFA'
+    font_size        'small'
+    font_family      preferred_fonts
+    color            text_color
+  }
+
+  css.id!('navbar') {
+    width            '500px'
+  }
+
+  css.class!('navitem') {
+    color            'red'
+  }
+
+  css.a :hover {
+    text_decoration  'underline'
+  }
+
+  css.div(:id =&gt; 'menu') {
+    background       'green'
+  }
+
+  css.div(:class =&gt; 'foo') {
+    background       'red'
+  }
+</pre>
+<p>
+This will yield the following stylesheet:
+</p>
+<pre>
+  /* This is our stylesheet */
+  body {
+    background_color: #FAFAFA;
+    font_size:        small;
+    font_family:      Helvetica, Arial, sans_serif;
+    color:            #7F7F7F;
+  }
+
+  #navbar {
+    width:            500px;
+  }
+
+  .navitem {
+    color:            red;
+  }
+
+  a:hover {
+    text_decoration:  underline;
+  }
+
+  div#menu {
+    background:       green;
+  }
+
+  div.foo {
+    background:       red;
+  }
+</pre>
+</div>
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M001581">+</a></li>
+  <li><a href="#M001583">&gt;</a></li>
+  <li><a href="#M001582">&gt;&gt;</a></li>
+  <li><a href="#M001588">class!</a></li>
+  <li><a href="#M001586">comment!</a></li>
+  <li><a href="#M001590">group!</a></li>
+  <li><a href="#M001587">id!</a></li>
+  <li><a href="#M001591">method_missing</a></li>
+  <li><a href="#M001580">new</a></li>
+  <li><a href="#M001592">nil?</a></li>
+  <li><a href="#M001589">store!</a></li>
+  <li><a href="#M001585">target!</a></li>
+  <li><a href="#M001584">|</a></li>
+  </ul>
+
+
+
+
+
+
+<div class="sectiontitle">Public Class methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M001580"></a><b>new</b>(indent=2)
+  </div>
+  <div class="description">
+  <p>
+Create a <a href="CSS.html">CSS</a> builder.
+</p>
+<table>
+<tr><td valign="top">out:</td><td><a href="../Object.html">Object</a> receiving the markup.1 <tt>out</tt>
+must respond to <tt>&lt;&lt;</tt>.
+
+</td></tr>
+<tr><td valign="top">indent:</td><td>Number of spaces used for indentation (0 implies no indentation and no line
+breaks).
+
+</td></tr>
+</table>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001580_source')" id="l_M001580_source">show source</a> ]</p>
+  <div id="M001580_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/vendor/builder-2.1.2/builder/css.rb, line 101</span>
+101:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">indent</span>=<span class="ruby-value">2</span>)
+102:       <span class="ruby-ivar">@indent</span>      = <span class="ruby-identifier">indent</span>
+103:       <span class="ruby-ivar">@target</span>      = []
+104:       <span class="ruby-ivar">@parts</span>       = []
+105:       <span class="ruby-ivar">@library</span>     = {}
+106:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M001581"></a><b>+</b>(part)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001581_source')" id="l_M001581_source">show source</a> ]</p>
+  <div id="M001581_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/vendor/builder-2.1.2/builder/css.rb, line 108</span>
+108:     <span class="ruby-keyword kw">def</span> <span class="ruby-operator">+</span>(<span class="ruby-identifier">part</span>)
+109:       <span class="ruby-identifier">_join_with_op!</span> <span class="ruby-value str">'+'</span>
+110:       <span class="ruby-keyword kw">self</span>
+111:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001583"></a><b>&gt;</b>(part)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001583_source')" id="l_M001583_source">show source</a> ]</p>
+  <div id="M001583_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/vendor/builder-2.1.2/builder/css.rb, line 118</span>
+118:     <span class="ruby-keyword kw">def</span> <span class="ruby-operator">&gt;</span>(<span class="ruby-identifier">part</span>)
+119:       <span class="ruby-identifier">_join_with_op!</span> <span class="ruby-value str">'&gt;'</span>
+120:       <span class="ruby-keyword kw">self</span>
+121:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001582"></a><b>&gt;&gt;</b>(part)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001582_source')" id="l_M001582_source">show source</a> ]</p>
+  <div id="M001582_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/vendor/builder-2.1.2/builder/css.rb, line 113</span>
+113:     <span class="ruby-keyword kw">def</span> <span class="ruby-operator">&gt;&gt;</span>(<span class="ruby-identifier">part</span>)
+114:       <span class="ruby-identifier">_join_with_op!</span> <span class="ruby-value str">''</span>
+115:       <span class="ruby-keyword kw">self</span>
+116:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001588"></a><b>class!</b>(arg, &amp;block)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001588_source')" id="l_M001588_source">show source</a> ]</p>
+  <div id="M001588_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/vendor/builder-2.1.2/builder/css.rb, line 145</span>
+145:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">class!</span>(<span class="ruby-identifier">arg</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+146:       <span class="ruby-identifier">_start_container</span>(<span class="ruby-value str">'.'</span><span class="ruby-operator">+</span><span class="ruby-identifier">arg</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">block_given?</span>)
+147:       <span class="ruby-identifier">_css_block</span>(<span class="ruby-identifier">block</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block</span>
+148:       <span class="ruby-identifier">_unify_block</span>
+149:       <span class="ruby-keyword kw">self</span>
+150:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001586"></a><b>comment!</b>(comment_text)
+  </div>
+  <div class="description">
+  <p>
+Create a comment string in the output.
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001586_source')" id="l_M001586_source">show source</a> ]</p>
+  <div id="M001586_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/vendor/builder-2.1.2/builder/css.rb, line 134</span>
+134:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">comment!</span>(<span class="ruby-identifier">comment_text</span>)
+135:       <span class="ruby-ivar">@target</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;/* #{comment_text} */\n&quot;</span>
+136:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001590"></a><b>group!</b>(*args, &amp;block)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001590_source')" id="l_M001590_source">show source</a> ]</p>
+  <div id="M001590_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/vendor/builder-2.1.2/builder/css.rb, line 156</span>
+156:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">group!</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+157:       <span class="ruby-identifier">args</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">arg</span><span class="ruby-operator">|</span>
+158:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Symbol</span>)
+159:           <span class="ruby-identifier">instance_eval</span>(<span class="ruby-operator">&amp;</span><span class="ruby-ivar">@library</span>[<span class="ruby-identifier">arg</span>])
+160:         <span class="ruby-keyword kw">else</span>
+161:           <span class="ruby-identifier">instance_eval</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">arg</span>)
+162:         <span class="ruby-keyword kw">end</span>
+163:         <span class="ruby-identifier">_text</span> <span class="ruby-value str">', '</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">arg</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">last</span>
+164:       <span class="ruby-keyword kw">end</span>
+165:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block</span>
+166:         <span class="ruby-identifier">_css_block</span>(<span class="ruby-identifier">block</span>)
+167:         <span class="ruby-identifier">_unify_block</span>
+168:       <span class="ruby-keyword kw">end</span>
+169:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001587"></a><b>id!</b>(arg, &amp;block)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001587_source')" id="l_M001587_source">show source</a> ]</p>
+  <div id="M001587_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/vendor/builder-2.1.2/builder/css.rb, line 138</span>
+138:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">id!</span>(<span class="ruby-identifier">arg</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+139:       <span class="ruby-identifier">_start_container</span>(<span class="ruby-value str">'#'</span><span class="ruby-operator">+</span><span class="ruby-identifier">arg</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">block_given?</span>)
+140:       <span class="ruby-identifier">_css_block</span>(<span class="ruby-identifier">block</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block</span>
+141:       <span class="ruby-identifier">_unify_block</span>
+142:       <span class="ruby-keyword kw">self</span>
+143:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001591"></a><b>method_missing</b>(sym, *args, &amp;block)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001591_source')" id="l_M001591_source">show source</a> ]</p>
+  <div id="M001591_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/vendor/builder-2.1.2/builder/css.rb, line 171</span>
+171:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">method_missing</span>(<span class="ruby-identifier">sym</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+172:       <span class="ruby-identifier">sym</span> = <span class="ruby-node">&quot;#{sym}:#{args.shift}&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Symbol</span>)
+173:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block</span>
+174:         <span class="ruby-identifier">_start_container</span>(<span class="ruby-identifier">sym</span>, <span class="ruby-identifier">args</span>.<span class="ruby-identifier">first</span>)
+175:         <span class="ruby-identifier">_css_block</span>(<span class="ruby-identifier">block</span>)
+176:         <span class="ruby-identifier">_unify_block</span>
+177:       <span class="ruby-keyword kw">elsif</span> <span class="ruby-ivar">@in_block</span>
+178:         <span class="ruby-identifier">_indent</span>
+179:         <span class="ruby-identifier">_css_line</span>(<span class="ruby-identifier">sym</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+180:         <span class="ruby-identifier">_newline</span>
+181:         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">self</span>
+182:       <span class="ruby-keyword kw">else</span>
+183:         <span class="ruby-identifier">_start_container</span>(<span class="ruby-identifier">sym</span>, <span class="ruby-identifier">args</span>.<span class="ruby-identifier">first</span>, <span class="ruby-keyword kw">false</span>)
+184:         <span class="ruby-identifier">_unify_block</span>
+185:       <span class="ruby-keyword kw">end</span>
+186:       <span class="ruby-keyword kw">self</span>
+187:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001592"></a><b>nil?</b>()
+  </div>
+  <div class="description">
+  <p>
+&quot;Cargo culted&quot; from Jim who also &quot;cargo culted&quot; it. See
+xmlbase.rb.
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001592_source')" id="l_M001592_source">show source</a> ]</p>
+  <div id="M001592_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/vendor/builder-2.1.2/builder/css.rb, line 190</span>
+190:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">nil?</span>
+191:       <span class="ruby-keyword kw">false</span>
+192:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001589"></a><b>store!</b>(sym, &amp;block)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001589_source')" id="l_M001589_source">show source</a> ]</p>
+  <div id="M001589_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/vendor/builder-2.1.2/builder/css.rb, line 152</span>
+152:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">store!</span>(<span class="ruby-identifier">sym</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+153:       <span class="ruby-ivar">@library</span>[<span class="ruby-identifier">sym</span>] = <span class="ruby-identifier">block</span>.<span class="ruby-identifier">to_proc</span>
+154:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001585"></a><b>target!</b>()
+  </div>
+  <div class="description">
+  <p>
+Return the target of the builder
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001585_source')" id="l_M001585_source">show source</a> ]</p>
+  <div id="M001585_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/vendor/builder-2.1.2/builder/css.rb, line 129</span>
+129:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">target!</span>
+130:       <span class="ruby-ivar">@target</span> <span class="ruby-operator">*</span> <span class="ruby-value str">''</span>
+131:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001584"></a><b>|</b>(part)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001584_source')" id="l_M001584_source">show source</a> ]</p>
+  <div id="M001584_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/vendor/builder-2.1.2/builder/css.rb, line 123</span>
+123:     <span class="ruby-keyword kw">def</span> <span class="ruby-operator">|</span>(<span class="ruby-identifier">part</span>)
+124:       <span class="ruby-identifier">_join_with_op!</span> <span class="ruby-value str">','</span>
+125:       <span class="ruby-keyword kw">self</span>
+126:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Module: ActionController::Caching::Pages::ClassMethods</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Module</span><br />ActionController::Caching::Pages::ClassMethods</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../../../files/vendor/rails/actionpack/lib/action_controller/caching/pages_rb.html">vendor/rails/actionpack/lib/action_controller/caching/pages.rb</a>
+        </td>
+      </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M000452">cache_page</a></li>
+  <li><a href="#M000453">caches_page</a></li>
+  <li><a href="#M000451">expire_page</a></li>
+  </ul>
+
+
+
+
+
+
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M000452"></a><b>cache_page</b>(content, path)
+  </div>
+  <div class="description">
+  <p>
+Manually cache the <tt>content</tt> in the key determined by <tt>path</tt>.
+Example:
+</p>
+<pre>
+  cache_page &quot;I'm the cached content&quot;, &quot;/lists/show&quot;
+</pre>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000452_source')" id="l_M000452_source">show source</a> ]</p>
+  <div id="M000452_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/caching/pages.rb, line 73</span>
+73:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">cache_page</span>(<span class="ruby-identifier">content</span>, <span class="ruby-identifier">path</span>)
+74:           <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">perform_caching</span>
+75: 
+76:           <span class="ruby-identifier">benchmark</span> <span class="ruby-node">&quot;Cached page: #{page_cache_file(path)}&quot;</span> <span class="ruby-keyword kw">do</span>
+77:             <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">makedirs</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-identifier">page_cache_path</span>(<span class="ruby-identifier">path</span>)))
+78:             <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">page_cache_path</span>(<span class="ruby-identifier">path</span>), <span class="ruby-value str">&quot;wb+&quot;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">content</span>) }
+79:           <span class="ruby-keyword kw">end</span>
+80:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000453"></a><b>caches_page</b>(*actions)
+  </div>
+  <div class="description">
+  <p>
+Caches the <tt>actions</tt> using the page-caching approach that&#8216;ll
+store the cache in a path within the page_cache_directory that matches the
+triggering url.
+</p>
+<p>
+Usage:
+</p>
+<pre>
+  # cache the index action
+  caches_page :index
+
+  # cache the index action except for JSON requests
+  caches_page :index, :if =&gt; Proc.new { |c| !c.request.format.json? }
+</pre>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000453_source')" id="l_M000453_source">show source</a> ]</p>
+  <div id="M000453_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/caching/pages.rb, line 92</span>
+92:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">caches_page</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">actions</span>)
+93:           <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">perform_caching</span>
+94:           <span class="ruby-identifier">options</span> = <span class="ruby-identifier">actions</span>.<span class="ruby-identifier">extract_options!</span>
+95:           <span class="ruby-identifier">after_filter</span>({<span class="ruby-identifier">:only</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">actions</span>}.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">options</span>)) { <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">cache_page</span> }
+96:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000451"></a><b>expire_page</b>(path)
+  </div>
+  <div class="description">
+  <p>
+Expires the page that was cached with the <tt>path</tt> as a key. Example:
+</p>
+<pre>
+  expire_page &quot;/lists/show&quot;
+</pre>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000451_source')" id="l_M000451_source">show source</a> ]</p>
+  <div id="M000451_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/caching/pages.rb, line 63</span>
+63:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">expire_page</span>(<span class="ruby-identifier">path</span>)
+64:           <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">perform_caching</span>
+65: 
+66:           <span class="ruby-identifier">benchmark</span> <span class="ruby-node">&quot;Expired page: #{page_cache_file(path)}&quot;</span> <span class="ruby-keyword kw">do</span>
+67:             <span class="ruby-constant">File</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">page_cache_path</span>(<span class="ruby-identifier">path</span>)) <span class="ruby-keyword kw">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">page_cache_path</span>(<span class="ruby-identifier">path</span>))
+68:           <span class="ruby-keyword kw">end</span>
+69:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

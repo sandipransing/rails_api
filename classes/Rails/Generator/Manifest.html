@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Class: Rails::Generator::Manifest</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Class</span><br />Rails::Generator::Manifest</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../../files/vendor/rails/railties/lib/rails_generator/manifest_rb.html">vendor/rails/railties/lib/rails_generator/manifest.rb</a>
+        </td>
+      </tr>
+    <tr>
+      <td>Parent:</td>
+      <td>
+        <a href="../../Object.html">
+Object
+         </a>
+     </td>
+   </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+  <div class="description"><p>
+<a href="Manifest.html">Manifest</a> captures the actions a generator
+performs. Instantiate a manifest with an optional target object, hammer it
+with actions, then <a href="Manifest.html#M002469">replay</a> or <a
+href="Manifest.html#M002470">rewind</a> on the object of your choice.
+</p>
+<p>
+Example:
+</p>
+<pre>
+  manifest = Manifest.new { |m|
+    m.make_directory '/foo'
+    m.create_file '/foo/bar.txt'
+  }
+  manifest.replay(creator)
+  manifest.rewind(destroyer)
+</pre>
+</div>
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M002471">erase</a></li>
+  <li><a href="#M002468">method_missing</a></li>
+  <li><a href="#M002467">new</a></li>
+  <li><a href="#M002469">replay</a></li>
+  <li><a href="#M002470">rewind</a></li>
+  </ul>
+
+
+
+
+
+  <div class="sectiontitle">Attributes</div>
+  <table border='0' cellpadding='5'>
+  <tr valign='top'>
+    <td class='attr-rw'>
+[R]
+    </td>
+    <td class='attr-name'>target</td>
+    <td class='attr-desc'></td>
+  </tr>
+  </table>
+
+<div class="sectiontitle">Public Class methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M002467"></a><b>new</b>(target = nil) {|self if block_given?| ...}
+  </div>
+  <div class="description">
+  <p>
+Take a default action target. Yield self if block given.
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002467_source')" id="l_M002467_source">show source</a> ]</p>
+  <div id="M002467_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/railties/lib/rails_generator/manifest.rb, line 19</span>
+19:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">target</span> = <span class="ruby-keyword kw">nil</span>)
+20:         <span class="ruby-ivar">@target</span>, <span class="ruby-ivar">@actions</span> = <span class="ruby-identifier">target</span>, []
+21:         <span class="ruby-keyword kw">yield</span> <span class="ruby-keyword kw">self</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block_given?</span>
+22:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M002471"></a><b>erase</b>()
+  </div>
+  <div class="description">
+  <p>
+Erase recorded actions.
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002471_source')" id="l_M002471_source">show source</a> ]</p>
+  <div id="M002471_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/railties/lib/rails_generator/manifest.rb, line 40</span>
+40:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">erase</span>
+41:         <span class="ruby-ivar">@actions</span> = []
+42:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M002468"></a><b>method_missing</b>(action, *args, &amp;block)
+  </div>
+  <div class="description">
+  <p>
+Record an action.
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002468_source')" id="l_M002468_source">show source</a> ]</p>
+  <div id="M002468_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/railties/lib/rails_generator/manifest.rb, line 25</span>
+25:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">method_missing</span>(<span class="ruby-identifier">action</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+26:         <span class="ruby-ivar">@actions</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-identifier">action</span>, <span class="ruby-identifier">args</span>, <span class="ruby-identifier">block</span>]
+27:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M002469"></a><b>replay</b>(target = nil)
+  </div>
+  <div class="description">
+  <p>
+Replay recorded actions.
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002469_source')" id="l_M002469_source">show source</a> ]</p>
+  <div id="M002469_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/railties/lib/rails_generator/manifest.rb, line 30</span>
+30:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">replay</span>(<span class="ruby-identifier">target</span> = <span class="ruby-keyword kw">nil</span>)
+31:         <span class="ruby-identifier">send_actions</span>(<span class="ruby-identifier">target</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@target</span>, <span class="ruby-ivar">@actions</span>)
+32:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M002470"></a><b>rewind</b>(target = nil)
+  </div>
+  <div class="description">
+  <p>
+Rewind recorded actions.
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002470_source')" id="l_M002470_source">show source</a> ]</p>
+  <div id="M002470_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/railties/lib/rails_generator/manifest.rb, line 35</span>
+35:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">rewind</span>(<span class="ruby-identifier">target</span> = <span class="ruby-keyword kw">nil</span>)
+36:         <span class="ruby-identifier">send_actions</span>(<span class="ruby-identifier">target</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@target</span>, <span class="ruby-ivar">@actions</span>.<span class="ruby-identifier">reverse</span>)
+37:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

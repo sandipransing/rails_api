@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Module: Rails</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Module</span><br />Rails</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../files/vendor/rails/railties/lib/initializer_rb.html">vendor/rails/railties/lib/initializer.rb</a>
+<a href="../files/vendor/rails/railties/lib/rails_generator/base_rb.html">vendor/rails/railties/lib/rails_generator/base.rb</a>
+<a href="../files/vendor/rails/railties/lib/rails_generator/commands_rb.html">vendor/rails/railties/lib/rails_generator/commands.rb</a>
+<a href="../files/vendor/rails/railties/lib/rails_generator/generated_attribute_rb.html">vendor/rails/railties/lib/rails_generator/generated_attribute.rb</a>
+<a href="../files/vendor/rails/railties/lib/rails_generator/lookup_rb.html">vendor/rails/railties/lib/rails_generator/lookup.rb</a>
+<a href="../files/vendor/rails/railties/lib/rails_generator/manifest_rb.html">vendor/rails/railties/lib/rails_generator/manifest.rb</a>
+<a href="../files/vendor/rails/railties/lib/rails_generator/options_rb.html">vendor/rails/railties/lib/rails_generator/options.rb</a>
+<a href="../files/vendor/rails/railties/lib/rails_generator/scripts_rb.html">vendor/rails/railties/lib/rails_generator/scripts.rb</a>
+<a href="../files/vendor/rails/railties/lib/rails_generator/secret_key_generator_rb.html">vendor/rails/railties/lib/rails_generator/secret_key_generator.rb</a>
+<a href="../files/vendor/rails/railties/lib/rails_generator/simple_logger_rb.html">vendor/rails/railties/lib/rails_generator/simple_logger.rb</a>
+<a href="../files/vendor/rails/railties/lib/rails_generator/spec_rb.html">vendor/rails/railties/lib/rails_generator/spec.rb</a>
+        </td>
+      </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M002384">backtrace_cleaner</a></li>
+  <li><a href="#M002387">cache</a></li>
+  <li><a href="#M002379">configuration</a></li>
+  <li><a href="#M002380">configuration=</a></li>
+  <li><a href="#M002386">env</a></li>
+  <li><a href="#M002382">initialized=</a></li>
+  <li><a href="#M002381">initialized?</a></li>
+  <li><a href="#M002383">logger</a></li>
+  <li><a href="#M002389">public_path</a></li>
+  <li><a href="#M002390">public_path=</a></li>
+  <li><a href="#M002385">root</a></li>
+  <li><a href="#M002388">version</a></li>
+  </ul>
+
+
+
+  <div class="sectiontitle">Classes and Modules</div>
+  Module <a href="Rails/Generator.html" class="link">Rails::Generator</a><br />
+Class <a href="Rails/Configuration.html" class="link">Rails::Configuration</a><br />
+Class <a href="Rails/Initializer.html" class="link">Rails::Initializer</a><br />
+Class <a href="Rails/SecretKeyGenerator.html" class="link">Rails::SecretKeyGenerator</a><br />
+
+
+
+
+<div class="sectiontitle">Public Class methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M002384"></a><b>backtrace_cleaner</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002384_source')" id="l_M002384_source">show source</a> ]</p>
+  <div id="M002384_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/railties/lib/initializer.rb, line 43</span>
+43:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">backtrace_cleaner</span>
+44:       <span class="ruby-ivar">@@backtrace_cleaner</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword kw">begin</span>
+45:         <span class="ruby-comment cmt"># Relies on ActiveSupport, so we have to lazy load to postpone definition until AS has been loaded</span>
+46:         <span class="ruby-identifier">require</span> <span class="ruby-value str">'rails/backtrace_cleaner'</span>
+47:         <span class="ruby-constant">Rails</span><span class="ruby-operator">::</span><span class="ruby-constant">BacktraceCleaner</span>.<span class="ruby-identifier">new</span>
+48:       <span class="ruby-keyword kw">end</span>
+49:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M002387"></a><b>cache</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002387_source')" id="l_M002387_source">show source</a> ]</p>
+  <div id="M002387_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/railties/lib/initializer.rb, line 59</span>
+59:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">cache</span>
+60:       <span class="ruby-constant">RAILS_CACHE</span>
+61:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M002379"></a><b>configuration</b>()
+  </div>
+  <div class="description">
+  <p>
+The <a href="Rails/Configuration.html">Configuration</a> instance used to
+configure the <a href="Rails.html">Rails</a> environment
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002379_source')" id="l_M002379_source">show source</a> ]</p>
+  <div id="M002379_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/railties/lib/initializer.rb, line 19</span>
+19:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">configuration</span>
+20:       <span class="ruby-ivar">@@configuration</span>
+21:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M002380"></a><b>configuration=</b>(configuration)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002380_source')" id="l_M002380_source">show source</a> ]</p>
+  <div id="M002380_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/railties/lib/initializer.rb, line 23</span>
+23:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">configuration=</span>(<span class="ruby-identifier">configuration</span>)
+24:       <span class="ruby-ivar">@@configuration</span> = <span class="ruby-identifier">configuration</span>
+25:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M002386"></a><b>env</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002386_source')" id="l_M002386_source">show source</a> ]</p>
+  <div id="M002386_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/railties/lib/initializer.rb, line 55</span>
+55:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">env</span>
+56:       <span class="ruby-ivar">@_env</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">StringInquirer</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">RAILS_ENV</span>)
+57:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M002382"></a><b>initialized=</b>(initialized)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002382_source')" id="l_M002382_source">show source</a> ]</p>
+  <div id="M002382_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/railties/lib/initializer.rb, line 31</span>
+31:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialized=</span>(<span class="ruby-identifier">initialized</span>)
+32:       <span class="ruby-ivar">@initialized</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">initialized</span>
+33:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M002381"></a><b>initialized?</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002381_source')" id="l_M002381_source">show source</a> ]</p>
+  <div id="M002381_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/railties/lib/initializer.rb, line 27</span>
+27:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialized?</span>
+28:       <span class="ruby-ivar">@initialized</span> <span class="ruby-operator">||</span> <span class="ruby-keyword kw">false</span>
+29:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M002383"></a><b>logger</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002383_source')" id="l_M002383_source">show source</a> ]</p>
+  <div id="M002383_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/railties/lib/initializer.rb, line 35</span>
+35:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">logger</span>
+36:       <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">defined?</span>(<span class="ruby-constant">RAILS_DEFAULT_LOGGER</span>)
+37:         <span class="ruby-constant">RAILS_DEFAULT_LOGGER</span>
+38:       <span class="ruby-keyword kw">else</span>
+39:         <span class="ruby-keyword kw">nil</span>
+40:       <span class="ruby-keyword kw">end</span>
+41:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M002389"></a><b>public_path</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002389_source')" id="l_M002389_source">show source</a> ]</p>
+  <div id="M002389_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/railties/lib/initializer.rb, line 67</span>
+67:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">public_path</span>
+68:       <span class="ruby-ivar">@@public_path</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">root</span> <span class="ruby-value">? </span><span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">root</span>, <span class="ruby-value str">&quot;public&quot;</span>) <span class="ruby-operator">:</span> <span class="ruby-value str">&quot;public&quot;</span>
+69:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M002390"></a><b>public_path=</b>(path)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002390_source')" id="l_M002390_source">show source</a> ]</p>
+  <div id="M002390_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/railties/lib/initializer.rb, line 71</span>
+71:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">public_path=</span>(<span class="ruby-identifier">path</span>)
+72:       <span class="ruby-ivar">@@public_path</span> = <span class="ruby-identifier">path</span>
+73:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M002385"></a><b>root</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002385_source')" id="l_M002385_source">show source</a> ]</p>
+  <div id="M002385_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/railties/lib/initializer.rb, line 51</span>
+51:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">root</span>
+52:       <span class="ruby-constant">Pathname</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">RAILS_ROOT</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">defined?</span>(<span class="ruby-constant">RAILS_ROOT</span>)
+53:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M002388"></a><b>version</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002388_source')" id="l_M002388_source">show source</a> ]</p>
+  <div id="M002388_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/railties/lib/initializer.rb, line 63</span>
+63:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">version</span>
+64:       <span class="ruby-constant">VERSION</span><span class="ruby-operator">::</span><span class="ruby-constant">STRING</span>
+65:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

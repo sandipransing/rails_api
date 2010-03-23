@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Class: I18nSimpleBackendLocalizeDateTest</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Class</span><br />I18nSimpleBackendLocalizeDateTest</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../files/vendor/rails/activesupport/lib/active_support/vendor/i18n-0_1_3/test/simple_backend_test_rb.html">vendor/rails/activesupport/lib/active_support/vendor/i18n-0.1.3/test/simple_backend_test.rb</a>
+        </td>
+      </tr>
+    <tr>
+      <td>Parent:</td>
+      <td>
+Test::Unit::TestCase
+     </td>
+   </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M000019">setup</a></li>
+  <li><a href="#M000029">test_localize_nil_raises_argument_error</a></li>
+  <li><a href="#M000030">test_localize_object_raises_argument_error</a></li>
+  <li><a href="#M000023">test_translate_given_a_day_name_format_it_returns_a_day_name</a></li>
+  <li><a href="#M000025">test_translate_given_a_month_name_format_it_returns_a_month_name</a></li>
+  <li><a href="#M000024">test_translate_given_an_abbr_day_name_format_it_returns_an_abbrevated_day_name</a></li>
+  <li><a href="#M000026">test_translate_given_an_abbr_month_name_format_it_returns_an_abbrevated_month_name</a></li>
+  <li><a href="#M000028">test_translate_given_an_unknown_format_it_does_not_fail</a></li>
+  <li><a href="#M000027">test_translate_given_no_format_it_does_not_fail</a></li>
+  <li><a href="#M000022">test_translate_given_the_default_format_it_uses_it</a></li>
+  <li><a href="#M000021">test_translate_given_the_long_format_it_uses_it</a></li>
+  <li><a href="#M000020">test_translate_given_the_short_format_it_uses_it</a></li>
+  </ul>
+
+<div class="sectiontitle">Included Modules</div>
+<ul>
+  <li><a href="I18nSimpleBackendTestSetup.html">I18nSimpleBackendTestSetup</a></li>
+</ul>
+
+
+
+
+
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M000019"></a><b>setup</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000019_source')" id="l_M000019_source">show source</a> ]</p>
+  <div id="M000019_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/vendor/i18n-0.1.3/test/simple_backend_test.rb, line 311</span>
+311:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">setup</span>
+312:     <span class="ruby-ivar">@backend</span> = <span class="ruby-constant">I18n</span><span class="ruby-operator">::</span><span class="ruby-constant">Backend</span><span class="ruby-operator">::</span><span class="ruby-constant">Simple</span>.<span class="ruby-identifier">new</span>
+313:     <span class="ruby-identifier">add_datetime_translations</span>
+314:     <span class="ruby-ivar">@date</span> = <span class="ruby-constant">Date</span>.<span class="ruby-identifier">new</span> <span class="ruby-value">2008</span>, <span class="ruby-value">1</span>, <span class="ruby-value">1</span>
+315:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000029"></a><b>test_localize_nil_raises_argument_error</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000029_source')" id="l_M000029_source">show source</a> ]</p>
+  <div id="M000029_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/vendor/i18n-0.1.3/test/simple_backend_test.rb, line 353</span>
+353:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_localize_nil_raises_argument_error</span>
+354:     <span class="ruby-identifier">assert_raise</span>(<span class="ruby-constant">I18n</span><span class="ruby-operator">::</span><span class="ruby-constant">ArgumentError</span>) { <span class="ruby-ivar">@backend</span>.<span class="ruby-identifier">localize</span> <span class="ruby-value str">'de'</span>, <span class="ruby-keyword kw">nil</span> }
+355:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000030"></a><b>test_localize_object_raises_argument_error</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000030_source')" id="l_M000030_source">show source</a> ]</p>
+  <div id="M000030_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/vendor/i18n-0.1.3/test/simple_backend_test.rb, line 357</span>
+357:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_localize_object_raises_argument_error</span>
+358:     <span class="ruby-identifier">assert_raise</span>(<span class="ruby-constant">I18n</span><span class="ruby-operator">::</span><span class="ruby-constant">ArgumentError</span>) { <span class="ruby-ivar">@backend</span>.<span class="ruby-identifier">localize</span> <span class="ruby-value str">'de'</span>, <span class="ruby-constant">Object</span>.<span class="ruby-identifier">new</span> }
+359:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000023"></a><b>test_translate_given_a_day_name_format_it_returns_a_day_name</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000023_source')" id="l_M000023_source">show source</a> ]</p>
+  <div id="M000023_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/vendor/i18n-0.1.3/test/simple_backend_test.rb, line 329</span>
+329:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_translate_given_a_day_name_format_it_returns_a_day_name</span>
+330:     <span class="ruby-identifier">assert_equal</span> <span class="ruby-value str">'Dienstag'</span>, <span class="ruby-ivar">@backend</span>.<span class="ruby-identifier">localize</span>(<span class="ruby-value str">'de'</span>, <span class="ruby-ivar">@date</span>, <span class="ruby-value str">'%A'</span>)
+331:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000025"></a><b>test_translate_given_a_month_name_format_it_returns_a_month_name</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000025_source')" id="l_M000025_source">show source</a> ]</p>
+  <div id="M000025_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/vendor/i18n-0.1.3/test/simple_backend_test.rb, line 337</span>
+337:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_translate_given_a_month_name_format_it_returns_a_month_name</span>
+338:     <span class="ruby-identifier">assert_equal</span> <span class="ruby-value str">'Januar'</span>, <span class="ruby-ivar">@backend</span>.<span class="ruby-identifier">localize</span>(<span class="ruby-value str">'de'</span>, <span class="ruby-ivar">@date</span>, <span class="ruby-value str">'%B'</span>)
+339:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000024"></a><b>test_translate_given_an_abbr_day_name_format_it_returns_an_abbrevated_day_name</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000024_source')" id="l_M000024_source">show source</a> ]</p>
+  <div id="M000024_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/vendor/i18n-0.1.3/test/simple_backend_test.rb, line 333</span>
+333:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_translate_given_an_abbr_day_name_format_it_returns_an_abbrevated_day_name</span>
+334:     <span class="ruby-identifier">assert_equal</span> <span class="ruby-value str">'Di'</span>, <span class="ruby-ivar">@backend</span>.<span class="ruby-identifier">localize</span>(<span class="ruby-value str">'de'</span>, <span class="ruby-ivar">@date</span>, <span class="ruby-value str">'%a'</span>)
+335:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000026"></a><b>test_translate_given_an_abbr_month_name_format_it_returns_an_abbrevated_month_name</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000026_source')" id="l_M000026_source">show source</a> ]</p>
+  <div id="M000026_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/vendor/i18n-0.1.3/test/simple_backend_test.rb, line 341</span>
+341:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_translate_given_an_abbr_month_name_format_it_returns_an_abbrevated_month_name</span>
+342:     <span class="ruby-identifier">assert_equal</span> <span class="ruby-value str">'Jan'</span>, <span class="ruby-ivar">@backend</span>.<span class="ruby-identifier">localize</span>(<span class="ruby-value str">'de'</span>, <span class="ruby-ivar">@date</span>, <span class="ruby-value str">'%b'</span>)
+343:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000028"></a><b>test_translate_given_an_unknown_format_it_does_not_fail</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000028_source')" id="l_M000028_source">show source</a> ]</p>
+  <div id="M000028_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/vendor/i18n-0.1.3/test/simple_backend_test.rb, line 349</span>
+349:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_translate_given_an_unknown_format_it_does_not_fail</span>
+350:     <span class="ruby-identifier">assert_nothing_raised</span>{ <span class="ruby-ivar">@backend</span>.<span class="ruby-identifier">localize</span> <span class="ruby-value str">'de'</span>, <span class="ruby-ivar">@date</span>, <span class="ruby-value str">'%x'</span> }
+351:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000027"></a><b>test_translate_given_no_format_it_does_not_fail</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000027_source')" id="l_M000027_source">show source</a> ]</p>
+  <div id="M000027_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/vendor/i18n-0.1.3/test/simple_backend_test.rb, line 345</span>
+345:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_translate_given_no_format_it_does_not_fail</span>
+346:     <span class="ruby-identifier">assert_nothing_raised</span>{ <span class="ruby-ivar">@backend</span>.<span class="ruby-identifier">localize</span> <span class="ruby-value str">'de'</span>, <span class="ruby-ivar">@date</span> }
+347:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000022"></a><b>test_translate_given_the_default_format_it_uses_it</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000022_source')" id="l_M000022_source">show source</a> ]</p>
+  <div id="M000022_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/vendor/i18n-0.1.3/test/simple_backend_test.rb, line 325</span>
+325:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_translate_given_the_default_format_it_uses_it</span>
+326:     <span class="ruby-identifier">assert_equal</span> <span class="ruby-value str">'01.01.2008'</span>, <span class="ruby-ivar">@backend</span>.<span class="ruby-identifier">localize</span>(<span class="ruby-value str">'de'</span>, <span class="ruby-ivar">@date</span>, <span class="ruby-identifier">:default</span>)
+327:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000021"></a><b>test_translate_given_the_long_format_it_uses_it</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000021_source')" id="l_M000021_source">show source</a> ]</p>
+  <div id="M000021_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/vendor/i18n-0.1.3/test/simple_backend_test.rb, line 321</span>
+321:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_translate_given_the_long_format_it_uses_it</span>
+322:     <span class="ruby-identifier">assert_equal</span> <span class="ruby-value str">'01. Januar 2008'</span>, <span class="ruby-ivar">@backend</span>.<span class="ruby-identifier">localize</span>(<span class="ruby-value str">'de'</span>, <span class="ruby-ivar">@date</span>, <span class="ruby-identifier">:long</span>)
+323:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000020"></a><b>test_translate_given_the_short_format_it_uses_it</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000020_source')" id="l_M000020_source">show source</a> ]</p>
+  <div id="M000020_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/vendor/i18n-0.1.3/test/simple_backend_test.rb, line 317</span>
+317:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_translate_given_the_short_format_it_uses_it</span>
+318:     <span class="ruby-identifier">assert_equal</span> <span class="ruby-value str">'01. Jan'</span>, <span class="ruby-ivar">@backend</span>.<span class="ruby-identifier">localize</span>(<span class="ruby-value str">'de'</span>, <span class="ruby-ivar">@date</span>, <span class="ruby-identifier">:short</span>)
+319:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

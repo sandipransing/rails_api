@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Class: ActionController::Routing::Optimisation::Optimiser</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Class</span><br />ActionController::Routing::Optimisation::Optimiser</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../../../files/vendor/rails/actionpack/lib/action_controller/routing/optimisations_rb.html">vendor/rails/actionpack/lib/action_controller/routing/optimisations.rb</a>
+        </td>
+      </tr>
+    <tr>
+      <td>Parent:</td>
+      <td>
+        <a href="../../../Object.html">
+Object
+         </a>
+     </td>
+   </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M000553">applicable?</a></li>
+  <li><a href="#M000551">generation_code</a></li>
+  <li><a href="#M000550">guard_conditions</a></li>
+  <li><a href="#M000549">new</a></li>
+  <li><a href="#M000552">source_code</a></li>
+  </ul>
+
+
+
+
+  <div class="sectiontitle">Constants</div>
+  <table border='0' cellpadding='5'>
+  <tr valign='top'>
+    <td class="attr-name">GLOBAL_GUARD_CONDITIONS</td>
+    <td>=</td>
+    <td class="attr-value">[           &quot;(!defined?(default_url_options) || default_url_options.blank?)&quot;,           &quot;(!defined?(controller.default_url_options) || controller.default_url_options.blank?)&quot;,           &quot;defined?(request)&quot;,           &quot;request&quot;</td>
+  </tr>
+  </table>
+
+  <div class="sectiontitle">Attributes</div>
+  <table border='0' cellpadding='5'>
+  <tr valign='top'>
+    <td class='attr-rw'>
+[R]
+    </td>
+    <td class='attr-name'>kind</td>
+    <td class='attr-desc'></td>
+  </tr>
+  <tr valign='top'>
+    <td class='attr-rw'>
+[R]
+    </td>
+    <td class='attr-name'>route</td>
+    <td class='attr-desc'></td>
+  </tr>
+  </table>
+
+<div class="sectiontitle">Public Class methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M000549"></a><b>new</b>(route, kind)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000549_source')" id="l_M000549_source">show source</a> ]</p>
+  <div id="M000549_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/routing/optimisations.rb, line 30</span>
+30:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">route</span>, <span class="ruby-identifier">kind</span>)
+31:           <span class="ruby-ivar">@route</span> = <span class="ruby-identifier">route</span>
+32:           <span class="ruby-ivar">@kind</span>  = <span class="ruby-identifier">kind</span>
+33:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M000553"></a><b>applicable?</b>()
+  </div>
+  <div class="description">
+  <p>
+Temporarily disabled <tt>:url</tt> optimisation pending proper solution to
+Issues around request.host etc.
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000553_source')" id="l_M000553_source">show source</a> ]</p>
+  <div id="M000553_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/routing/optimisations.rb, line 54</span>
+54:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">applicable?</span>
+55:           <span class="ruby-keyword kw">true</span>
+56:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000551"></a><b>generation_code</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000551_source')" id="l_M000551_source">show source</a> ]</p>
+  <div id="M000551_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/routing/optimisations.rb, line 39</span>
+39:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">generation_code</span>
+40:           <span class="ruby-value str">'nil'</span>
+41:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000550"></a><b>guard_conditions</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000550_source')" id="l_M000550_source">show source</a> ]</p>
+  <div id="M000550_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/routing/optimisations.rb, line 35</span>
+35:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">guard_conditions</span>
+36:           [<span class="ruby-value str">&quot;false&quot;</span>]
+37:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000552"></a><b>source_code</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000552_source')" id="l_M000552_source">show source</a> ]</p>
+  <div id="M000552_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/routing/optimisations.rb, line 43</span>
+43:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">source_code</span>
+44:           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">applicable?</span>
+45:             <span class="ruby-identifier">guard_condition</span> = (<span class="ruby-constant">GLOBAL_GUARD_CONDITIONS</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">guard_conditions</span>).<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot; &amp;&amp; &quot;</span>)
+46:             <span class="ruby-node">&quot;return #{generation_code} if #{guard_condition}\n&quot;</span>
+47:           <span class="ruby-keyword kw">else</span>
+48:             <span class="ruby-value str">&quot;\n&quot;</span>
+49:           <span class="ruby-keyword kw">end</span>
+50:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

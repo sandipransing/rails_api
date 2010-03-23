@@ -1,0 +1,654 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Class: RailsFCGIHandler</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Class</span><br />RailsFCGIHandler</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../files/vendor/rails/railties/lib/fcgi_handler_rb.html">vendor/rails/railties/lib/fcgi_handler.rb</a>
+        </td>
+      </tr>
+    <tr>
+      <td>Parent:</td>
+      <td>
+        <a href="Object.html">
+Object
+         </a>
+     </td>
+   </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M000065">close_connection</a></li>
+  <li><a href="#M000051">dispatcher_error</a></li>
+  <li><a href="#M000050">dispatcher_log</a></li>
+  <li><a href="#M000056">exit_handler</a></li>
+  <li><a href="#M000055">exit_now_handler</a></li>
+  <li><a href="#M000064">gc_countdown</a></li>
+  <li><a href="#M000053">install_signal_handler</a></li>
+  <li><a href="#M000052">install_signal_handlers</a></li>
+  <li><a href="#M000049">logger</a></li>
+  <li><a href="#M000061">mark_features!</a></li>
+  <li><a href="#M000045">new</a></li>
+  <li><a href="#M000046">process!</a></li>
+  <li><a href="#M000044">process!</a></li>
+  <li><a href="#M000047">process_each_request</a></li>
+  <li><a href="#M000048">process_request</a></li>
+  <li><a href="#M000060">reload!</a></li>
+  <li><a href="#M000057">reload_handler</a></li>
+  <li><a href="#M000059">restart!</a></li>
+  <li><a href="#M000058">restart_handler</a></li>
+  <li><a href="#M000062">restore!</a></li>
+  <li><a href="#M000063">run_gc!</a></li>
+  <li><a href="#M000054">with_signal_handler</a></li>
+  </ul>
+
+
+
+
+  <div class="sectiontitle">Constants</div>
+  <table border='0' cellpadding='5'>
+  <tr valign='top'>
+    <td class="attr-name">SIGNALS</td>
+    <td>=</td>
+    <td class="attr-value">{     'HUP'     =&gt; :reload,     'INT'     =&gt; :exit_now,     'TERM'    =&gt; :exit_now,     'USR1'    =&gt; :exit,     'USR2'    =&gt; :restart</td>
+  </tr>
+  <tr valign='top'>
+    <td class="attr-name">GLOBAL_SIGNALS</td>
+    <td>=</td>
+    <td class="attr-value">SIGNALS.keys - %w(USR1)</td>
+  </tr>
+  </table>
+
+  <div class="sectiontitle">Attributes</div>
+  <table border='0' cellpadding='5'>
+  <tr valign='top'>
+    <td class='attr-rw'>
+[RW]
+    </td>
+    <td class='attr-name'>gc_request_period</td>
+    <td class='attr-desc'></td>
+  </tr>
+  <tr valign='top'>
+    <td class='attr-rw'>
+[RW]
+    </td>
+    <td class='attr-name'>log_file_path</td>
+    <td class='attr-desc'></td>
+  </tr>
+  <tr valign='top'>
+    <td class='attr-rw'>
+[R]
+    </td>
+    <td class='attr-name'>when_ready</td>
+    <td class='attr-desc'></td>
+  </tr>
+  </table>
+
+<div class="sectiontitle">Public Class methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M000045"></a><b>new</b>(log_file_path = nil, gc_request_period = nil) {|self if block_given?| ...}
+  </div>
+  <div class="description">
+  <p>
+Initialize the FastCGI instance with the path to a crash log detailing
+unhandled exceptions (default RAILS_ROOT/log/fastcgi.crash.log) and the
+number of requests to process between garbage collection runs (default nil
+for normal GC behavior.) Optionally, pass a block which takes this instance
+as an argument for further configuration.
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000045_source')" id="l_M000045_source">show source</a> ]</p>
+  <div id="M000045_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/railties/lib/fcgi_handler.rb, line 31</span>
+31:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">log_file_path</span> = <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">gc_request_period</span> = <span class="ruby-keyword kw">nil</span>)
+32:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">log_file_path</span> = <span class="ruby-identifier">log_file_path</span> <span class="ruby-operator">||</span> <span class="ruby-node">&quot;#{RAILS_ROOT}/log/fastcgi.crash.log&quot;</span>
+33:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">gc_request_period</span> = <span class="ruby-identifier">gc_request_period</span>
+34: 
+35:     <span class="ruby-comment cmt"># Yield for additional configuration.</span>
+36:     <span class="ruby-keyword kw">yield</span> <span class="ruby-keyword kw">self</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block_given?</span>
+37: 
+38:     <span class="ruby-comment cmt"># Safely install signal handlers.</span>
+39:     <span class="ruby-identifier">install_signal_handlers</span>
+40: 
+41:     <span class="ruby-ivar">@app</span> = <span class="ruby-constant">Dispatcher</span>.<span class="ruby-identifier">new</span>
+42: 
+43:     <span class="ruby-comment cmt"># Start error timestamp at 11 seconds ago.</span>
+44:     <span class="ruby-ivar">@last_error_on</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span> <span class="ruby-operator">-</span> <span class="ruby-value">11</span>
+45:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000044"></a><b>process!</b>(*args, &amp;block)
+  </div>
+  <div class="description">
+  <p>
+Initialize and run the FastCGI instance, passing arguments through to <a
+href="RailsFCGIHandler.html#M000045">new</a>.
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000044_source')" id="l_M000044_source">show source</a> ]</p>
+  <div id="M000044_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/railties/lib/fcgi_handler.rb, line 22</span>
+22:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">process!</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+23:     <span class="ruby-identifier">new</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>).<span class="ruby-identifier">process!</span>
+24:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M000046"></a><b>process!</b>(provider = FCGI)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000046_source')" id="l_M000046_source">show source</a> ]</p>
+  <div id="M000046_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/railties/lib/fcgi_handler.rb, line 47</span>
+47:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">process!</span>(<span class="ruby-identifier">provider</span> = <span class="ruby-constant">FCGI</span>)
+48:     <span class="ruby-identifier">mark_features!</span>
+49: 
+50:     <span class="ruby-identifier">dispatcher_log</span> <span class="ruby-identifier">:info</span>, <span class="ruby-value str">'starting'</span>
+51:     <span class="ruby-identifier">process_each_request</span> <span class="ruby-identifier">provider</span>
+52:     <span class="ruby-identifier">dispatcher_log</span> <span class="ruby-identifier">:info</span>, <span class="ruby-value str">'stopping gracefully'</span>
+53: 
+54:   <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">Exception</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">error</span>
+55:     <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">error</span>
+56:     <span class="ruby-keyword kw">when</span> <span class="ruby-constant">SystemExit</span>
+57:       <span class="ruby-identifier">dispatcher_log</span> <span class="ruby-identifier">:info</span>, <span class="ruby-value str">'stopping after explicit exit'</span>
+58:     <span class="ruby-keyword kw">when</span> <span class="ruby-constant">SignalException</span>
+59:       <span class="ruby-identifier">dispatcher_error</span> <span class="ruby-identifier">error</span>, <span class="ruby-value str">'stopping after unhandled signal'</span>
+60:     <span class="ruby-keyword kw">else</span>
+61:       <span class="ruby-comment cmt"># Retry if exceptions occur more than 10 seconds apart.</span>
+62:       <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@last_error_on</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">10</span>
+63:         <span class="ruby-ivar">@last_error_on</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
+64:         <span class="ruby-identifier">dispatcher_error</span> <span class="ruby-identifier">error</span>, <span class="ruby-value str">'retrying after unhandled exception'</span>
+65:         <span class="ruby-keyword kw">retry</span>
+66:       <span class="ruby-keyword kw">else</span>
+67:         <span class="ruby-identifier">dispatcher_error</span> <span class="ruby-identifier">error</span>, <span class="ruby-value str">'stopping after unhandled exception within 10 seconds of the last'</span>
+68:       <span class="ruby-keyword kw">end</span>
+69:     <span class="ruby-keyword kw">end</span>
+70:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="sectiontitle">Protected Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M000065"></a><b>close_connection</b>(request)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000065_source')" id="l_M000065_source">show source</a> ]</p>
+  <div id="M000065_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/fcgi_handler.rb, line 236</span>
+236:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">close_connection</span>(<span class="ruby-identifier">request</span>)
+237:       <span class="ruby-identifier">request</span>.<span class="ruby-identifier">finish</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">request</span>
+238:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000051"></a><b>dispatcher_error</b>(e, msg = &quot;&quot;)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000051_source')" id="l_M000051_source">show source</a> ]</p>
+  <div id="M000051_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/fcgi_handler.rb, line 126</span>
+126:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">dispatcher_error</span>(<span class="ruby-identifier">e</span>, <span class="ruby-identifier">msg</span> = <span class="ruby-value str">&quot;&quot;</span>)
+127:       <span class="ruby-identifier">error_message</span> =
+128:         <span class="ruby-node">&quot;Dispatcher failed to catch: #{e} (#{e.class})\n&quot;</span> <span class="ruby-operator">+</span>
+129:         <span class="ruby-node">&quot;  #{e.backtrace.join(&quot;\n  &quot;)}\n#{msg}&quot;</span>
+130:       <span class="ruby-identifier">dispatcher_log</span>(<span class="ruby-identifier">:error</span>, <span class="ruby-identifier">error_message</span>)
+131:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000050"></a><b>dispatcher_log</b>(level, msg)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000050_source')" id="l_M000050_source">show source</a> ]</p>
+  <div id="M000050_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/fcgi_handler.rb, line 118</span>
+118:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">dispatcher_log</span>(<span class="ruby-identifier">level</span>, <span class="ruby-identifier">msg</span>)
+119:       <span class="ruby-identifier">time_str</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">strftime</span>(<span class="ruby-value str">&quot;%d/%b/%Y:%H:%M:%S&quot;</span>)
+120:       <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">level</span>, <span class="ruby-node">&quot;[#{time_str} :: #{$$}] #{msg}&quot;</span>)
+121:     <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">Exception</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">log_error</span>  <span class="ruby-comment cmt"># Logger errors</span>
+122:       <span class="ruby-constant">STDERR</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;Couldn't write to #{@log_file_path.inspect}: #{msg}\n&quot;</span>
+123:       <span class="ruby-constant">STDERR</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;  #{log_error.class}: #{log_error.message}\n&quot;</span>
+124:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000056"></a><b>exit_handler</b>(signal)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000056_source')" id="l_M000056_source">show source</a> ]</p>
+  <div id="M000056_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/fcgi_handler.rb, line 163</span>
+163:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">exit_handler</span>(<span class="ruby-identifier">signal</span>)
+164:       <span class="ruby-identifier">dispatcher_log</span> <span class="ruby-identifier">:info</span>, <span class="ruby-value str">&quot;asked to stop ASAP&quot;</span>
+165:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@processing</span>
+166:         <span class="ruby-ivar">@when_ready</span> = <span class="ruby-identifier">:exit</span>
+167:       <span class="ruby-keyword kw">else</span>
+168:         <span class="ruby-identifier">throw</span> <span class="ruby-identifier">:exit</span>
+169:       <span class="ruby-keyword kw">end</span>
+170:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000055"></a><b>exit_now_handler</b>(signal)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000055_source')" id="l_M000055_source">show source</a> ]</p>
+  <div id="M000055_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/fcgi_handler.rb, line 158</span>
+158:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">exit_now_handler</span>(<span class="ruby-identifier">signal</span>)
+159:       <span class="ruby-identifier">dispatcher_log</span> <span class="ruby-identifier">:info</span>, <span class="ruby-value str">&quot;asked to stop immediately&quot;</span>
+160:       <span class="ruby-identifier">exit</span>
+161:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000064"></a><b>gc_countdown</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000064_source')" id="l_M000064_source">show source</a> ]</p>
+  <div id="M000064_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/fcgi_handler.rb, line 228</span>
+228:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">gc_countdown</span>
+229:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">gc_request_period</span>
+230:         <span class="ruby-ivar">@gc_request_countdown</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">gc_request_period</span>
+231:         <span class="ruby-ivar">@gc_request_countdown</span> <span class="ruby-operator">-=</span> <span class="ruby-value">1</span>
+232:         <span class="ruby-identifier">run_gc!</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@gc_request_countdown</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">0</span>
+233:       <span class="ruby-keyword kw">end</span>
+234:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000053"></a><b>install_signal_handler</b>(signal, handler = nil)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000053_source')" id="l_M000053_source">show source</a> ]</p>
+  <div id="M000053_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/fcgi_handler.rb, line 137</span>
+137:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">install_signal_handler</span>(<span class="ruby-identifier">signal</span>, <span class="ruby-identifier">handler</span> = <span class="ruby-keyword kw">nil</span>)
+138:       <span class="ruby-keyword kw">if</span> <span class="ruby-constant">SIGNALS</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">signal</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">method_defined?</span>(<span class="ruby-identifier">name</span> = <span class="ruby-node">&quot;#{SIGNALS[signal]}_handler&quot;</span>)
+139:         <span class="ruby-identifier">handler</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">method</span>(<span class="ruby-identifier">name</span>).<span class="ruby-identifier">to_proc</span>
+140: 
+141:         <span class="ruby-keyword kw">begin</span>
+142:           <span class="ruby-identifier">trap</span>(<span class="ruby-identifier">signal</span>, <span class="ruby-identifier">handler</span>)
+143:         <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">ArgumentError</span>
+144:           <span class="ruby-identifier">dispatcher_log</span> <span class="ruby-identifier">:warn</span>, <span class="ruby-node">&quot;Ignoring unsupported signal #{signal}.&quot;</span>
+145:         <span class="ruby-keyword kw">end</span>
+146:       <span class="ruby-keyword kw">else</span>
+147:         <span class="ruby-identifier">dispatcher_log</span> <span class="ruby-identifier">:warn</span>, <span class="ruby-node">&quot;Ignoring unsupported signal #{signal}.&quot;</span>
+148:       <span class="ruby-keyword kw">end</span>
+149:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000052"></a><b>install_signal_handlers</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000052_source')" id="l_M000052_source">show source</a> ]</p>
+  <div id="M000052_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/fcgi_handler.rb, line 133</span>
+133:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">install_signal_handlers</span>
+134:       <span class="ruby-constant">GLOBAL_SIGNALS</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">signal</span><span class="ruby-operator">|</span> <span class="ruby-identifier">install_signal_handler</span>(<span class="ruby-identifier">signal</span>) }
+135:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000049"></a><b>logger</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000049_source')" id="l_M000049_source">show source</a> ]</p>
+  <div id="M000049_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/fcgi_handler.rb, line 114</span>
+114:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">logger</span>
+115:       <span class="ruby-ivar">@logger</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Logger</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@log_file_path</span>)
+116:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000061"></a><b>mark_features!</b>()
+  </div>
+  <div class="description">
+  <p>
+Make a note of $&quot; so we can safely reload this instance.
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000061_source')" id="l_M000061_source">show source</a> ]</p>
+  <div id="M000061_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/fcgi_handler.rb, line 213</span>
+213:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">mark_features!</span>
+214:       <span class="ruby-ivar">@features</span> = <span class="ruby-identifier">$&quot;</span>.<span class="ruby-identifier">clone</span>
+215:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000047"></a><b>process_each_request</b>(provider)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000047_source')" id="l_M000047_source">show source</a> ]</p>
+  <div id="M000047_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/railties/lib/fcgi_handler.rb, line 73</span>
+73:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">process_each_request</span>(<span class="ruby-identifier">provider</span>)
+74:       <span class="ruby-identifier">request</span> = <span class="ruby-keyword kw">nil</span>
+75: 
+76:       <span class="ruby-identifier">catch</span> <span class="ruby-identifier">:exit</span> <span class="ruby-keyword kw">do</span>
+77:         <span class="ruby-identifier">provider</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">request</span><span class="ruby-operator">|</span>
+78:           <span class="ruby-identifier">process_request</span>(<span class="ruby-identifier">request</span>)
+79: 
+80:           <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">when_ready</span>
+81:             <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:reload</span>
+82:               <span class="ruby-identifier">reload!</span>
+83:             <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:restart</span>
+84:               <span class="ruby-identifier">close_connection</span>(<span class="ruby-identifier">request</span>)
+85:               <span class="ruby-identifier">restart!</span>
+86:             <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">:exit</span>
+87:               <span class="ruby-identifier">close_connection</span>(<span class="ruby-identifier">request</span>)
+88:               <span class="ruby-identifier">throw</span> <span class="ruby-identifier">:exit</span>
+89:           <span class="ruby-keyword kw">end</span>
+90:         <span class="ruby-keyword kw">end</span>
+91:       <span class="ruby-keyword kw">end</span>
+92:     <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">SignalException</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">signal</span>
+93:       <span class="ruby-identifier">raise</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">signal</span>.<span class="ruby-identifier">message</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'SIGUSR1'</span>
+94:       <span class="ruby-identifier">close_connection</span>(<span class="ruby-identifier">request</span>)
+95:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000048"></a><b>process_request</b>(request)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000048_source')" id="l_M000048_source">show source</a> ]</p>
+  <div id="M000048_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/fcgi_handler.rb, line 97</span>
+ 97:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">process_request</span>(<span class="ruby-identifier">request</span>)
+ 98:       <span class="ruby-ivar">@processing</span>, <span class="ruby-ivar">@when_ready</span> = <span class="ruby-keyword kw">true</span>, <span class="ruby-keyword kw">nil</span>
+ 99:       <span class="ruby-identifier">gc_countdown</span>
+100: 
+101:       <span class="ruby-identifier">with_signal_handler</span> <span class="ruby-value str">'USR1'</span> <span class="ruby-keyword kw">do</span>
+102:         <span class="ruby-keyword kw">begin</span>
+103:           <span class="ruby-operator">::</span><span class="ruby-constant">Rack</span><span class="ruby-operator">::</span><span class="ruby-constant">Handler</span><span class="ruby-operator">::</span><span class="ruby-constant">FastCGI</span>.<span class="ruby-identifier">serve</span>(<span class="ruby-identifier">request</span>, <span class="ruby-ivar">@app</span>)
+104:         <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">SignalException</span>, <span class="ruby-constant">SystemExit</span>
+105:           <span class="ruby-identifier">raise</span>
+106:         <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">Exception</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">error</span>
+107:           <span class="ruby-identifier">dispatcher_error</span> <span class="ruby-identifier">error</span>, <span class="ruby-value str">'unhandled dispatch error'</span>
+108:         <span class="ruby-keyword kw">end</span>
+109:       <span class="ruby-keyword kw">end</span>
+110:     <span class="ruby-keyword kw">ensure</span>
+111:       <span class="ruby-ivar">@processing</span> = <span class="ruby-keyword kw">false</span>
+112:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000060"></a><b>reload!</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000060_source')" id="l_M000060_source">show source</a> ]</p>
+  <div id="M000060_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/fcgi_handler.rb, line 205</span>
+205:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">reload!</span>
+206:       <span class="ruby-identifier">run_gc!</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">gc_request_period</span>
+207:       <span class="ruby-identifier">restore!</span>
+208:       <span class="ruby-ivar">@when_ready</span> = <span class="ruby-keyword kw">nil</span>
+209:       <span class="ruby-identifier">dispatcher_log</span> <span class="ruby-identifier">:info</span>, <span class="ruby-value str">&quot;reloaded&quot;</span>
+210:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000057"></a><b>reload_handler</b>(signal)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000057_source')" id="l_M000057_source">show source</a> ]</p>
+  <div id="M000057_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/fcgi_handler.rb, line 172</span>
+172:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">reload_handler</span>(<span class="ruby-identifier">signal</span>)
+173:       <span class="ruby-identifier">dispatcher_log</span> <span class="ruby-identifier">:info</span>, <span class="ruby-value str">&quot;asked to reload ASAP&quot;</span>
+174:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@processing</span>
+175:         <span class="ruby-ivar">@when_ready</span> = <span class="ruby-identifier">:reload</span>
+176:       <span class="ruby-keyword kw">else</span>
+177:         <span class="ruby-identifier">reload!</span>
+178:       <span class="ruby-keyword kw">end</span>
+179:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000059"></a><b>restart!</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000059_source')" id="l_M000059_source">show source</a> ]</p>
+  <div id="M000059_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/fcgi_handler.rb, line 190</span>
+190:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">restart!</span>
+191:       <span class="ruby-identifier">config</span>       = <span class="ruby-operator">::</span><span class="ruby-constant">Config</span><span class="ruby-operator">::</span><span class="ruby-constant">CONFIG</span>
+192:       <span class="ruby-identifier">ruby</span>         = <span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-identifier">join</span>(<span class="ruby-identifier">config</span>[<span class="ruby-value str">'bindir'</span>], <span class="ruby-identifier">config</span>[<span class="ruby-value str">'ruby_install_name'</span>]) <span class="ruby-operator">+</span> <span class="ruby-identifier">config</span>[<span class="ruby-value str">'EXEEXT'</span>]
+193:       <span class="ruby-identifier">command_line</span> = [<span class="ruby-identifier">ruby</span>, <span class="ruby-identifier">$0</span>, <span class="ruby-constant">ARGV</span>].<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">' '</span>)
+194: 
+195:       <span class="ruby-identifier">dispatcher_log</span> <span class="ruby-identifier">:info</span>, <span class="ruby-value str">&quot;restarted&quot;</span>
+196: 
+197:       <span class="ruby-comment cmt"># close resources as they won't be closed by</span>
+198:       <span class="ruby-comment cmt"># the OS when using exec</span>
+199:       <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">close</span> <span class="ruby-keyword kw">rescue</span> <span class="ruby-keyword kw">nil</span>
+200:       <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">logger</span>.<span class="ruby-identifier">close</span> <span class="ruby-keyword kw">rescue</span> <span class="ruby-keyword kw">nil</span>
+201: 
+202:       <span class="ruby-identifier">exec</span>(<span class="ruby-identifier">command_line</span>)
+203:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000058"></a><b>restart_handler</b>(signal)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000058_source')" id="l_M000058_source">show source</a> ]</p>
+  <div id="M000058_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/fcgi_handler.rb, line 181</span>
+181:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">restart_handler</span>(<span class="ruby-identifier">signal</span>)
+182:       <span class="ruby-identifier">dispatcher_log</span> <span class="ruby-identifier">:info</span>, <span class="ruby-value str">&quot;asked to restart ASAP&quot;</span>
+183:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@processing</span>
+184:         <span class="ruby-ivar">@when_ready</span> = <span class="ruby-identifier">:restart</span>
+185:       <span class="ruby-keyword kw">else</span>
+186:         <span class="ruby-identifier">restart!</span>
+187:       <span class="ruby-keyword kw">end</span>
+188:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000062"></a><b>restore!</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000062_source')" id="l_M000062_source">show source</a> ]</p>
+  <div id="M000062_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/fcgi_handler.rb, line 217</span>
+217:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">restore!</span>
+218:       <span class="ruby-identifier">$&quot;</span>.<span class="ruby-identifier">replace</span> <span class="ruby-ivar">@features</span>
+219:       <span class="ruby-constant">Dispatcher</span>.<span class="ruby-identifier">reset_application!</span>
+220:       <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Routing</span><span class="ruby-operator">::</span><span class="ruby-constant">Routes</span>.<span class="ruby-identifier">reload</span>
+221:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000063"></a><b>run_gc!</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000063_source')" id="l_M000063_source">show source</a> ]</p>
+  <div id="M000063_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/fcgi_handler.rb, line 223</span>
+223:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">run_gc!</span>
+224:       <span class="ruby-ivar">@gc_request_countdown</span> = <span class="ruby-identifier">gc_request_period</span>
+225:       <span class="ruby-constant">GC</span>.<span class="ruby-identifier">enable</span>; <span class="ruby-constant">GC</span>.<span class="ruby-identifier">start</span>; <span class="ruby-constant">GC</span>.<span class="ruby-identifier">disable</span>
+226:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000054"></a><b>with_signal_handler</b>(signal) {|| ...}
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000054_source')" id="l_M000054_source">show source</a> ]</p>
+  <div id="M000054_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/fcgi_handler.rb, line 151</span>
+151:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">with_signal_handler</span>(<span class="ruby-identifier">signal</span>)
+152:       <span class="ruby-identifier">install_signal_handler</span>(<span class="ruby-identifier">signal</span>)
+153:       <span class="ruby-keyword kw">yield</span>
+154:     <span class="ruby-keyword kw">ensure</span>
+155:       <span class="ruby-identifier">install_signal_handler</span>(<span class="ruby-identifier">signal</span>, <span class="ruby-value str">'DEFAULT'</span>)
+156:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

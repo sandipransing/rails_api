@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Class: ActionView::TemplateHandlers::ERB</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Class</span><br />ActionView::TemplateHandlers::ERB</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../../files/vendor/rails/actionpack/lib/action_view/template_handlers/erb_rb.html">vendor/rails/actionpack/lib/action_view/template_handlers/erb.rb</a>
+        </td>
+      </tr>
+    <tr>
+      <td>Parent:</td>
+      <td>
+TemplateHandler
+     </td>
+   </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M001769">compile</a></li>
+  </ul>
+
+<div class="sectiontitle">Included Modules</div>
+<ul>
+  <li><a href="Compilable.html">Compilable</a></li>
+</ul>
+
+
+
+
+
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M001769"></a><b>compile</b>(template)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001769_source')" id="l_M001769_source">show source</a> ]</p>
+  <div id="M001769_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_view/template_handlers/erb.rb, line 13</span>
+13:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">compile</span>(<span class="ruby-identifier">template</span>)
+14:         <span class="ruby-identifier">src</span> = <span class="ruby-operator">::</span><span class="ruby-constant">ERB</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;&lt;% __in_erb_template=true %&gt;#{template.source}&quot;</span>, <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">erb_trim_mode</span>, <span class="ruby-value str">'@output_buffer'</span>).<span class="ruby-identifier">src</span>
+15: 
+16:         <span class="ruby-comment cmt"># Ruby 1.9 prepends an encoding to the source. However this is</span>
+17:         <span class="ruby-comment cmt"># useless because you can only set an encoding on the first line</span>
+18:         <span class="ruby-constant">RUBY_VERSION</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value str">'1.9'</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">src</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp re">/\A#coding:.*\n/</span>, <span class="ruby-value str">''</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">src</span>
+19:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

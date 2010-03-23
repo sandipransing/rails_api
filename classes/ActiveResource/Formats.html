@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Module: ActiveResource::Formats</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Module</span><br />ActiveResource::Formats</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../files/vendor/rails/activeresource/lib/active_resource/formats/json_format_rb.html">vendor/rails/activeresource/lib/active_resource/formats/json_format.rb</a>
+<a href="../../files/vendor/rails/activeresource/lib/active_resource/formats/xml_format_rb.html">vendor/rails/activeresource/lib/active_resource/formats/xml_format.rb</a>
+<a href="../../files/vendor/rails/activeresource/lib/active_resource/formats_rb.html">vendor/rails/activeresource/lib/active_resource/formats.rb</a>
+        </td>
+      </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M000844">[]</a></li>
+  </ul>
+
+
+
+  <div class="sectiontitle">Classes and Modules</div>
+  Module <a href="Formats/JsonFormat.html" class="link">ActiveResource::Formats::JsonFormat</a><br />
+Module <a href="Formats/XmlFormat.html" class="link">ActiveResource::Formats::XmlFormat</a><br />
+
+
+
+
+<div class="sectiontitle">Public Class methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M000844"></a><b>[]</b>(mime_type_reference)
+  </div>
+  <div class="description">
+  <p>
+Lookup the format class from a mime type reference symbol. Example:
+</p>
+<pre>
+  ActiveResource::Formats[:xml]  # =&gt; ActiveResource::Formats::XmlFormat
+  ActiveResource::Formats[:json] # =&gt; ActiveResource::Formats::JsonFormat
+</pre>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000844_source')" id="l_M000844_source">show source</a> ]</p>
+  <div id="M000844_source" class="dyn-source">
+<pre>
+   <span class="ruby-comment cmt"># File vendor/rails/activeresource/lib/active_resource/formats.rb, line 7</span>
+7:     <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-operator">[]</span>(<span class="ruby-identifier">mime_type_reference</span>)
+8:       <span class="ruby-constant">ActiveResource</span><span class="ruby-operator">::</span><span class="ruby-constant">Formats</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-identifier">mime_type_reference</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">camelize</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;Format&quot;</span>)
+9:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

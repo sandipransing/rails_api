@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Module: ActionController::TestCase::RaiseActionExceptions</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Module</span><br />ActionController::TestCase::RaiseActionExceptions</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../../files/vendor/rails/actionpack/lib/action_controller/test_case_rb.html">vendor/rails/actionpack/lib/action_controller/test_case.rb</a>
+        </td>
+      </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+  <div class="description"><p>
+When the request.remote_addr remains the default for testing, which is
+0.0.0.0, the exception is simply raised inline (bystepping the regular
+exception handling from rescue_action). If the request.remote_addr is
+anything else, the regular rescue_action process takes place. This means
+you can test your rescue_action code by setting remote_addr to something
+else than 0.0.0.0.
+</p>
+<p>
+The exception is stored in the exception accessor for further inspection.
+</p>
+</div>
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M000589">included</a></li>
+  <li><a href="#M000590">rescue_action_without_handler</a></li>
+  </ul>
+
+
+
+
+
+
+<div class="sectiontitle">Public Class methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M000589"></a><b>included</b>(base)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000589_source')" id="l_M000589_source">show source</a> ]</p>
+  <div id="M000589_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/test_case.rb, line 130</span>
+130:       <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">included</span>(<span class="ruby-identifier">base</span>)
+131:         <span class="ruby-identifier">base</span>.<span class="ruby-identifier">class_eval</span> <span class="ruby-keyword kw">do</span>
+132:           <span class="ruby-identifier">attr_accessor</span> <span class="ruby-identifier">:exception</span>
+133:           <span class="ruby-identifier">protected</span> <span class="ruby-identifier">:exception</span>, <span class="ruby-identifier">:exception=</span>
+134:         <span class="ruby-keyword kw">end</span>
+135:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="sectiontitle">Protected Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M000590"></a><b>rescue_action_without_handler</b>(e)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000590_source')" id="l_M000590_source">show source</a> ]</p>
+  <div id="M000590_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/test_case.rb, line 138</span>
+138:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">rescue_action_without_handler</span>(<span class="ruby-identifier">e</span>)
+139:           <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">exception</span> = <span class="ruby-identifier">e</span>
+140: 
+141:           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">remote_addr</span> <span class="ruby-operator">==</span> <span class="ruby-value str">&quot;0.0.0.0&quot;</span>
+142:             <span class="ruby-identifier">raise</span>(<span class="ruby-identifier">e</span>)
+143:           <span class="ruby-keyword kw">else</span>
+144:             <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">e</span>)
+145:           <span class="ruby-keyword kw">end</span>
+146:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Module: ActiveSupport::CoreExtensions::Hash::Slice</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Module</span><br />ActiveSupport::CoreExtensions::Hash::Slice</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../../../files/vendor/rails/activesupport/lib/active_support/core_ext/hash/slice_rb.html">vendor/rails/activesupport/lib/active_support/core_ext/hash/slice.rb</a>
+        </td>
+      </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+  <div class="description"><p>
+<a href="Slice.html">Slice</a> a hash to include only the given keys. This
+is useful for limiting an options hash to valid keys before passing to a
+method:
+</p>
+<pre>
+  def search(criteria = {})
+    assert_valid_keys(:mass, :velocity, :time)
+  end
+
+  search(options.slice(:mass, :velocity, :time))
+</pre>
+<p>
+If you have an array of keys you want to limit to, you should splat them:
+</p>
+<pre>
+  valid_keys = [:mass, :velocity, :time]
+  search(options.slice(*valid_keys))
+</pre>
+</div>
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M001183">slice</a></li>
+  <li><a href="#M001184">slice!</a></li>
+  </ul>
+
+
+
+
+
+
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M001183"></a><b>slice</b>(*keys)
+  </div>
+  <div class="description">
+  <p>
+Returns a new hash with only the given keys.
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001183_source')" id="l_M001183_source">show source</a> ]</p>
+  <div id="M001183_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/core_ext/hash/slice.rb, line 19</span>
+19:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">slice</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">keys</span>)
+20:           <span class="ruby-identifier">keys</span> = <span class="ruby-identifier">keys</span>.<span class="ruby-identifier">map!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">key</span><span class="ruby-operator">|</span> <span class="ruby-identifier">convert_key</span>(<span class="ruby-identifier">key</span>) } <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:convert_key</span>)
+21:           <span class="ruby-identifier">hash</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>
+22:           <span class="ruby-identifier">keys</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">k</span>] = <span class="ruby-keyword kw">self</span>[<span class="ruby-identifier">k</span>] <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">k</span>) }
+23:           <span class="ruby-identifier">hash</span>
+24:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001184"></a><b>slice!</b>(*keys)
+  </div>
+  <div class="description">
+  <p>
+Replaces the hash with only the given keys. Returns a hash contained the
+removed key/value pairs
+</p>
+<pre>
+  {:a =&gt; 1, :b =&gt; 2, :c =&gt; 3, :d =&gt; 4}.slice!(:a, :b) # =&gt; {:c =&gt; 3, :d =&gt;4}
+</pre>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001184_source')" id="l_M001184_source">show source</a> ]</p>
+  <div id="M001184_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/core_ext/hash/slice.rb, line 29</span>
+29:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">slice!</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">keys</span>)
+30:           <span class="ruby-identifier">keys</span> = <span class="ruby-identifier">keys</span>.<span class="ruby-identifier">map!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">key</span><span class="ruby-operator">|</span> <span class="ruby-identifier">convert_key</span>(<span class="ruby-identifier">key</span>) } <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:convert_key</span>)
+31:           <span class="ruby-identifier">omit</span> = <span class="ruby-identifier">slice</span>(<span class="ruby-operator">*</span><span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">keys</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">keys</span>)
+32:           <span class="ruby-identifier">hash</span> = <span class="ruby-identifier">slice</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">keys</span>)
+33:           <span class="ruby-identifier">replace</span>(<span class="ruby-identifier">hash</span>)
+34:           <span class="ruby-identifier">omit</span>
+35:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

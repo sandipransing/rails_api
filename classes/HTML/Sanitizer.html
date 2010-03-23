@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Class: HTML::Sanitizer</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Class</span><br />HTML::Sanitizer</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../files/vendor/rails/actionpack/lib/action_controller/vendor/html-scanner/html/sanitizer_rb.html">vendor/rails/actionpack/lib/action_controller/vendor/html-scanner/html/sanitizer.rb</a>
+        </td>
+      </tr>
+    <tr>
+      <td>Parent:</td>
+      <td>
+        <a href="../Object.html">
+Object
+         </a>
+     </td>
+   </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M000364">process_node</a></li>
+  <li><a href="#M000361">sanitize</a></li>
+  <li><a href="#M000362">sanitizeable?</a></li>
+  <li><a href="#M000363">tokenize</a></li>
+  </ul>
+
+
+
+
+
+
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M000361"></a><b>sanitize</b>(text, options = {})
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000361_source')" id="l_M000361_source">show source</a> ]</p>
+  <div id="M000361_source" class="dyn-source">
+<pre>
+   <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/vendor/html-scanner/html/sanitizer.rb, line 3</span>
+3:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">sanitize</span>(<span class="ruby-identifier">text</span>, <span class="ruby-identifier">options</span> = {})
+4:       <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">text</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">sanitizeable?</span>(<span class="ruby-identifier">text</span>)
+5:       <span class="ruby-identifier">tokenize</span>(<span class="ruby-identifier">text</span>, <span class="ruby-identifier">options</span>).<span class="ruby-identifier">join</span>
+6:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000362"></a><b>sanitizeable?</b>(text)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000362_source')" id="l_M000362_source">show source</a> ]</p>
+  <div id="M000362_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/vendor/html-scanner/html/sanitizer.rb, line 8</span>
+ 8:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">sanitizeable?</span>(<span class="ruby-identifier">text</span>)
+ 9:       <span class="ruby-operator">!</span>(<span class="ruby-identifier">text</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">text</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-identifier">text</span>.<span class="ruby-identifier">index</span>(<span class="ruby-value str">&quot;&lt;&quot;</span>))
+10:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="sectiontitle">Protected Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M000364"></a><b>process_node</b>(node, result, options)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000364_source')" id="l_M000364_source">show source</a> ]</p>
+  <div id="M000364_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/vendor/html-scanner/html/sanitizer.rb, line 23</span>
+23:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">process_node</span>(<span class="ruby-identifier">node</span>, <span class="ruby-identifier">result</span>, <span class="ruby-identifier">options</span>)
+24:       <span class="ruby-identifier">result</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">node</span>.<span class="ruby-identifier">to_s</span>
+25:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000363"></a><b>tokenize</b>(text, options)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000363_source')" id="l_M000363_source">show source</a> ]</p>
+  <div id="M000363_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/vendor/html-scanner/html/sanitizer.rb, line 13</span>
+13:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">tokenize</span>(<span class="ruby-identifier">text</span>, <span class="ruby-identifier">options</span>)
+14:       <span class="ruby-identifier">tokenizer</span> = <span class="ruby-constant">HTML</span><span class="ruby-operator">::</span><span class="ruby-constant">Tokenizer</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">text</span>)
+15:       <span class="ruby-identifier">result</span> = []
+16:       <span class="ruby-keyword kw">while</span> <span class="ruby-identifier">token</span> = <span class="ruby-identifier">tokenizer</span>.<span class="ruby-identifier">next</span>
+17:         <span class="ruby-identifier">node</span> = <span class="ruby-constant">Node</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-keyword kw">nil</span>, <span class="ruby-value">0</span>, <span class="ruby-value">0</span>, <span class="ruby-identifier">token</span>, <span class="ruby-keyword kw">false</span>)
+18:         <span class="ruby-identifier">process_node</span> <span class="ruby-identifier">node</span>, <span class="ruby-identifier">result</span>, <span class="ruby-identifier">options</span>
+19:       <span class="ruby-keyword kw">end</span>
+20:       <span class="ruby-identifier">result</span>
+21:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

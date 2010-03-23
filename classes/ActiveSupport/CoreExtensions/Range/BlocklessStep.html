@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Module: ActiveSupport::CoreExtensions::Range::BlocklessStep</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Module</span><br />ActiveSupport::CoreExtensions::Range::BlocklessStep</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../../../files/vendor/rails/activesupport/lib/active_support/core_ext/range/blockless_step_rb.html">vendor/rails/activesupport/lib/active_support/core_ext/range/blockless_step.rb</a>
+        </td>
+      </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+  <div class="description"><p>
+Return an array when step is called without a block.
+</p>
+</div>
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M001111">step_with_blockless</a></li>
+  <li><a href="#M001112">step_with_blockless</a></li>
+  </ul>
+
+
+
+
+
+
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M001111"></a><b>step_with_blockless</b>(value = 1, &amp;block)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001111_source')" id="l_M001111_source">show source</a> ]</p>
+  <div id="M001111_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/core_ext/range/blockless_step.rb, line 11</span>
+11:           <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">step_with_blockless</span>(<span class="ruby-identifier">value</span> = <span class="ruby-value">1</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+12:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block_given?</span>
+13:               <span class="ruby-identifier">step_without_blockless</span>(<span class="ruby-identifier">value</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+14:             <span class="ruby-keyword kw">else</span>
+15:               <span class="ruby-identifier">returning</span> [] <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">array</span><span class="ruby-operator">|</span>
+16:                 <span class="ruby-identifier">step_without_blockless</span>(<span class="ruby-identifier">value</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">step</span><span class="ruby-operator">|</span> <span class="ruby-identifier">array</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">step</span> }
+17:               <span class="ruby-keyword kw">end</span>
+18:             <span class="ruby-keyword kw">end</span>
+19:           <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001112"></a><b>step_with_blockless</b>(value = 1, &amp;block)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001112_source')" id="l_M001112_source">show source</a> ]</p>
+  <div id="M001112_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/core_ext/range/blockless_step.rb, line 21</span>
+21:           <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">step_with_blockless</span>(<span class="ruby-identifier">value</span> = <span class="ruby-value">1</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+22:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block_given?</span>
+23:               <span class="ruby-identifier">step_without_blockless</span>(<span class="ruby-identifier">value</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+24:             <span class="ruby-keyword kw">else</span>
+25:               <span class="ruby-identifier">step_without_blockless</span>(<span class="ruby-identifier">value</span>).<span class="ruby-identifier">to_a</span>
+26:             <span class="ruby-keyword kw">end</span>
+27:           <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

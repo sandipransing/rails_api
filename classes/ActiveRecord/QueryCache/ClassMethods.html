@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Module: ActiveRecord::QueryCache::ClassMethods</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Module</span><br />ActiveRecord::QueryCache::ClassMethods</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../../files/vendor/rails/activerecord/lib/active_record/query_cache_rb.html">vendor/rails/activerecord/lib/active_record/query_cache.rb</a>
+        </td>
+      </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M002260">cache</a></li>
+  <li><a href="#M002261">uncached</a></li>
+  </ul>
+
+
+
+
+
+
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M002260"></a><b>cache</b>() {|| ...}
+  </div>
+  <div class="description">
+  <p>
+Enable the query <a href="ClassMethods.html#M002260">cache</a> within the
+block if Active Record is configured.
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002260_source')" id="l_M002260_source">show source</a> ]</p>
+  <div id="M002260_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activerecord/lib/active_record/query_cache.rb, line 5</span>
+ 5:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">cache</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+ 6:         <span class="ruby-keyword kw">if</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">configurations</span>.<span class="ruby-identifier">blank?</span>
+ 7:           <span class="ruby-keyword kw">yield</span>
+ 8:         <span class="ruby-keyword kw">else</span>
+ 9:           <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">cache</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+10:         <span class="ruby-keyword kw">end</span>
+11:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M002261"></a><b>uncached</b>() {|| ...}
+  </div>
+  <div class="description">
+  <p>
+Disable the query <a href="ClassMethods.html#M002260">cache</a> within the
+block if Active Record is configured.
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002261_source')" id="l_M002261_source">show source</a> ]</p>
+  <div id="M002261_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activerecord/lib/active_record/query_cache.rb, line 14</span>
+14:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">uncached</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+15:         <span class="ruby-keyword kw">if</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">configurations</span>.<span class="ruby-identifier">blank?</span>
+16:           <span class="ruby-keyword kw">yield</span>
+17:         <span class="ruby-keyword kw">else</span>
+18:           <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">uncached</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+19:         <span class="ruby-keyword kw">end</span>
+20:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

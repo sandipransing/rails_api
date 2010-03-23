@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Class: ActionController::IntegrationTest</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Class</span><br />ActionController::IntegrationTest</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../files/vendor/rails/actionpack/lib/action_controller/integration_rb.html">vendor/rails/actionpack/lib/action_controller/integration.rb</a>
+        </td>
+      </tr>
+    <tr>
+      <td>Parent:</td>
+      <td>
+        <a href="../ActiveSupport/TestCase.html">
+ActiveSupport::TestCase
+         </a>
+     </td>
+   </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+  <div class="description"><p>
+An <a href="IntegrationTest.html">IntegrationTest</a> is one that spans
+multiple controllers and actions, tying them all together to ensure they
+work together as expected. It tests more completely than either unit or
+functional tests do, exercising the entire stack, from the dispatcher to
+the database.
+</p>
+<p>
+At its simplest, you simply extend <a
+href="IntegrationTest.html">IntegrationTest</a> and write your tests using
+the get/post methods:
+</p>
+<pre>
+  require &quot;#{File.dirname(__FILE__)}/test_helper&quot;
+
+  class ExampleTest &lt; ActionController::IntegrationTest
+    fixtures :people
+
+    def test_login
+      # get the login page
+      get &quot;/login&quot;
+      assert_equal 200, status
+
+      # post the login and follow through to the home page
+      post &quot;/login&quot;, :username =&gt; people(:jamis).username,
+        :password =&gt; people(:jamis).password
+      follow_redirect!
+      assert_equal 200, status
+      assert_equal &quot;/home&quot;, path
+    end
+  end
+</pre>
+<p>
+However, you can also have multiple session instances open per test, and
+even extend those instances with assertions and methods to create a very
+powerful testing DSL that is specific for your application. You can even
+reference any named routes you happen to have defined!
+</p>
+<pre>
+  require &quot;#{File.dirname(__FILE__)}/test_helper&quot;
+
+  class AdvancedTest &lt; ActionController::IntegrationTest
+    fixtures :people, :rooms
+
+    def test_login_and_speak
+      jamis, david = login(:jamis), login(:david)
+      room = rooms(:office)
+
+      jamis.enter(room)
+      jamis.speak(room, &quot;anybody home?&quot;)
+
+      david.enter(room)
+      david.speak(room, &quot;hello!&quot;)
+    end
+
+    private
+
+      module CustomAssertions
+        def enter(room)
+          # reference a named route, for maximum internal consistency!
+          get(room_url(:id =&gt; room.id))
+          assert(...)
+          ...
+        end
+
+        def speak(room, message)
+          xml_http_request &quot;/say/#{room.id}&quot;, :message =&gt; message
+          assert(...)
+          ...
+        end
+      end
+
+      def login(who)
+        open_session do |sess|
+          sess.extend(CustomAssertions)
+          who = people(who)
+          sess.post &quot;/login&quot;, :username =&gt; who.username,
+            :password =&gt; who.password
+          assert(...)
+        end
+      end
+  end
+</pre>
+</div>
+
+
+
+
+<div class="sectiontitle">Included Modules</div>
+<ul>
+  <li><a href="Integration/Runner.html">Integration::Runner</a></li>
+</ul>
+
+
+
+
+
+</div>
+
+  </div>
+
+    </body>
+</html>

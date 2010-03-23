@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Module: ActionController::Assertions::DomAssertions</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Module</span><br />ActionController::Assertions::DomAssertions</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../../files/vendor/rails/actionpack/lib/action_controller/assertions/dom_assertions_rb.html">vendor/rails/actionpack/lib/action_controller/assertions/dom_assertions.rb</a>
+        </td>
+      </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M000579">assert_dom_equal</a></li>
+  <li><a href="#M000580">assert_dom_not_equal</a></li>
+  </ul>
+
+
+
+
+
+
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M000579"></a><b>assert_dom_equal</b>(expected, actual, message = &quot;&quot;)
+  </div>
+  <div class="description">
+  <p>
+<a href="../../Test.html">Test</a> two HTML strings for equivalency (e.g.,
+identical up to reordering of attributes)
+</p>
+<h4>Examples</h4>
+<pre>
+  # assert that the referenced method generates the appropriate HTML string
+  assert_dom_equal '&lt;a href=&quot;http://www.example.com&quot;&gt;Apples&lt;/a&gt;', link_to(&quot;Apples&quot;, &quot;http://www.example.com&quot;)
+</pre>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000579_source')" id="l_M000579_source">show source</a> ]</p>
+  <div id="M000579_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/assertions/dom_assertions.rb, line 11</span>
+11:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">assert_dom_equal</span>(<span class="ruby-identifier">expected</span>, <span class="ruby-identifier">actual</span>, <span class="ruby-identifier">message</span> = <span class="ruby-value str">&quot;&quot;</span>)
+12:         <span class="ruby-identifier">clean_backtrace</span> <span class="ruby-keyword kw">do</span>
+13:           <span class="ruby-identifier">expected_dom</span> = <span class="ruby-constant">HTML</span><span class="ruby-operator">::</span><span class="ruby-constant">Document</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">expected</span>).<span class="ruby-identifier">root</span>
+14:           <span class="ruby-identifier">actual_dom</span>   = <span class="ruby-constant">HTML</span><span class="ruby-operator">::</span><span class="ruby-constant">Document</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">actual</span>).<span class="ruby-identifier">root</span>
+15:           <span class="ruby-identifier">full_message</span> = <span class="ruby-identifier">build_message</span>(<span class="ruby-identifier">message</span>, <span class="ruby-value str">&quot;&lt;?&gt; expected to be == to\n&lt;?&gt;.&quot;</span>, <span class="ruby-identifier">expected_dom</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-identifier">actual_dom</span>.<span class="ruby-identifier">to_s</span>)
+16: 
+17:           <span class="ruby-identifier">assert_block</span>(<span class="ruby-identifier">full_message</span>) { <span class="ruby-identifier">expected_dom</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">actual_dom</span> }
+18:         <span class="ruby-keyword kw">end</span>
+19:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000580"></a><b>assert_dom_not_equal</b>(expected, actual, message = &quot;&quot;)
+  </div>
+  <div class="description">
+  <p>
+The negated form of <tt>assert_dom_equivalent</tt>.
+</p>
+<h4>Examples</h4>
+<pre>
+  # assert that the referenced method does not generate the specified HTML string
+  assert_dom_not_equal '&lt;a href=&quot;http://www.example.com&quot;&gt;Apples&lt;/a&gt;', link_to(&quot;Oranges&quot;, &quot;http://www.example.com&quot;)
+</pre>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000580_source')" id="l_M000580_source">show source</a> ]</p>
+  <div id="M000580_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/assertions/dom_assertions.rb, line 28</span>
+28:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">assert_dom_not_equal</span>(<span class="ruby-identifier">expected</span>, <span class="ruby-identifier">actual</span>, <span class="ruby-identifier">message</span> = <span class="ruby-value str">&quot;&quot;</span>)
+29:         <span class="ruby-identifier">clean_backtrace</span> <span class="ruby-keyword kw">do</span>
+30:           <span class="ruby-identifier">expected_dom</span> = <span class="ruby-constant">HTML</span><span class="ruby-operator">::</span><span class="ruby-constant">Document</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">expected</span>).<span class="ruby-identifier">root</span>
+31:           <span class="ruby-identifier">actual_dom</span>   = <span class="ruby-constant">HTML</span><span class="ruby-operator">::</span><span class="ruby-constant">Document</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">actual</span>).<span class="ruby-identifier">root</span>
+32:           <span class="ruby-identifier">full_message</span> = <span class="ruby-identifier">build_message</span>(<span class="ruby-identifier">message</span>, <span class="ruby-value str">&quot;&lt;?&gt; expected to be != to\n&lt;?&gt;.&quot;</span>, <span class="ruby-identifier">expected_dom</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-identifier">actual_dom</span>.<span class="ruby-identifier">to_s</span>)
+33: 
+34:           <span class="ruby-identifier">assert_block</span>(<span class="ruby-identifier">full_message</span>) { <span class="ruby-identifier">expected_dom</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">actual_dom</span> }
+35:         <span class="ruby-keyword kw">end</span>
+36:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

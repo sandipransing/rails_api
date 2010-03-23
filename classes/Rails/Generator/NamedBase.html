@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Class: Rails::Generator::NamedBase</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Class</span><br />Rails::Generator::NamedBase</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../../files/vendor/rails/railties/lib/rails_generator/base_rb.html">vendor/rails/railties/lib/rails_generator/base.rb</a>
+        </td>
+      </tr>
+    <tr>
+      <td>Parent:</td>
+      <td>
+        <a href="Base.html">
+Base
+         </a>
+     </td>
+   </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+  <div class="description"><p>
+The base generator for named components: models, controllers, mailers, etc.
+The target name is taken as the first argument and inflected to singular,
+plural, class, file, and table forms for your convenience. The remaining
+arguments are aliased to <tt>actions</tt> as an array for controller and
+mailer convenience.
+</p>
+<p>
+Several useful local variables and methods are populated in the
+<tt>initialize</tt> method. See below for a list of Attributes and External
+Aliases available to both the manifest and to all templates.
+</p>
+<p>
+If no name is provided, the generator raises a usage error with content
+optionally read from the USAGE file in the generator&#8216;s base path.
+</p>
+<p>
+For example, the <tt>controller</tt> generator takes the first argument as
+the name of the class and subsequent arguments as the names of actions to
+be generated:
+</p>
+<pre>
+  ./script/generate controller Article index new create
+</pre>
+<p>
+See <a href="Base.html">Rails::Generator::Base</a> for a discussion of
+manifests, <a
+href="Commands/Create.html">Rails::Generator::Commands::Create</a> for
+methods available to the manifest, and <a
+href="../Generator.html">Rails::Generator</a> for a general discussion of
+generators.
+</p>
+</div>
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M002466">attributes</a></li>
+  <li><a href="#M002465">banner</a></li>
+  <li><a href="#M002464">new</a></li>
+  </ul>
+
+
+
+
+
+  <div class="sectiontitle">Attributes</div>
+  <table border='0' cellpadding='5'>
+  <tr valign='top'>
+    <td class='attr-rw'>
+[R]
+    </td>
+    <td class='attr-name'>class_name</td>
+    <td class='attr-desc'></td>
+  </tr>
+  <tr valign='top'>
+    <td class='attr-rw'>
+[R]
+    </td>
+    <td class='attr-name'>class_nesting</td>
+    <td class='attr-desc'></td>
+  </tr>
+  <tr valign='top'>
+    <td class='attr-rw'>
+[R]
+    </td>
+    <td class='attr-name'>class_nesting_depth</td>
+    <td class='attr-desc'></td>
+  </tr>
+  <tr valign='top'>
+    <td class='attr-rw'>
+[R]
+    </td>
+    <td class='attr-name'>class_path</td>
+    <td class='attr-desc'></td>
+  </tr>
+  <tr valign='top'>
+    <td class='attr-rw'>
+[R]
+    </td>
+    <td class='attr-name'>file_path</td>
+    <td class='attr-desc'></td>
+  </tr>
+  <tr valign='top'>
+    <td class='attr-rw'>
+[R]
+    </td>
+    <td class='attr-name'>name</td>
+    <td class='attr-desc'></td>
+  </tr>
+  <tr valign='top'>
+    <td class='attr-rw'>
+[R]
+    </td>
+    <td class='attr-name'>plural_name</td>
+    <td class='attr-desc'></td>
+  </tr>
+  <tr valign='top'>
+    <td class='attr-rw'>
+[R]
+    </td>
+    <td class='attr-name'>singular_name</td>
+    <td class='attr-desc'></td>
+  </tr>
+  <tr valign='top'>
+    <td class='attr-rw'>
+[R]
+    </td>
+    <td class='attr-name'>table_name</td>
+    <td class='attr-desc'></td>
+  </tr>
+  </table>
+
+<div class="sectiontitle">Public Class methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M002464"></a><b>new</b>(runtime_args, runtime_options = {})
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002464_source')" id="l_M002464_source">show source</a> ]</p>
+  <div id="M002464_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/rails_generator/base.rb, line 206</span>
+206:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">runtime_args</span>, <span class="ruby-identifier">runtime_options</span> = {})
+207:         <span class="ruby-keyword kw">super</span>
+208: 
+209:         <span class="ruby-comment cmt"># Name argument is required.</span>
+210:         <span class="ruby-identifier">usage</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">runtime_args</span>.<span class="ruby-identifier">empty?</span>
+211: 
+212:         <span class="ruby-ivar">@args</span> = <span class="ruby-identifier">runtime_args</span>.<span class="ruby-identifier">dup</span>
+213:         <span class="ruby-identifier">base_name</span> = <span class="ruby-ivar">@args</span>.<span class="ruby-identifier">shift</span>
+214:         <span class="ruby-identifier">assign_names!</span>(<span class="ruby-identifier">base_name</span>)
+215:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="sectiontitle">Protected Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M002466"></a><b>attributes</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002466_source')" id="l_M002466_source">show source</a> ]</p>
+  <div id="M002466_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/rails_generator/base.rb, line 223</span>
+223:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">attributes</span>
+224:           <span class="ruby-ivar">@attributes</span> <span class="ruby-operator">||=</span> <span class="ruby-ivar">@args</span>.<span class="ruby-identifier">collect</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">attribute</span><span class="ruby-operator">|</span>
+225:             <span class="ruby-constant">Rails</span><span class="ruby-operator">::</span><span class="ruby-constant">Generator</span><span class="ruby-operator">::</span><span class="ruby-constant">GeneratedAttribute</span>.<span class="ruby-identifier">new</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">attribute</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">&quot;:&quot;</span>))
+226:           <span class="ruby-keyword kw">end</span>
+227:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M002465"></a><b>banner</b>()
+  </div>
+  <div class="description">
+  <p>
+Override with your own usage <a href="NamedBase.html#M002465">banner</a>.
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M002465_source')" id="l_M002465_source">show source</a> ]</p>
+  <div id="M002465_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/railties/lib/rails_generator/base.rb, line 219</span>
+219:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">banner</span>
+220:           <span class="ruby-node">&quot;Usage: #{$0} #{spec.name} #{spec.name.camelize}Name [options]&quot;</span>
+221:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

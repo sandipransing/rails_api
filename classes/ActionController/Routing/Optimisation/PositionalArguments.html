@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Class: ActionController::Routing::Optimisation::PositionalArguments</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Class</span><br />ActionController::Routing::Optimisation::PositionalArguments</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../../../files/vendor/rails/actionpack/lib/action_controller/routing/optimisations_rb.html">vendor/rails/actionpack/lib/action_controller/routing/optimisations.rb</a>
+        </td>
+      </tr>
+    <tr>
+      <td>Parent:</td>
+      <td>
+        <a href="Optimiser.html">
+Optimiser
+         </a>
+     </td>
+   </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+  <div class="description"><p>
+Given a route
+</p>
+<pre>
+  map.person '/people/:id'
+</pre>
+<p>
+If the user calls <tt>person_url(@person)</tt>, we can simply return a
+string like &quot;/people/#{@person.to_param}&quot; rather than triggering
+the expensive logic in <tt>url_for</tt>.
+</p>
+</div>
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M000545">generation_code</a></li>
+  <li><a href="#M000544">guard_conditions</a></li>
+  </ul>
+
+
+
+
+
+
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M000545"></a><b>generation_code</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000545_source')" id="l_M000545_source">show source</a> ]</p>
+  <div id="M000545_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/routing/optimisations.rb, line 78</span>
+ 78:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">generation_code</span>
+ 79:           <span class="ruby-identifier">elements</span> = []
+ 80:           <span class="ruby-identifier">idx</span> = <span class="ruby-value">0</span>
+ 81: 
+ 82:           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">kind</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:url</span>
+ 83:             <span class="ruby-identifier">elements</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">'#{request.protocol}'</span>
+ 84:             <span class="ruby-identifier">elements</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">'#{request.host_with_port}'</span>
+ 85:           <span class="ruby-keyword kw">end</span>
+ 86: 
+ 87:           <span class="ruby-identifier">elements</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">'#{ActionController::Base.relative_url_root if ActionController::Base.relative_url_root}'</span>
+ 88: 
+ 89:           <span class="ruby-comment cmt"># The last entry in &lt;tt&gt;route.segments&lt;/tt&gt; appears to *always* be a</span>
+ 90:           <span class="ruby-comment cmt"># 'divider segment' for '/' but we have assertions to ensure that</span>
+ 91:           <span class="ruby-comment cmt"># we don't include the trailing slashes, so skip them.</span>
+ 92:           (<span class="ruby-identifier">route</span>.<span class="ruby-identifier">segments</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">route</span>.<span class="ruby-identifier">segments</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">route</span>.<span class="ruby-identifier">segments</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">-2</span>]).<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">segment</span><span class="ruby-operator">|</span>
+ 93:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">segment</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">DynamicSegment</span>)
+ 94:               <span class="ruby-identifier">elements</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">segment</span>.<span class="ruby-identifier">interpolation_chunk</span>(<span class="ruby-node">&quot;args[#{idx}].to_param&quot;</span>)
+ 95:               <span class="ruby-identifier">idx</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+ 96:             <span class="ruby-keyword kw">else</span>
+ 97:               <span class="ruby-identifier">elements</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">segment</span>.<span class="ruby-identifier">interpolation_chunk</span>
+ 98:             <span class="ruby-keyword kw">end</span>
+ 99:           <span class="ruby-keyword kw">end</span>
+100:           <span class="ruby-node">%(&quot;#{elements * ''}&quot;)</span>
+101:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000544"></a><b>guard_conditions</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000544_source')" id="l_M000544_source">show source</a> ]</p>
+  <div id="M000544_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/routing/optimisations.rb, line 67</span>
+67:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">guard_conditions</span>
+68:           <span class="ruby-identifier">number_of_arguments</span> = <span class="ruby-identifier">route</span>.<span class="ruby-identifier">required_segment_keys</span>.<span class="ruby-identifier">size</span>
+69:           <span class="ruby-comment cmt"># if they're using foo_url(:id=&gt;2) it's one</span>
+70:           <span class="ruby-comment cmt"># argument, but we don't want to generate /foos/id2</span>
+71:           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">number_of_arguments</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
+72:             [<span class="ruby-value str">&quot;args.size == 1&quot;</span>, <span class="ruby-value str">&quot;!args.first.is_a?(Hash)&quot;</span>]
+73:           <span class="ruby-keyword kw">else</span>
+74:             [<span class="ruby-node">&quot;args.size == #{number_of_arguments}&quot;</span>]
+75:           <span class="ruby-keyword kw">end</span>
+76:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

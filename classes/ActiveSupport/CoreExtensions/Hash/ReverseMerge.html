@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Module: ActiveSupport::CoreExtensions::Hash::ReverseMerge</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Module</span><br />ActiveSupport::CoreExtensions::Hash::ReverseMerge</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../../../files/vendor/rails/activesupport/lib/active_support/core_ext/hash/reverse_merge_rb.html">vendor/rails/activesupport/lib/active_support/core_ext/hash/reverse_merge.rb</a>
+        </td>
+      </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+  <div class="description"><p>
+Allows for reverse merging two hashes where the keys in the calling hash
+take precedence over those in the <tt>other_hash</tt>. This is particularly
+useful for initializing an option hash with default values:
+</p>
+<pre>
+  def setup(options = {})
+    options.reverse_merge! :size =&gt; 25, :velocity =&gt; 10
+  end
+</pre>
+<p>
+Using <tt>merge</tt>, the above example would look as follows:
+</p>
+<pre>
+  def setup(options = {})
+    { :size =&gt; 25, :velocity =&gt; 10 }.merge(options)
+  end
+</pre>
+<p>
+The default <tt>:size</tt> and <tt>:velocity</tt> are only set if the
+<tt>options</tt> hash passed in doesn&#8216;t already have the respective
+key.
+</p>
+</div>
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M001185">reverse_merge</a></li>
+  <li><a href="#M001186">reverse_merge!</a></li>
+  <li><a href="#M001187">reverse_update</a></li>
+  </ul>
+
+
+
+
+
+
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M001185"></a><b>reverse_merge</b>(other_hash)
+  </div>
+  <div class="description">
+  <p>
+Performs the opposite of <tt>merge</tt>, with the keys and values from the
+first hash taking precedence over the second.
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001185_source')" id="l_M001185_source">show source</a> ]</p>
+  <div id="M001185_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/core_ext/hash/reverse_merge.rb, line 21</span>
+21:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">reverse_merge</span>(<span class="ruby-identifier">other_hash</span>)
+22:           <span class="ruby-identifier">other_hash</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-keyword kw">self</span>)
+23:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001186"></a><b>reverse_merge!</b>(other_hash)
+  </div>
+  <div class="description">
+  <p>
+Performs the opposite of <tt>merge</tt>, with the keys and values from the
+first hash taking precedence over the second. Modifies the receiver in
+place.
+</p>
+  </div>
+<div class="aka">
+  This method is also aliased as
+  <a href="ReverseMerge.html#M001187">reverse_update</a>
+</div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001186_source')" id="l_M001186_source">show source</a> ]</p>
+  <div id="M001186_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/core_ext/hash/reverse_merge.rb, line 27</span>
+27:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">reverse_merge!</span>(<span class="ruby-identifier">other_hash</span>)
+28:           <span class="ruby-identifier">replace</span>(<span class="ruby-identifier">reverse_merge</span>(<span class="ruby-identifier">other_hash</span>))
+29:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001187"></a><b>reverse_update</b>(other_hash)
+  </div>
+  <div class="description">
+  <p>
+Alias for <a href="ReverseMerge.html#M001185">reverse_merge</a>!
+</p>
+  </div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

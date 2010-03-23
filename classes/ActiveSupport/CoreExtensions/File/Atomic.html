@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Module: ActiveSupport::CoreExtensions::File::Atomic</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Module</span><br />ActiveSupport::CoreExtensions::File::Atomic</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../../../files/vendor/rails/activesupport/lib/active_support/core_ext/file/atomic_rb.html">vendor/rails/activesupport/lib/active_support/core_ext/file/atomic.rb</a>
+        </td>
+      </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M001380">atomic_write</a></li>
+  </ul>
+
+
+
+
+
+
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M001380"></a><b>atomic_write</b>(file_name, temp_dir = Dir.tmpdir) {|temp_file| ...}
+  </div>
+  <div class="description">
+  <p>
+Write to a file atomically. Useful for situations where you don&#8216;t
+want other processes or threads to see half-written files.
+</p>
+<pre>
+  File.atomic_write(&quot;important.file&quot;) do |file|
+    file.write(&quot;hello&quot;)
+  end
+</pre>
+<p>
+If your temp directory is not on the same filesystem as the file
+you&#8216;re trying to write, you can provide a different temporary
+directory.
+</p>
+<pre>
+  File.atomic_write(&quot;/data/something.important&quot;, &quot;/data/tmp&quot;) do |f|
+    file.write(&quot;hello&quot;)
+  end
+</pre>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001380_source')" id="l_M001380_source">show source</a> ]</p>
+  <div id="M001380_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/core_ext/file/atomic.rb, line 18</span>
+18:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">atomic_write</span>(<span class="ruby-identifier">file_name</span>, <span class="ruby-identifier">temp_dir</span> = <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">tmpdir</span>)
+19:           <span class="ruby-identifier">require</span> <span class="ruby-value str">'tempfile'</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-keyword kw">defined?</span>(<span class="ruby-constant">Tempfile</span>)
+20: 
+21:           <span class="ruby-identifier">temp_file</span> = <span class="ruby-constant">Tempfile</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">file_name</span>), <span class="ruby-identifier">temp_dir</span>)
+22:           <span class="ruby-keyword kw">yield</span> <span class="ruby-identifier">temp_file</span>
+23:           <span class="ruby-identifier">temp_file</span>.<span class="ruby-identifier">close</span>
+24: 
+25:           <span class="ruby-keyword kw">begin</span>
+26:             <span class="ruby-comment cmt"># Get original file permissions</span>
+27:             <span class="ruby-identifier">old_stat</span> = <span class="ruby-identifier">stat</span>(<span class="ruby-identifier">file_name</span>)
+28:           <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">ENOENT</span>
+29:             <span class="ruby-comment cmt"># No old permissions, write a temp file to determine the defaults</span>
+30:             <span class="ruby-identifier">check_name</span> = <span class="ruby-identifier">join</span>(<span class="ruby-identifier">dirname</span>(<span class="ruby-identifier">file_name</span>), <span class="ruby-node">&quot;.permissions_check.#{Thread.current.object_id}.#{Process.pid}.#{rand(1000000)}&quot;</span>)
+31:             <span class="ruby-identifier">open</span>(<span class="ruby-identifier">check_name</span>, <span class="ruby-value str">&quot;w&quot;</span>) { }
+32:             <span class="ruby-identifier">old_stat</span> = <span class="ruby-identifier">stat</span>(<span class="ruby-identifier">check_name</span>)
+33:             <span class="ruby-identifier">unlink</span>(<span class="ruby-identifier">check_name</span>)
+34:           <span class="ruby-keyword kw">end</span>
+35: 
+36:           <span class="ruby-comment cmt"># Overwrite original file with temp file</span>
+37:           <span class="ruby-identifier">rename</span>(<span class="ruby-identifier">temp_file</span>.<span class="ruby-identifier">path</span>, <span class="ruby-identifier">file_name</span>)
+38: 
+39:           <span class="ruby-comment cmt"># Set correct permissions on new file</span>
+40:           <span class="ruby-identifier">chown</span>(<span class="ruby-identifier">old_stat</span>.<span class="ruby-identifier">uid</span>, <span class="ruby-identifier">old_stat</span>.<span class="ruby-identifier">gid</span>, <span class="ruby-identifier">file_name</span>)
+41:           <span class="ruby-identifier">chmod</span>(<span class="ruby-identifier">old_stat</span>.<span class="ruby-identifier">mode</span>, <span class="ruby-identifier">file_name</span>)
+42:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Module: ActionController::Routing::Optimisation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Module</span><br />ActionController::Routing::Optimisation</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../../files/vendor/rails/actionpack/lib/action_controller/routing/optimisations_rb.html">vendor/rails/actionpack/lib/action_controller/routing/optimisations.rb</a>
+        </td>
+      </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+  <div class="description"><p>
+Much of the slow performance from routes comes from the complexity of
+expiry, <tt>:requirements</tt> matching, defaults providing and figuring
+out which url pattern to use. With named routes we can avoid the expense of
+finding the right route. So if they&#8216;ve provided the right number of
+arguments, and have no <tt>:requirements</tt>, we can just build up a
+string and return it.
+</p>
+<p>
+To support building optimisations for other common cases, the generation
+code is separated into several classes
+</p>
+</div>
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M000543">generate_optimisation_block</a></li>
+  </ul>
+
+
+
+  <div class="sectiontitle">Classes and Modules</div>
+  Class <a href="Optimisation/Optimiser.html" class="link">ActionController::Routing::Optimisation::Optimiser</a><br />
+Class <a href="Optimisation/PositionalArguments.html" class="link">ActionController::Routing::Optimisation::PositionalArguments</a><br />
+Class <a href="Optimisation/PositionalArgumentsWithAdditionalParams.html" class="link">ActionController::Routing::Optimisation::PositionalArgumentsWithAdditionalParams</a><br />
+
+
+  <div class="sectiontitle">Constants</div>
+  <table border='0' cellpadding='5'>
+  <tr valign='top'>
+    <td class="attr-name">OPTIMISERS</td>
+    <td>=</td>
+    <td class="attr-value">[PositionalArguments, PositionalArgumentsWithAdditionalParams]</td>
+  </tr>
+  </table>
+
+
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M000543"></a><b>generate_optimisation_block</b>(route, kind)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000543_source')" id="l_M000543_source">show source</a> ]</p>
+  <div id="M000543_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/routing/optimisations.rb, line 13</span>
+13:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">generate_optimisation_block</span>(<span class="ruby-identifier">route</span>, <span class="ruby-identifier">kind</span>)
+14:         <span class="ruby-keyword kw">return</span> <span class="ruby-value str">&quot;&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">route</span>.<span class="ruby-identifier">optimise?</span>
+15:         <span class="ruby-constant">OPTIMISERS</span>.<span class="ruby-identifier">inject</span>(<span class="ruby-value str">&quot;&quot;</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">memo</span>, <span class="ruby-identifier">klazz</span><span class="ruby-operator">|</span>
+16:           <span class="ruby-identifier">memo</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">klazz</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">route</span>, <span class="ruby-identifier">kind</span>).<span class="ruby-identifier">source_code</span>
+17:           <span class="ruby-identifier">memo</span>
+18:         <span class="ruby-keyword kw">end</span>
+19:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

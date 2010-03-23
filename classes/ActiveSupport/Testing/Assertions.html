@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Module: ActiveSupport::Testing::Assertions</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Module</span><br />ActiveSupport::Testing::Assertions</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../../files/vendor/rails/activesupport/lib/active_support/testing/assertions_rb.html">vendor/rails/activesupport/lib/active_support/testing/assertions.rb</a>
+        </td>
+      </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M001427">assert_difference</a></li>
+  <li><a href="#M001428">assert_no_difference</a></li>
+  </ul>
+
+
+
+
+
+
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M001427"></a><b>assert_difference</b>(expression, difference = 1, message = nil) {|| ...}
+  </div>
+  <div class="description">
+  <p>
+<a href="../../Test.html">Test</a> numeric difference between the return
+value of an expression as a result of what is evaluated in the yielded
+block.
+</p>
+<pre>
+  assert_difference 'Article.count' do
+    post :create, :article =&gt; {...}
+  end
+</pre>
+<p>
+An arbitrary expression is passed in and evaluated.
+</p>
+<pre>
+  assert_difference 'assigns(:article).comments(:reload).size' do
+    post :create, :comment =&gt; {...}
+  end
+</pre>
+<p>
+An arbitrary positive or negative difference can be specified. The default
+is +1.
+</p>
+<pre>
+  assert_difference 'Article.count', -1 do
+    post :delete, :id =&gt; ...
+  end
+</pre>
+<p>
+An array of expressions can also be passed in and evaluated.
+</p>
+<pre>
+  assert_difference [ 'Article.count', 'Post.count' ], +2 do
+    post :create, :article =&gt; {...}
+  end
+</pre>
+<p>
+A error message can be specified.
+</p>
+<pre>
+  assert_difference 'Article.count', -1, &quot;An Article should be destroyed&quot; do
+    post :delete, :id =&gt; ...
+  end
+</pre>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001427_source')" id="l_M001427_source">show source</a> ]</p>
+  <div id="M001427_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/testing/assertions.rb, line 34</span>
+34:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">assert_difference</span>(<span class="ruby-identifier">expression</span>, <span class="ruby-identifier">difference</span> = <span class="ruby-value">1</span>, <span class="ruby-identifier">message</span> = <span class="ruby-keyword kw">nil</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+35:         <span class="ruby-identifier">b</span> = <span class="ruby-identifier">block</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">:binding</span>)
+36:         <span class="ruby-identifier">exps</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">wrap</span>(<span class="ruby-identifier">expression</span>)
+37:         <span class="ruby-identifier">before</span> = <span class="ruby-identifier">exps</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">eval</span>(<span class="ruby-identifier">e</span>, <span class="ruby-identifier">b</span>) }
+38: 
+39:         <span class="ruby-keyword kw">yield</span>
+40: 
+41:         <span class="ruby-identifier">exps</span>.<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">e</span>, <span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+42:           <span class="ruby-identifier">error</span> = <span class="ruby-node">&quot;#{e.inspect} didn't change by #{difference}&quot;</span>
+43:           <span class="ruby-identifier">error</span> = <span class="ruby-node">&quot;#{message}.\n#{error}&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">message</span>
+44:           <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">before</span>[<span class="ruby-identifier">i</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">difference</span>, <span class="ruby-identifier">eval</span>(<span class="ruby-identifier">e</span>, <span class="ruby-identifier">b</span>), <span class="ruby-identifier">error</span>)
+45:         <span class="ruby-keyword kw">end</span>
+46:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001428"></a><b>assert_no_difference</b>(expression, message = nil, &amp;block)
+  </div>
+  <div class="description">
+  <p>
+Assertion that the numeric result of evaluating an expression is not
+changed before and after invoking the passed in block.
+</p>
+<pre>
+  assert_no_difference 'Article.count' do
+    post :create, :article =&gt; invalid_attributes
+  end
+</pre>
+<p>
+A error message can be specified.
+</p>
+<pre>
+  assert_no_difference 'Article.count', &quot;An Article should not be destroyed&quot; do
+    post :create, :article =&gt; invalid_attributes
+  end
+</pre>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001428_source')" id="l_M001428_source">show source</a> ]</p>
+  <div id="M001428_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/testing/assertions.rb, line 60</span>
+60:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">assert_no_difference</span>(<span class="ruby-identifier">expression</span>, <span class="ruby-identifier">message</span> = <span class="ruby-keyword kw">nil</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+61:         <span class="ruby-identifier">assert_difference</span> <span class="ruby-identifier">expression</span>, <span class="ruby-value">0</span>, <span class="ruby-identifier">message</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>
+62:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

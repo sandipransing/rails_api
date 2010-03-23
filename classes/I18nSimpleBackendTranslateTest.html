@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Class: I18nSimpleBackendTranslateTest</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Class</span><br />I18nSimpleBackendTranslateTest</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../files/vendor/rails/activesupport/lib/active_support/vendor/i18n-0_1_3/test/simple_backend_test_rb.html">vendor/rails/activesupport/lib/active_support/vendor/i18n-0.1.3/test/simple_backend_test.rb</a>
+        </td>
+      </tr>
+    <tr>
+      <td>Parent:</td>
+      <td>
+Test::Unit::TestCase
+     </td>
+   </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M000304">test_given_no_keys_it_returns_the_default</a></li>
+  <li><a href="#M000308">test_translate_an_array_of_keys_translates_all_of_them</a></li>
+  <li><a href="#M000310">test_translate_calls_interpolate</a></li>
+  <li><a href="#M000311">test_translate_calls_interpolate_including_count_as_a_value</a></li>
+  <li><a href="#M000303">test_translate_calls_lookup_with_locale_given</a></li>
+  <li><a href="#M000309">test_translate_calls_pluralize</a></li>
+  <li><a href="#M000305">test_translate_given_a_symbol_as_a_default_translates_the_symbol</a></li>
+  <li><a href="#M000306">test_translate_given_an_array_as_default_uses_the_first_match</a></li>
+  <li><a href="#M000307">test_translate_given_an_array_of_inexistent_keys_it_raises_missing_translation_data</a></li>
+  <li><a href="#M000312">test_translate_given_nil_as_a_locale_raises_an_argument_error</a></li>
+  <li><a href="#M000313">test_translate_with_a_bogus_key_and_no_default_raises_missing_translation_data</a></li>
+  </ul>
+
+<div class="sectiontitle">Included Modules</div>
+<ul>
+  <li><a href="I18nSimpleBackendTestSetup.html">I18nSimpleBackendTestSetup</a></li>
+</ul>
+
+
+
+
+
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M000304"></a><b>test_given_no_keys_it_returns_the_default</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000304_source')" id="l_M000304_source">show source</a> ]</p>
+  <div id="M000304_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/vendor/i18n-0.1.3/test/simple_backend_test.rb, line 144</span>
+144:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_given_no_keys_it_returns_the_default</span>
+145:     <span class="ruby-identifier">assert_equal</span> <span class="ruby-value str">'default'</span>, <span class="ruby-ivar">@backend</span>.<span class="ruby-identifier">translate</span>(<span class="ruby-value str">'en'</span>, <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">:default</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'default'</span>)
+146:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000308"></a><b>test_translate_an_array_of_keys_translates_all_of_them</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000308_source')" id="l_M000308_source">show source</a> ]</p>
+  <div id="M000308_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/vendor/i18n-0.1.3/test/simple_backend_test.rb, line 162</span>
+162:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_translate_an_array_of_keys_translates_all_of_them</span>
+163:     <span class="ruby-identifier">assert_equal</span> <span class="ruby-node">%w(bar baz)</span>, <span class="ruby-ivar">@backend</span>.<span class="ruby-identifier">translate</span>(<span class="ruby-value str">'en'</span>, [<span class="ruby-identifier">:bar</span>, <span class="ruby-identifier">:baz</span>], <span class="ruby-identifier">:scope</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-identifier">:foo</span>])
+164:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000310"></a><b>test_translate_calls_interpolate</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000310_source')" id="l_M000310_source">show source</a> ]</p>
+  <div id="M000310_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/vendor/i18n-0.1.3/test/simple_backend_test.rb, line 171</span>
+171:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_translate_calls_interpolate</span>
+172:     <span class="ruby-ivar">@backend</span>.<span class="ruby-identifier">expects</span>(<span class="ruby-identifier">:interpolate</span>).<span class="ruby-identifier">with</span> <span class="ruby-value str">'en'</span>, <span class="ruby-value str">'bar'</span>, {}
+173:     <span class="ruby-ivar">@backend</span>.<span class="ruby-identifier">translate</span> <span class="ruby-value str">'en'</span>, <span class="ruby-identifier">:bar</span>, <span class="ruby-identifier">:scope</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-identifier">:foo</span>]
+174:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000311"></a><b>test_translate_calls_interpolate_including_count_as_a_value</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000311_source')" id="l_M000311_source">show source</a> ]</p>
+  <div id="M000311_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/vendor/i18n-0.1.3/test/simple_backend_test.rb, line 176</span>
+176:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_translate_calls_interpolate_including_count_as_a_value</span>
+177:     <span class="ruby-ivar">@backend</span>.<span class="ruby-identifier">expects</span>(<span class="ruby-identifier">:interpolate</span>).<span class="ruby-identifier">with</span> <span class="ruby-value str">'en'</span>, <span class="ruby-value str">'bar'</span>, {<span class="ruby-identifier">:count</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>}
+178:     <span class="ruby-ivar">@backend</span>.<span class="ruby-identifier">translate</span> <span class="ruby-value str">'en'</span>, <span class="ruby-identifier">:bar</span>, <span class="ruby-identifier">:scope</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-identifier">:foo</span>], <span class="ruby-identifier">:count</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>
+179:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000303"></a><b>test_translate_calls_lookup_with_locale_given</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000303_source')" id="l_M000303_source">show source</a> ]</p>
+  <div id="M000303_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/vendor/i18n-0.1.3/test/simple_backend_test.rb, line 139</span>
+139:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_translate_calls_lookup_with_locale_given</span>
+140:     <span class="ruby-ivar">@backend</span>.<span class="ruby-identifier">expects</span>(<span class="ruby-identifier">:lookup</span>).<span class="ruby-identifier">with</span>(<span class="ruby-value str">'de'</span>, <span class="ruby-identifier">:bar</span>, [<span class="ruby-identifier">:foo</span>]).<span class="ruby-identifier">returns</span> <span class="ruby-value str">'bar'</span>
+141:     <span class="ruby-ivar">@backend</span>.<span class="ruby-identifier">translate</span> <span class="ruby-value str">'de'</span>, <span class="ruby-identifier">:bar</span>, <span class="ruby-identifier">:scope</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-identifier">:foo</span>]
+142:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000309"></a><b>test_translate_calls_pluralize</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000309_source')" id="l_M000309_source">show source</a> ]</p>
+  <div id="M000309_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/vendor/i18n-0.1.3/test/simple_backend_test.rb, line 166</span>
+166:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_translate_calls_pluralize</span>
+167:     <span class="ruby-ivar">@backend</span>.<span class="ruby-identifier">expects</span>(<span class="ruby-identifier">:pluralize</span>).<span class="ruby-identifier">with</span> <span class="ruby-value str">'en'</span>, <span class="ruby-value str">'bar'</span>, <span class="ruby-value">1</span>
+168:     <span class="ruby-ivar">@backend</span>.<span class="ruby-identifier">translate</span> <span class="ruby-value str">'en'</span>, <span class="ruby-identifier">:bar</span>, <span class="ruby-identifier">:scope</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-identifier">:foo</span>], <span class="ruby-identifier">:count</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>
+169:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000305"></a><b>test_translate_given_a_symbol_as_a_default_translates_the_symbol</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000305_source')" id="l_M000305_source">show source</a> ]</p>
+  <div id="M000305_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/vendor/i18n-0.1.3/test/simple_backend_test.rb, line 148</span>
+148:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_translate_given_a_symbol_as_a_default_translates_the_symbol</span>
+149:     <span class="ruby-identifier">assert_equal</span> <span class="ruby-value str">'bar'</span>, <span class="ruby-ivar">@backend</span>.<span class="ruby-identifier">translate</span>(<span class="ruby-value str">'en'</span>, <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">:scope</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-identifier">:foo</span>], <span class="ruby-identifier">:default</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">:bar</span>)
+150:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000306"></a><b>test_translate_given_an_array_as_default_uses_the_first_match</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000306_source')" id="l_M000306_source">show source</a> ]</p>
+  <div id="M000306_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/vendor/i18n-0.1.3/test/simple_backend_test.rb, line 152</span>
+152:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_translate_given_an_array_as_default_uses_the_first_match</span>
+153:     <span class="ruby-identifier">assert_equal</span> <span class="ruby-value str">'bar'</span>, <span class="ruby-ivar">@backend</span>.<span class="ruby-identifier">translate</span>(<span class="ruby-value str">'en'</span>, <span class="ruby-identifier">:does_not_exist</span>, <span class="ruby-identifier">:scope</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-identifier">:foo</span>], <span class="ruby-identifier">:default</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-identifier">:does_not_exist_2</span>, <span class="ruby-identifier">:bar</span>])
+154:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000307"></a><b>test_translate_given_an_array_of_inexistent_keys_it_raises_missing_translation_data</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000307_source')" id="l_M000307_source">show source</a> ]</p>
+  <div id="M000307_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/vendor/i18n-0.1.3/test/simple_backend_test.rb, line 156</span>
+156:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_translate_given_an_array_of_inexistent_keys_it_raises_missing_translation_data</span>
+157:     <span class="ruby-identifier">assert_raise</span> <span class="ruby-constant">I18n</span><span class="ruby-operator">::</span><span class="ruby-constant">MissingTranslationData</span> <span class="ruby-keyword kw">do</span>
+158:       <span class="ruby-ivar">@backend</span>.<span class="ruby-identifier">translate</span>(<span class="ruby-value str">'en'</span>, <span class="ruby-identifier">:does_not_exist</span>, <span class="ruby-identifier">:scope</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-identifier">:foo</span>], <span class="ruby-identifier">:default</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-identifier">:does_not_exist_2</span>, <span class="ruby-identifier">:does_not_exist_3</span>])
+159:     <span class="ruby-keyword kw">end</span>
+160:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000312"></a><b>test_translate_given_nil_as_a_locale_raises_an_argument_error</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000312_source')" id="l_M000312_source">show source</a> ]</p>
+  <div id="M000312_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/vendor/i18n-0.1.3/test/simple_backend_test.rb, line 181</span>
+181:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_translate_given_nil_as_a_locale_raises_an_argument_error</span>
+182:     <span class="ruby-identifier">assert_raise</span>(<span class="ruby-constant">I18n</span><span class="ruby-operator">::</span><span class="ruby-constant">InvalidLocale</span>){ <span class="ruby-ivar">@backend</span>.<span class="ruby-identifier">translate</span> <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">:bar</span> }
+183:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000313"></a><b>test_translate_with_a_bogus_key_and_no_default_raises_missing_translation_data</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000313_source')" id="l_M000313_source">show source</a> ]</p>
+  <div id="M000313_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/vendor/i18n-0.1.3/test/simple_backend_test.rb, line 185</span>
+185:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">test_translate_with_a_bogus_key_and_no_default_raises_missing_translation_data</span>
+186:     <span class="ruby-identifier">assert_raise</span>(<span class="ruby-constant">I18n</span><span class="ruby-operator">::</span><span class="ruby-constant">MissingTranslationData</span>){ <span class="ruby-ivar">@backend</span>.<span class="ruby-identifier">translate</span> <span class="ruby-value str">'de'</span>, <span class="ruby-identifier">:bogus</span> }
+187:   <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

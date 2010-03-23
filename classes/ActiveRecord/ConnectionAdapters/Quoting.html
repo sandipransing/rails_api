@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Module: ActiveRecord::ConnectionAdapters::Quoting</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Module</span><br />ActiveRecord::ConnectionAdapters::Quoting</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../../files/vendor/rails/activerecord/lib/active_record/connection_adapters/abstract/quoting_rb.html">vendor/rails/activerecord/lib/active_record/connection_adapters/abstract/quoting.rb</a>
+        </td>
+      </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M001921">quote</a></li>
+  <li><a href="#M001923">quote_column_name</a></li>
+  <li><a href="#M001922">quote_string</a></li>
+  <li><a href="#M001924">quote_table_name</a></li>
+  <li><a href="#M001927">quoted_date</a></li>
+  <li><a href="#M001926">quoted_false</a></li>
+  <li><a href="#M001928">quoted_string_prefix</a></li>
+  <li><a href="#M001925">quoted_true</a></li>
+  </ul>
+
+
+
+
+
+
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M001921"></a><b>quote</b>(value, column = nil)
+  </div>
+  <div class="description">
+  <p>
+Quotes the column value to help prevent <a
+href="http://en.wikipedia.org/wiki/SQL_injection">SQL injection
+attacks</a>.
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001921_source')" id="l_M001921_source">show source</a> ]</p>
+  <div id="M001921_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activerecord/lib/active_record/connection_adapters/abstract/quoting.rb, line 6</span>
+ 6:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">quote</span>(<span class="ruby-identifier">value</span>, <span class="ruby-identifier">column</span> = <span class="ruby-keyword kw">nil</span>)
+ 7:         <span class="ruby-comment cmt"># records are quoted as their primary key</span>
+ 8:         <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">quoted_id</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:quoted_id</span>)
+ 9: 
+10:         <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">value</span>
+11:           <span class="ruby-keyword kw">when</span> <span class="ruby-constant">String</span>, <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Multibyte</span><span class="ruby-operator">::</span><span class="ruby-constant">Chars</span>
+12:             <span class="ruby-identifier">value</span> = <span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_s</span>
+13:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">column</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:binary</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:string_to_binary</span>)
+14:               <span class="ruby-node">&quot;#{quoted_string_prefix}'#{quote_string(column.class.string_to_binary(value))}'&quot;</span> <span class="ruby-comment cmt"># ' (for ruby-mode)</span>
+15:             <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">column</span> <span class="ruby-operator">&amp;&amp;</span> [<span class="ruby-identifier">:integer</span>, <span class="ruby-identifier">:float</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">column</span>.<span class="ruby-identifier">type</span>)
+16:               <span class="ruby-identifier">value</span> = <span class="ruby-identifier">column</span>.<span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:integer</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_f</span>
+17:               <span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_s</span>
+18:             <span class="ruby-keyword kw">else</span>
+19:               <span class="ruby-node">&quot;#{quoted_string_prefix}'#{quote_string(value)}'&quot;</span> <span class="ruby-comment cmt"># ' (for ruby-mode)</span>
+20:             <span class="ruby-keyword kw">end</span>
+21:           <span class="ruby-keyword kw">when</span> <span class="ruby-constant">NilClass</span>                 <span class="ruby-keyword kw">then</span> <span class="ruby-value str">&quot;NULL&quot;</span>
+22:           <span class="ruby-keyword kw">when</span> <span class="ruby-constant">TrueClass</span>                <span class="ruby-keyword kw">then</span> (<span class="ruby-identifier">column</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:integer</span> <span class="ruby-operator">?</span> <span class="ruby-value str">'1'</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">quoted_true</span>)
+23:           <span class="ruby-keyword kw">when</span> <span class="ruby-constant">FalseClass</span>               <span class="ruby-keyword kw">then</span> (<span class="ruby-identifier">column</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:integer</span> <span class="ruby-operator">?</span> <span class="ruby-value str">'0'</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">quoted_false</span>)
+24:           <span class="ruby-keyword kw">when</span> <span class="ruby-constant">Float</span>, <span class="ruby-constant">Fixnum</span>, <span class="ruby-constant">Bignum</span>    <span class="ruby-keyword kw">then</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_s</span>
+25:           <span class="ruby-comment cmt"># BigDecimals need to be output in a non-normalized form and quoted.</span>
+26:           <span class="ruby-keyword kw">when</span> <span class="ruby-constant">BigDecimal</span>               <span class="ruby-keyword kw">then</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_s</span>(<span class="ruby-value str">'F'</span>)
+27:           <span class="ruby-keyword kw">else</span>
+28:             <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">acts_like?</span>(<span class="ruby-identifier">:date</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">acts_like?</span>(<span class="ruby-identifier">:time</span>)
+29:               <span class="ruby-node">&quot;'#{quoted_date(value)}'&quot;</span>
+30:             <span class="ruby-keyword kw">else</span>
+31:               <span class="ruby-node">&quot;#{quoted_string_prefix}'#{quote_string(value.to_yaml)}'&quot;</span>
+32:             <span class="ruby-keyword kw">end</span>
+33:         <span class="ruby-keyword kw">end</span>
+34:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001923"></a><b>quote_column_name</b>(column_name)
+  </div>
+  <div class="description">
+  <p>
+Quotes the column name. Defaults to no quoting.
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001923_source')" id="l_M001923_source">show source</a> ]</p>
+  <div id="M001923_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activerecord/lib/active_record/connection_adapters/abstract/quoting.rb, line 43</span>
+43:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">quote_column_name</span>(<span class="ruby-identifier">column_name</span>)
+44:         <span class="ruby-identifier">column_name</span>
+45:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001922"></a><b>quote_string</b>(s)
+  </div>
+  <div class="description">
+  <p>
+Quotes a string, escaping any &#8217; (single <a
+href="Quoting.html#M001921">quote</a>) and \ (backslash) characters.
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001922_source')" id="l_M001922_source">show source</a> ]</p>
+  <div id="M001922_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activerecord/lib/active_record/connection_adapters/abstract/quoting.rb, line 38</span>
+38:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">quote_string</span>(<span class="ruby-identifier">s</span>)
+39:         <span class="ruby-identifier">s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/\\/</span>, <span class="ruby-value str">'\&amp;\&amp;'</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/'/</span>, <span class="ruby-value str">&quot;''&quot;</span>) <span class="ruby-comment cmt"># ' (for ruby-mode)</span>
+40:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001924"></a><b>quote_table_name</b>(table_name)
+  </div>
+  <div class="description">
+  <p>
+Quotes the table name. Defaults to column name quoting.
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001924_source')" id="l_M001924_source">show source</a> ]</p>
+  <div id="M001924_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activerecord/lib/active_record/connection_adapters/abstract/quoting.rb, line 48</span>
+48:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">quote_table_name</span>(<span class="ruby-identifier">table_name</span>)
+49:         <span class="ruby-identifier">quote_column_name</span>(<span class="ruby-identifier">table_name</span>)
+50:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001927"></a><b>quoted_date</b>(value)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001927_source')" id="l_M001927_source">show source</a> ]</p>
+  <div id="M001927_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activerecord/lib/active_record/connection_adapters/abstract/quoting.rb, line 60</span>
+60:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">quoted_date</span>(<span class="ruby-identifier">value</span>)
+61:         <span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_s</span>(<span class="ruby-identifier">:db</span>)
+62:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001926"></a><b>quoted_false</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001926_source')" id="l_M001926_source">show source</a> ]</p>
+  <div id="M001926_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activerecord/lib/active_record/connection_adapters/abstract/quoting.rb, line 56</span>
+56:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">quoted_false</span>
+57:         <span class="ruby-value str">&quot;'f'&quot;</span>
+58:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001928"></a><b>quoted_string_prefix</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001928_source')" id="l_M001928_source">show source</a> ]</p>
+  <div id="M001928_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activerecord/lib/active_record/connection_adapters/abstract/quoting.rb, line 64</span>
+64:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">quoted_string_prefix</span>
+65:         <span class="ruby-value str">''</span>
+66:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001925"></a><b>quoted_true</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001925_source')" id="l_M001925_source">show source</a> ]</p>
+  <div id="M001925_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activerecord/lib/active_record/connection_adapters/abstract/quoting.rb, line 52</span>
+52:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">quoted_true</span>
+53:         <span class="ruby-value str">&quot;'t'&quot;</span>
+54:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

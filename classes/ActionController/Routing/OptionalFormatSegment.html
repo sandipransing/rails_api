@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Class: ActionController::Routing::OptionalFormatSegment</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Class</span><br />ActionController::Routing::OptionalFormatSegment</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../../files/vendor/rails/actionpack/lib/action_controller/routing/segments_rb.html">vendor/rails/actionpack/lib/action_controller/routing/segments.rb</a>
+        </td>
+      </tr>
+    <tr>
+      <td>Parent:</td>
+      <td>
+DynamicSegment
+     </td>
+   </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+  <div class="description"><p>
+The <a href="OptionalFormatSegment.html">OptionalFormatSegment</a> allows
+for any resource route to have an optional :format, which decreases the
+amount of routes created by 50%.
+</p>
+</div>
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M000561">extract_value</a></li>
+  <li><a href="#M000558">interpolation_chunk</a></li>
+  <li><a href="#M000562">match_extraction</a></li>
+  <li><a href="#M000557">new</a></li>
+  <li><a href="#M000559">regexp_chunk</a></li>
+  <li><a href="#M000560">to_s</a></li>
+  </ul>
+
+
+
+
+
+
+<div class="sectiontitle">Public Class methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M000557"></a><b>new</b>(key = nil, options = {})
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000557_source')" id="l_M000557_source">show source</a> ]</p>
+  <div id="M000557_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/routing/segments.rb, line 312</span>
+312:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">key</span> = <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">options</span> = {})
+313:         <span class="ruby-keyword kw">super</span>(<span class="ruby-identifier">:format</span>, {<span class="ruby-identifier">:optional</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">true</span>}.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">options</span>))            
+314:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M000561"></a><b>extract_value</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000561_source')" id="l_M000561_source">show source</a> ]</p>
+  <div id="M000561_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/routing/segments.rb, line 328</span>
+328:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">extract_value</span>
+329:         <span class="ruby-node">&quot;#{local_name} = options[:#{key}] &amp;&amp; options[:#{key}].to_s.downcase&quot;</span>
+330:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000558"></a><b>interpolation_chunk</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000558_source')" id="l_M000558_source">show source</a> ]</p>
+  <div id="M000558_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/routing/segments.rb, line 316</span>
+316:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">interpolation_chunk</span>
+317:         <span class="ruby-value str">&quot;.&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-keyword kw">super</span>
+318:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000562"></a><b>match_extraction</b>(next_capture)
+  </div>
+  <div class="description">
+  <p>
+the value should not include the period (.)
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000562_source')" id="l_M000562_source">show source</a> ]</p>
+  <div id="M000562_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/routing/segments.rb, line 333</span>
+333:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">match_extraction</span>(<span class="ruby-identifier">next_capture</span>)
+334:         <span class="ruby-node">%[
+335:           if (m = match[#{next_capture}])
+336:             params[:#{key}] = URI.unescape(m.from(1))
+337:           end
+338:         ]</span>
+339:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000559"></a><b>regexp_chunk</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000559_source')" id="l_M000559_source">show source</a> ]</p>
+  <div id="M000559_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/routing/segments.rb, line 320</span>
+320:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">regexp_chunk</span>
+321:         <span class="ruby-value str">'/|(\.[^/?\.]+)?'</span>
+322:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M000560"></a><b>to_s</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000560_source')" id="l_M000560_source">show source</a> ]</p>
+  <div id="M000560_source" class="dyn-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/routing/segments.rb, line 324</span>
+324:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_s</span>
+325:         <span class="ruby-value str">'(.:format)?'</span>
+326:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

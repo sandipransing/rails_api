@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Class: Builder::XmlEvents</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Class</span><br />Builder::XmlEvents</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../files/vendor/rails/activesupport/lib/active_support/vendor/builder-2_1_2/builder/xmlevents_rb.html">vendor/rails/activesupport/lib/active_support/vendor/builder-2.1.2/builder/xmlevents.rb</a>
+        </td>
+      </tr>
+    <tr>
+      <td>Parent:</td>
+      <td>
+        <a href="XmlMarkup.html">
+XmlMarkup
+         </a>
+     </td>
+   </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+  <div class="description"><p>
+Create a series of SAX-like XML events (e.g. start_tag, end_tag) from the
+markup code. XmlEvent objects are used in a way similar to <a
+href="XmlMarkup.html">XmlMarkup</a> objects, except that a series of events
+are generated and passed to a handler rather than generating
+character-based markup.
+</p>
+<p>
+Usage:
+</p>
+<pre>
+  xe = Builder::XmlEvents.new(handler)
+  xe.title(&quot;HI&quot;)    # Sends start_tag/end_tag/text messages to the handler.
+</pre>
+<p>
+Indentation may also be selected by providing value for the indentation
+size and initial indentation level.
+</p>
+<pre>
+  xe = Builder::XmlEvents.new(handler, indent_size, initial_indent_level)
+</pre>
+<h2>XML Event Handler</h2>
+<p>
+The handler object must expect the following events.
+</p>
+<dl>
+<dt><tt>start_tag(tag, attrs)</tt></dt><dd>Announces that a new tag has been found. <tt>tag</tt> is the name of the
+tag and <tt>attrs</tt> is a hash of attributes for the tag.
+
+</dd>
+<dt><tt>end_tag(tag)</tt></dt><dd>Announces that an end tag for <tt>tag</tt> has been found.
+
+</dd>
+<dt><tt>text(text)</tt></dt><dd>Announces that a string of characters (<tt>text</tt>) has been found. A
+series of characters may be broken up into more than one <tt>text</tt>
+call, so the client cannot assume that a single callback contains all the
+text data.
+
+</dd>
+</dl>
+</div>
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M001595">_end_tag</a></li>
+  <li><a href="#M001594">_start_tag</a></li>
+  <li><a href="#M001593">text!</a></li>
+  </ul>
+
+
+
+
+
+
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M001595"></a><b>_end_tag</b>(sym)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001595_source')" id="l_M001595_source">show source</a> ]</p>
+  <div id="M001595_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/vendor/builder-2.1.2/builder/xmlevents.rb, line 58</span>
+58:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">_end_tag</span>(<span class="ruby-identifier">sym</span>)
+59:       <span class="ruby-ivar">@target</span>.<span class="ruby-identifier">end_tag</span>(<span class="ruby-identifier">sym</span>)
+60:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001594"></a><b>_start_tag</b>(sym, attrs, end_too=false)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001594_source')" id="l_M001594_source">show source</a> ]</p>
+  <div id="M001594_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/vendor/builder-2.1.2/builder/xmlevents.rb, line 53</span>
+53:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">_start_tag</span>(<span class="ruby-identifier">sym</span>, <span class="ruby-identifier">attrs</span>, <span class="ruby-identifier">end_too</span>=<span class="ruby-keyword kw">false</span>)
+54:       <span class="ruby-ivar">@target</span>.<span class="ruby-identifier">start_tag</span>(<span class="ruby-identifier">sym</span>, <span class="ruby-identifier">attrs</span>)
+55:       <span class="ruby-identifier">_end_tag</span>(<span class="ruby-identifier">sym</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">end_too</span>
+56:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001593"></a><b>text!</b>(text)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001593_source')" id="l_M001593_source">show source</a> ]</p>
+  <div id="M001593_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/activesupport/lib/active_support/vendor/builder-2.1.2/builder/xmlevents.rb, line 49</span>
+49:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">text!</span>(<span class="ruby-identifier">text</span>)
+50:       <span class="ruby-ivar">@target</span>.<span class="ruby-identifier">text</span>(<span class="ruby-identifier">text</span>)
+51:     <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

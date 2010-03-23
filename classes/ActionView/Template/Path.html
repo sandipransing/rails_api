@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Class: ActionView::Template::Path</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Class</span><br />ActionView::Template::Path</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../../files/vendor/rails/actionpack/lib/action_view/template_rb.html">vendor/rails/actionpack/lib/action_view/template.rb</a>
+        </td>
+      </tr>
+    <tr>
+      <td>Parent:</td>
+      <td>
+        <a href="../../Object.html">
+Object
+         </a>
+     </td>
+   </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M001819">==</a></li>
+  <li><a href="#M001821">[]</a></li>
+  <li><a href="#M001820">eql?</a></li>
+  <li><a href="#M001822">load!</a></li>
+  <li><a href="#M001816">new</a></li>
+  <li><a href="#M001823">new_and_loaded</a></li>
+  <li><a href="#M001817">to_s</a></li>
+  <li><a href="#M001818">to_str</a></li>
+  </ul>
+
+
+
+
+
+  <div class="sectiontitle">Attributes</div>
+  <table border='0' cellpadding='5'>
+  <tr valign='top'>
+    <td class='attr-rw'>
+[R]
+    </td>
+    <td class='attr-name'>path</td>
+    <td class='attr-desc'></td>
+  </tr>
+  <tr valign='top'>
+    <td class='attr-rw'>
+[R]
+    </td>
+    <td class='attr-name'>paths</td>
+    <td class='attr-desc'></td>
+  </tr>
+  </table>
+
+<div class="sectiontitle">Public Class methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M001816"></a><b>new</b>(path)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001816_source')" id="l_M001816_source">show source</a> ]</p>
+  <div id="M001816_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_view/template.rb, line 7</span>
+ 7:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">path</span>)
+ 8:         <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-value str">&quot;path already is a Path class&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">path</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Path</span>)
+ 9:         <span class="ruby-ivar">@path</span> = (<span class="ruby-identifier">path</span>.<span class="ruby-identifier">ends_with?</span>(<span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-constant">SEPARATOR</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">path</span>.<span class="ruby-identifier">to</span>(<span class="ruby-value">-2</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">path</span>).<span class="ruby-identifier">freeze</span>
+10:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001823"></a><b>new_and_loaded</b>(path)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001823_source')" id="l_M001823_source">show source</a> ]</p>
+  <div id="M001823_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_view/template.rb, line 47</span>
+47:       <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">new_and_loaded</span>(<span class="ruby-identifier">path</span>)
+48:         <span class="ruby-identifier">returning</span> <span class="ruby-identifier">new</span>(<span class="ruby-identifier">path</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>
+49:           <span class="ruby-identifier">path</span>.<span class="ruby-identifier">load!</span>
+50:         <span class="ruby-keyword kw">end</span>
+51:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="sectiontitle">Public Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M001819"></a><b>==</b>(path)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001819_source')" id="l_M001819_source">show source</a> ]</p>
+  <div id="M001819_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_view/template.rb, line 24</span>
+24:       <span class="ruby-keyword kw">def</span> <span class="ruby-operator">==</span>(<span class="ruby-identifier">path</span>)
+25:         <span class="ruby-identifier">to_str</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">path</span>.<span class="ruby-identifier">to_str</span>
+26:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001821"></a><b>[]</b>(path)
+  </div>
+  <div class="description">
+  <p>
+Returns a <a href="../Template.html">ActionView::Template</a> object for
+the given path string. The input path should be relative to the view path
+directory, +hello/index.html.erb+. This method also has a special exception
+to match partial file names without a handler extension. So
++hello/index.html+ will match the first template it finds with a known
+template extension, +hello/index.html.erb+. <a
+href="../Template.html">Template</a> extensions should not be confused with
+format extensions <tt>html</tt>, <tt>js</tt>, <tt>xml</tt>, etc. A format
+must be supplied to match a formated file. +hello/index+ will never match
++hello/index.html.erb+.
+</p>
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001821_source')" id="l_M001821_source">show source</a> ]</p>
+  <div id="M001821_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_view/template.rb, line 41</span>
+41:       <span class="ruby-keyword kw">def</span> <span class="ruby-operator">[]</span>(<span class="ruby-identifier">path</span>)
+42:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001820"></a><b>eql?</b>(path)
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001820_source')" id="l_M001820_source">show source</a> ]</p>
+  <div id="M001820_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_view/template.rb, line 28</span>
+28:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">eql?</span>(<span class="ruby-identifier">path</span>)
+29:         <span class="ruby-identifier">to_str</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">path</span>.<span class="ruby-identifier">to_str</span>
+30:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001822"></a><b>load!</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001822_source')" id="l_M001822_source">show source</a> ]</p>
+  <div id="M001822_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_view/template.rb, line 44</span>
+44:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">load!</span>
+45:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001817"></a><b>to_s</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001817_source')" id="l_M001817_source">show source</a> ]</p>
+  <div id="M001817_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_view/template.rb, line 12</span>
+12:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_s</span>
+13:         <span class="ruby-keyword kw">if</span> <span class="ruby-keyword kw">defined?</span>(<span class="ruby-constant">RAILS_ROOT</span>)
+14:           <span class="ruby-identifier">path</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-node">/^#{Regexp.escape(File.expand_path(RAILS_ROOT))}\//</span>, <span class="ruby-value str">''</span>)
+15:         <span class="ruby-keyword kw">else</span>
+16:           <span class="ruby-identifier">path</span>.<span class="ruby-identifier">to_s</span>
+17:         <span class="ruby-keyword kw">end</span>
+18:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+<div class="method">
+  <div class="title">
+    <a name="M001818"></a><b>to_str</b>()
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M001818_source')" id="l_M001818_source">show source</a> ]</p>
+  <div id="M001818_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_view/template.rb, line 20</span>
+20:       <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">to_str</span>
+21:         <span class="ruby-identifier">path</span>.<span class="ruby-identifier">to_str</span>
+22:       <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>

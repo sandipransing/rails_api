@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Module: ActionController::Caching::Actions</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+
+    <script language="JavaScript" type="text/javascript">
+    // <![CDATA[
+
+        function toggleSource( id )
+        {
+          var elem
+          var link
+
+          if( document.getElementById )
+          {
+            elem = document.getElementById( id )
+            link = document.getElementById( "l_" + id )
+          }
+          else if ( document.all )
+          {
+            elem = eval( "document.all." + id )
+            link = eval( "document.all.l_" + id )
+          }
+          else
+            return false;
+
+          if( elem.style.display == "block" )
+          {
+            elem.style.display = "none"
+            link.innerHTML = "show source"
+          }
+          else
+          {
+            elem.style.display = "block"
+            link.innerHTML = "hide source"
+          }
+        }
+
+        function openCode( url )
+        {
+          window.open( url, "SOURCE_CODE", "width=400,height=400,scrollbars=yes" )
+        }
+      // ]]>
+    </script>
+  </head>
+
+  <body>
+  <table width="100%" border='0' cellpadding='0' cellspacing='0' class='banner'><tr>
+  <td class="file-title"><span class="file-title-prefix">Module</span><br />ActionController::Caching::Actions</td>
+  <td align="right">
+    <table cellspacing=0 cellpadding=2>
+      <tr valign="top">
+        <td>In:</td>
+        <td>
+<a href="../../../files/vendor/rails/actionpack/lib/action_controller/caching/actions_rb.html">vendor/rails/actionpack/lib/action_controller/caching/actions.rb</a>
+        </td>
+      </tr>
+         </table>
+        </td>
+        </tr>
+      </table>
+ <!-- banner header -->
+
+  <div id="bodyContent">
+      <div id="content">
+
+  <div class="description"><p>
+Action caching is similar to page caching by the fact that the entire
+output of the response is cached, but unlike page caching, every request
+still goes through the Action Pack. The key benefit of this is that filters
+are run before the cache is served, which allows for authentication and
+other restrictions on whether someone is allowed to see the cache. Example:
+</p>
+<pre>
+  class ListsController &lt; ApplicationController
+    before_filter :authenticate, :except =&gt; :public
+    caches_page   :public
+    caches_action :index, :show, :feed
+  end
+</pre>
+<p>
+In this example, the public action doesn&#8216;t require authentication, so
+it&#8216;s possible to use the faster page caching method. But both the
+show and feed action are to be shielded behind the authenticate filter, so
+we need to implement those as action caches.
+</p>
+<p>
+Action caching internally uses the fragment caching and an around filter to
+do the job. The fragment cache is named according to both the current host
+and the path. So a page that is accessed at <a
+href="http://david.somewhere.com/lists/show/1">david.somewhere.com/lists/show/1</a>
+will result in a fragment named
+&quot;david.somewhere.com/lists/show/1&quot;. This allows the cacher to
+differentiate between &quot;david.somewhere.com/lists/&quot; and
+&quot;jamis.somewhere.com/lists/&quot; &#8212; which is a helpful way of
+assisting the subdomain-as-account-key pattern.
+</p>
+<p>
+Different representations of the same resource, e.g. <tt><a
+href="http://david.somewhere.com/lists">david.somewhere.com/lists</a></tt>
+and <tt><a
+href="http://david.somewhere.com/lists.xml">david.somewhere.com/lists.xml</a></tt>
+are treated like separate requests and so are cached separately. Keep in
+mind when expiring an action cache that <tt>:action =&gt;
+&#8216;lists&#8216;</tt> is not the same as <tt>:action =&gt;
+&#8216;list&#8217;, :format =&gt; :xml</tt>.
+</p>
+<p>
+You can set modify the default action cache path by passing a :cache_path
+option. This will be passed directly to <a
+href="Actions/ActionCachePath.html#M000461">ActionCachePath.path_for</a>.
+This is handy for actions with multiple possible routes that should be
+cached differently. If a block is given, it is called with the current
+controller instance.
+</p>
+<p>
+And you can also use :if (or :unless) to pass a Proc that specifies when
+the action should be cached.
+</p>
+<p>
+Finally, if you are using memcached, you can also pass :expires_in.
+</p>
+<pre>
+  class ListsController &lt; ApplicationController
+    before_filter :authenticate, :except =&gt; :public
+    caches_page   :public
+    caches_action :index, :if =&gt; Proc.new { |c| !c.request.format.json? } # cache if is not a JSON request
+    caches_action :show, :cache_path =&gt; { :project =&gt; 1 }, :expires_in =&gt; 1.hour
+    caches_action :feed, :cache_path =&gt; Proc.new { |controller|
+      controller.params[:user_id] ?
+        controller.send(:user_list_url, controller.params[:user_id], controller.params[:id]) :
+        controller.send(:list_url, controller.params[:id]) }
+  end
+</pre>
+<p>
+If you pass :layout =&gt; false, it will only cache your action content. It
+is useful when your layout has dynamic information.
+</p>
+</div>
+
+
+
+  <div class="sectiontitle">Methods</div>
+  <ul>
+  <li><a href="#M000459">expire_action</a></li>
+  </ul>
+
+
+
+  <div class="sectiontitle">Classes and Modules</div>
+  Module <a href="Actions/ClassMethods.html" class="link">ActionController::Caching::Actions::ClassMethods</a><br />
+Class <a href="Actions/ActionCachePath.html" class="link">ActionController::Caching::Actions::ActionCachePath</a><br />
+
+
+
+
+<div class="sectiontitle">Protected Instance methods</div>
+<div class="method">
+  <div class="title">
+    <a name="M000459"></a><b>expire_action</b>(options = {})
+  </div>
+<div class="sourcecode">
+  <p class="source-link">[ <a href="javascript:toggleSource('M000459_source')" id="l_M000459_source">show source</a> ]</p>
+  <div id="M000459_source" class="dyn-source">
+<pre>
+    <span class="ruby-comment cmt"># File vendor/rails/actionpack/lib/action_controller/caching/actions.rb, line 71</span>
+71:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">expire_action</span>(<span class="ruby-identifier">options</span> = {})
+72:           <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">cache_configured?</span>
+73: 
+74:           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:action</span>].<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Array</span>)
+75:             <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:action</span>].<span class="ruby-identifier">dup</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">action</span><span class="ruby-operator">|</span>
+76:               <span class="ruby-identifier">expire_fragment</span>(<span class="ruby-constant">ActionCachePath</span>.<span class="ruby-identifier">path_for</span>(<span class="ruby-keyword kw">self</span>, <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>({ <span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">action</span> }), <span class="ruby-keyword kw">false</span>))
+77:             <span class="ruby-keyword kw">end</span>
+78:           <span class="ruby-keyword kw">else</span>
+79:             <span class="ruby-identifier">expire_fragment</span>(<span class="ruby-constant">ActionCachePath</span>.<span class="ruby-identifier">path_for</span>(<span class="ruby-keyword kw">self</span>, <span class="ruby-identifier">options</span>, <span class="ruby-keyword kw">false</span>))
+80:           <span class="ruby-keyword kw">end</span>
+81:         <span class="ruby-keyword kw">end</span>
+</pre>
+  </div>
+</div>
+</div>
+</div>
+
+  </div>
+
+    </body>
+</html>
